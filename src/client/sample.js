@@ -10,8 +10,6 @@ class Index extends Component {
     };
   }
   componentDidMount() {
-    console.log('component did mount');
-
     const socket = openSocket('http://localhost:3000');
 
     this.setState({
@@ -21,7 +19,6 @@ class Index extends Component {
     });
 
     socket.on('message', message => {
-      console.log('new message received from server', message);
       this.addMessage(message);
     });
   }
@@ -33,7 +30,6 @@ class Index extends Component {
 
   onClick = event => {
     event.preventDefault();
-    console.log('on click');
     this.state.socket.emit('new-message', {
       id: this.state.id,
       value: `message ${Date.now()}`
@@ -41,8 +37,6 @@ class Index extends Component {
   };
 
   render() {
-    console.log('render');
-
     return (
       <div>
         <h1>Index Rendered</h1>
