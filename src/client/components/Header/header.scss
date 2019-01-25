@@ -1,0 +1,27 @@
+
+@import '../../scss/colors';
+@import '../../scss/mixins';
+
+.header {
+  background: $header-background;
+  box-shadow: 0 2px 4px 0 $header-shadow;
+  display: flex;
+  flex-direction: row;
+  height: 74px;
+  width: 100%;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 30%;
+}
+
+.right {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 70%;
+}

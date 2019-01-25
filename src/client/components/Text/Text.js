@@ -11,7 +11,8 @@ const Text = ({ children, type }) => {
 
 Text.propTypes = {
   children: PropTypes.node,
-  type: PropTypes.oneOf(['circle', 'result', 'team']).isRequired
+  type: PropTypes.oneOf(['banner', 'circle', 'entry', 'move', 'result', 'team'])
+    .isRequired
 };
 
 export default Text;

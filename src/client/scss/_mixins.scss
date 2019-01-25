@@ -1,0 +1,48 @@
+$mobile-tablet-overlap: 768px;
+$tablet-desktop-overlap: 1024px;
+$desktopsmall-desktophd-overlap: 1440px;
+
+@mixin mobile {
+  @media only screen
+    and (max-width: $mobile-tablet-overlap - 1) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media only screen
+    and (min-width: $mobile-tablet-overlap)
+    and (max-width: $tablet-desktop-overlap - 1) {
+    @content;
+  }
+}
+
+// This method is being used now for both mobile and tablet as we have only one design for both of them
+@mixin tablet-and-mobile {
+  @media only screen
+    and (max-width: $tablet-desktop-overlap - 1) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen
+    and (min-width: $tablet-desktop-overlap) {
+    @content;
+  }
+}
+
+@mixin desktophd {
+  @media screen
+    and (min-width: $desktopsmall-desktophd-overlap) {
+    @content;
+  }
+}
+
+@mixin desktopsmall {
+  @media screen
+    and (min-width: $tablet-desktop-overlap)
+    and (max-width: $desktopsmall-desktophd-overlap - 1) {
+    @content;
+  }
+}

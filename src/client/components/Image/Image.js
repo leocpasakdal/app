@@ -22,7 +22,7 @@ Image.defaultProps = {
 Image.propTypes = {
   alt: PropTypes.string,
   src: PropTypes.string,
-  type: PropTypes.oneOf(['avatar', 'result'])
+  type: PropTypes.oneOf(['avatar', 'result']).isRequired
 };
 
 export default Image;

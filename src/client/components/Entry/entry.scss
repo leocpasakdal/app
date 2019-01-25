@@ -1,0 +1,21 @@
+@import '../../scss/colors';
+@import '../../scss/mixins';
+
+.entry {
+  &.rectangle {
+    background: $white;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px 0 $text-shadow;
+    height: 32px; 
+    line-height: 32px;
+    width: 198px;
+  }
+
+  &.circle {
+    background-color: $theme-color;
+    border-radius: 100%;
+    height: 56px;
+    line-height: 56px;
+    width: 56px;     
+  }
+}
