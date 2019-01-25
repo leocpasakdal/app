@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './app.css';
-import ReactImage from './react.png';
+import styles from './app.scss';
+import ReactImage from './static/react.png';
 
 export default class App extends Component {
   state = { username: null };
@@ -17,7 +17,7 @@ export default class App extends Component {
     return (
       <div>
         {username ? (
-          <h1>{`Hello ${username}`}</h1>
+          <h1 className={styles.test}>{`Hello ${username}`}</h1>
         ) : (
           <h1>Loading.. please wait!</h1>
         )}
