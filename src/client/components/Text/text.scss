@@ -1,0 +1,29 @@
+
+@import '../../scss/colors';
+@import '../../scss/mixins';
+
+.text {
+  color: $black;
+  font-size: 12px;
+  letter-spacing: 0;
+
+  &.team {
+    color: $white;
+    font-size: 21px;
+  }
+
+  &.circle {
+    background-color: $theme-color;
+    border-radius: 100%;
+    color: $white;
+    font-size: 15px;
+    height: 56px;
+    line-height: 56px;
+    width: 56px;  
+  }
+
+  &.result {
+    color: $white;
+    font-size: 41px;
+  }
+}

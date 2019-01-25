@@ -29,10 +29,12 @@ module.exports = {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
+              camelCase: true,
               modules: true,
               localIdentName: '[name]__[local]__[hash:base64:5]'
             }
           },
+          'sass-loader',
           {
             loader: 'postcss-loader',
             options: {

@@ -1,0 +1,39 @@
+
+@import '../../scss/colors';
+@import '../../scss/mixins';
+
+.button {
+  background-color: $theme-color;
+  border: 0;
+  color: $white;
+  cursor: pointer;
+  font-size: 15px;
+  height: 56px;
+  outline: 0;
+  width: 56px;
+
+  &.oblong {
+    background-color: $white;
+    border-radius: 100px;
+    color: $theme-color;
+    font-size: 16px;
+    height: 56px;
+    width: 243px;
+  }
+
+  &.circle {
+    
+    border-radius: 100%;
+  }
+
+  &:hover {
+    &.main-hover-type.enabled {
+      box-shadow:0 2px 4px 0 $button-shadow;
+    }
+  }
+}
+
+.disabled {
+  cursor: default;
+  opacity: .5;
+}
