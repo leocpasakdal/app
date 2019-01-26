@@ -1,0 +1,22 @@
+
+@import '../../scss/colors';
+@import '../../scss/mixins';
+
+.overlay {
+  background-color: $theme-color;
+  display: none;
+  opacity: .9;
+  padding-bottom: 30px;
+  padding-top: 30px;
+
+  &.show {
+    display: block;
+  }
+
+  &.result {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

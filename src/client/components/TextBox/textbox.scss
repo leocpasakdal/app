@@ -1,0 +1,17 @@
+@import '../../scss/colors';
+@import '../../scss/mixins';
+
+.textbox {
+  font-size: 14px;
+  outline: none;
+}
+
+.wrapper {
+  border: 2px solid transparent;
+
+  width: 100%;
+  
+  &.error {
+    border-color: $textbox-error;
+  }
+}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from './app.scss';
+import './app.scss';
 
 import avatar from '../../static/images/avatar1.png';
 import win from '../../static/images/win.png';
@@ -8,8 +8,10 @@ import Button from '../../components/Button/Button';
 import Entry from '../../components/Entry/Entry';
 import Image from '../../components/Image/Image';
 import Header from '../../components/Header/Header';
+import ResultOverlay from '../../components/Overlay/ResultOverlay';
 import ResultEntry from '../../components/Entry/ResultEntry';
 import Text from '../../components/Text/Text';
+import TextBox from '../../components/TextBox/TextBox';
 import UserEntry from '../../components/Entry/UserEntry';
 
 export default class App extends Component {
@@ -22,10 +24,14 @@ export default class App extends Component {
   }
 
   render() {
-    const { username } = this.state;
-
     return (
       <div>
+        <TextBox
+          autoFocus
+          name="teamName"
+          onChange={() => {}}
+          placeholder="Your Team Name"
+        />
         <Header
           avatar={avatar}
           banner="Win the game or win the job"
@@ -42,6 +48,7 @@ export default class App extends Component {
         <Button type="circle">0</Button>
         <Button type="oblong">MainButton</Button>
         <UserEntry>+1</UserEntry>
+        <ResultOverlay onClick={() => {}} result="You won" show src={win} />
       </div>
     );
   }

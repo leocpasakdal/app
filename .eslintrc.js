@@ -1,5 +1,3 @@
-const path = require('path');
-
 const MULTILINE_BLOCK_LIKE = 'multiline-block-like';
 
 module.exports = {
@@ -12,7 +10,11 @@ module.exports = {
   },
 
   plugins: ['react', 'import', 'jest', 'sonarjs', 'prettier'],
-  extends: ['plugin:sonarjs/recommended'],
+  extends: [
+    'plugin:sonarjs/recommended',
+    'plugin:react/recommended',
+    'eslint:recommended'
+  ],
   globals: {
     expect: true,
     jest: true
