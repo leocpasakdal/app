@@ -1,0 +1,16 @@
+@import '../../scss/colors';
+@import '../../scss/mixins';
+
+.start-page {
+  @include flex-center;
+  background-color: $theme-color;
+  height: $mobile-height;
+}
+
+.elements-wrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  justify-content: space-evenly;
+}

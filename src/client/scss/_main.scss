@@ -1,0 +1,33 @@
+@import './colors';
+@import './mixins';
+
+div,
+span {
+  @include font-smoothing;
+
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: $white;
+  font-size: 15px;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant-caps: normal; 
+  font-variant-ligatures: normal; 
+  font-variant-numeric: normal; 
+  font-weight: lighter;
+  height: 100%;
+  line-height: 22px;
+  margin: 0;
+  width: 100%;
+}
+
+a {
+  &,
+  &:visited {
+    color: white;
+    cursor: pointer;
+  }
+}

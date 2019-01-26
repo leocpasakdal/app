@@ -12,9 +12,8 @@
 }
 
 .left {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  @include flex-center;
+  
   width: 30%;
 }
 

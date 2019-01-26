@@ -1,6 +1,15 @@
+$mobile-width: 320px;
+$mobile-height: 568px;
 $mobile-tablet-overlap: 768px;
 $tablet-desktop-overlap: 1024px;
 $desktopsmall-desktophd-overlap: 1440px;
+
+@mixin flex-center {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 @mixin placeholder {
   &::-webkit-input-placeholder {
@@ -20,6 +29,11 @@ $desktopsmall-desktophd-overlap: 1440px;
   &:-ms-input-placeholder {
     @content;
   }
+}
+
+@mixin font-smoothing {
+  -moz-osx-font-smoothing: grayscale; /* NOSONAR */
+  -webkit-font-smoothing: antialiased; /* NOSONAR */
 }
 
 @mixin mobile {

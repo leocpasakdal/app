@@ -1,0 +1,10 @@
+@import '../../scss/colors';
+@import '../../scss/mixins';
+
+.scrollable {
+  background-color: $white;
+  height: 100%;
+  overflow: scroll;
+  overflow-wrap: break-word;
+  width: $mobile-width; 
+}
