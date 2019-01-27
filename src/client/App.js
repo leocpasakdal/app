@@ -6,12 +6,10 @@ import StartPage from './containers/StartPage/StartPage';
 import GameArea from './containers/GameArea/GameArea';
 
 const App = () => (
-  <div>
-    <Switch>
-      <Route component={GameArea} path={ROUTES.GAME} />
-      <Route component={StartPage} exact path={ROUTES.START} />
-    </Switch>
-  </div>
+  <Switch>
+    <Route component={GameArea} path={ROUTES.GAME} />
+    <Route component={StartPage} exact path={ROUTES.START} />
+  </Switch>
 );
 
 export default withRouter(App);
