@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import * as reduxModules from '../../redux/modules';
-
 import Button from '../../components/Button/Button';
 import RadioButton from '../../components/RadioButton/RadioButton';
 import TextBox from '../../components/TextBox/TextBox';
@@ -38,9 +37,9 @@ class UnconnectedStartPage extends Component {
 
   setGameInfo = () => {
     const { avatarId, teamName } = this.state;
-    const { setGameInProgress, setPlayer } = this.props;
+    const { startGame, setPlayer } = this.props;
 
-    setGameInProgress();
+    startGame();
     setPlayer({
       avatarId,
       teamName
@@ -84,13 +83,13 @@ class UnconnectedStartPage extends Component {
 
 UnconnectedStartPage.propTypes = {
   history: PropTypes.object,
-  setGameInProgress: PropTypes.func,
-  setPlayer: PropTypes.func
+  setPlayer: PropTypes.func,
+  startGame: PropTypes.func
 };
 
 const mapDispatchToProps = {
   setPlayer: reduxModules.player.actions.setPlayer,
-  setGameInProgress: reduxModules.game.actions.setGameInProgress
+  startGame: reduxModules.game.actions.startGame
 };
 
 const StartPage = withRouter(

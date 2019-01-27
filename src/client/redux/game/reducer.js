@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import { SEND_INPUT, SET_GAME_IN_PROGRESS } from './actions';
+import { EXIT_GAME, FINISH_GAME, SEND_INPUT, START_GAME } from './actions';
 
 const testData1 = {
   type: 'playerMove',
@@ -20,24 +20,43 @@ const testData2 = {
 };
 
 const initialState = {
+  entries: [testData1, testData2, testData1, testData2],
   isGameInProgress: false,
-  entries: [testData1, testData2, testData1, testData2]
+  result: '',
+  won: false
 };
 
-const setGameInProgress = state => ({
+const startGame = state => ({
   ...state,
-  isGameInProgress: true
+  entries: [],
+  isGameInProgress: true,
+  won: false
+});
+
+const exitGame = state => ({
+  ...state,
+  entries: [],
+  isGameInProgress: false,
+  won: false
 });
 
 const sendInput = (state, action) => ({
   ...state,
-  entries: [...state.entries, action.payload]
+  entries: [...state.entries, action.payload],
+  won: false
+});
+
+const finishGame = (state, action) => ({
+  ...state,
+  won: action.payload
 });
 
 const reducer = handleActions(
   {
-    [SET_GAME_IN_PROGRESS]: setGameInProgress,
-    [SEND_INPUT]: sendInput
+    [EXIT_GAME]: exitGame,
+    [FINISH_GAME]: finishGame,
+    [SEND_INPUT]: sendInput,
+    [START_GAME]: startGame
   },
   initialState
 );
