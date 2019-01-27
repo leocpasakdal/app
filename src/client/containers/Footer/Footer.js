@@ -24,7 +24,7 @@ class UnconnectedFooter extends Component {
 }
 
 UnconnectedFooter.propTypes = {
-  showModal: PropTypes.showModal
+  showModal: PropTypes.func
 };
 
 const mapDispatchToProps = {
