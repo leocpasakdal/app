@@ -9,8 +9,7 @@ import { joinArrayIgnoreInvalid } from '../../utils/misc';
 
 const PlayerEntry = ({
   currentPlayerId,
-  entry: { avatarId, computation, move, playerId },
-  result
+  entry: { avatarId, computation, move, playerId, result }
 }) => {
   const compAlignment = styles[currentPlayerId === playerId ? 'left' : 'right'];
   const moveClass = joinArrayIgnoreInvalid([styles.move, compAlignment], ' ');
@@ -34,9 +33,7 @@ const PlayerEntry = ({
 
 PlayerEntry.propTypes = {
   currentPlayerId: PropTypes.string,
-  entry: PropTypes.object,
-
-  result: PropTypes.string
+  entry: PropTypes.object
 };
 
 export default PlayerEntry;
