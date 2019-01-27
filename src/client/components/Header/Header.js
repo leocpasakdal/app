@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './header.scss';
-import Image from '../Image/Image';
+import Avatar from '../Image/Avatar';
 import Text from '../Text/Text';
 
-const Header = ({ avatar, banner, teamName }) => (
+const Header = ({ avatarId, banner, teamName }) => (
   <div className={styles.header}>
     <div className={styles.left}>
-      <Image src={avatar} type="avatar" />
+      <Avatar id={avatarId} />
     </div>
     <div className={styles.right}>
       <Text type="team">{teamName}</Text>
@@ -17,7 +17,7 @@ const Header = ({ avatar, banner, teamName }) => (
 );
 
 Header.propTypes = {
-  avatar: PropTypes.string,
+  avatarId: PropTypes.string,
   banner: PropTypes.string,
   teamName: PropTypes.string
 };

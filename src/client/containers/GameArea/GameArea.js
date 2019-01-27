@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import Entries from '../../components/Entries/Entries';
 import Scrollable from '../../components/Scrollable/Scrollable';
 import Layout from '../Layout/Layout';
 
@@ -8,20 +10,26 @@ class UnconnectedGameArea extends Component {
   componentDidMount() {}
 
   render() {
+    const { currentPlayerId, entries } = this.props;
+
     return (
       <Layout>
-        <Scrollable scrollToBottomOnUpdate />
+        <Scrollable scrollToBottomOnUpdate>
+          <Entries currentPlayerId={currentPlayerId} entries={entries} />
+        </Scrollable>
       </Layout>
     );
   }
 }
 
-UnconnectedGameArea.propTypes = {};
+UnconnectedGameArea.propTypes = {
+  currentPlayerId: PropTypes.string,
+  entries: PropTypes.array
+};
 
 const mapStateToProps = state => ({
-  avatar: state.player.avatar,
-  isGameInProgress: state.game.isGameInProgress,
-  teamName: state.player.teamName
+  currentPlayerId: state.player.currentPlayerId,
+  entries: state.game.entries
 });
 
 const GameArea = connect(mapStateToProps)(UnconnectedGameArea);

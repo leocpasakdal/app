@@ -3,14 +3,15 @@ import { SET_PLAYER } from './actions';
 import { DEFAULT_BANNER } from '../../utils/language';
 
 const initialState = {
-  avatar: '',
+  avatarId: '',
+  currentPlayerId: '123456',
   banner: DEFAULT_BANNER,
   teamName: ''
 };
 
 const setPlayer = (state, action) => ({
   ...state,
-  avatar: action.payload.avatar,
+  avatarId: action.payload.avatarId,
   teamName: action.payload.teamName
 });
 

@@ -1,0 +1,26 @@
+.player-entry {
+  display: flex;
+  flex-direction: column;
+
+  .move {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 8px;
+    margin-top: 8px;
+
+    &.right {
+      flex-direction: row-reverse;
+    }
+  }
+
+  .entry {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 8px;
+
+    &.right {
+      text-align: right;
+    }
+  }
+}

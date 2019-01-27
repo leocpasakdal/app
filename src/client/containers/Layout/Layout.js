@@ -9,7 +9,7 @@ import Header from '../../components/Header/Header';
 import Footer from '../Footer/Footer';
 
 const UnconnectedLayout = props => {
-  const { avatar, banner, children, isGameInProgress, teamName } = props;
+  const { avatarId, banner, children, isGameInProgress, teamName } = props;
 
   if (!isGameInProgress) {
     return <Redirect to={ROUTES.START} />;
@@ -17,7 +17,7 @@ const UnconnectedLayout = props => {
 
   return (
     <div>
-      <Header avatar={avatar} banner={banner} teamName={teamName} />
+      <Header avatarId={avatarId} banner={banner} teamName={teamName} />
       <Body>{children}</Body>
       <Footer />
     </div>
@@ -25,14 +25,14 @@ const UnconnectedLayout = props => {
 };
 
 const mapStateToProps = state => ({
-  avatar: state.player.avatar,
+  avatarId: state.player.avatarId,
   banner: state.player.banner,
   isGameInProgress: state.game.isGameInProgress,
   teamName: state.player.teamName
 });
 
 UnconnectedLayout.propTypes = {
-  avatar: PropTypes.string,
+  avatarId: PropTypes.string,
   banner: PropTypes.string,
   children: PropTypes.node,
   isGameInProgress: PropTypes.bool,

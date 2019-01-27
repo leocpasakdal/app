@@ -1,5 +1,5 @@
 import avatar1 from '../static/images/avatar1.png';
-import avatar2 from '../static/images/avatar1.png';
+import avatar2 from '../static/images/avatar2.png';
 
 export const AVATARS = [
   { avatar: avatar1, id: 'avatar1', name: 'avatar 1' },
@@ -10,4 +10,9 @@ export const INPUTS = [-1, 0, 1];
 export const ROUTES = {
   GAME: '/game',
   START: '/'
+};
+
+export const ENTRY_TYPE = {
+  NEW_ENTRY: 'newEntry',
+  PLAYER_MOVE: 'playerMove'
 };

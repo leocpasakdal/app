@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import Entry from './Entry';
 import Text from '../Text/Text';
 
-const UserEntry = ({ children }) => (
+const MoveEntry = ({ children }) => (
   <Entry type="circle">
     <Text type="move">{children}</Text>
   </Entry>
 );
 
-UserEntry.propTypes = {
+MoveEntry.propTypes = {
   children: PropTypes.node
 };
 
-export default UserEntry;
+export default MoveEntry;

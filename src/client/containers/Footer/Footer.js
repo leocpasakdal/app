@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import FooterComponent from '../../components/Footer/Footer';
 import InputButton from '../../components/Button/InputButton';
+import * as reduxModules from '../../redux/modules';
 import { INPUTS } from '../../utils/constants';
 
 class UnconnectedFooter extends Component {
@@ -19,4 +21,13 @@ class UnconnectedFooter extends Component {
   }
 }
 
-export default UnconnectedFooter;
+const mapDispatchToProps = {
+  sendInput: reduxModules.game.actions.sendInput
+};
+
+const Footer = connect(
+  null,
+  mapDispatchToProps
+)(UnconnectedFooter);
+
+export default Footer;

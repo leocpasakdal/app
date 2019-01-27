@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import _get from 'lodash/get';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -40,22 +39,17 @@ class UnconnectedStartPage extends Component {
   setGameInfo = () => {
     const { avatarId, teamName } = this.state;
     const { setGameInProgress, setPlayer } = this.props;
-    const avatar = _get(
-      AVATARS.find(({ id }) => id === avatarId),
-      'avatar',
-      ''
-    );
 
     setGameInProgress();
     setPlayer({
-      avatar,
+      avatarId,
       teamName
     });
   };
 
   goToGame = () => this.props.history.replace(ROUTES.GAME);
 
-  getAvatars = () =>
+  getAvatarSelections = () =>
     AVATARS.map(({ id, name }) => (
       <RadioButton
         checked={this.state.avatarId === id}
@@ -73,7 +67,7 @@ class UnconnectedStartPage extends Component {
     return (
       <div className={styles.startPage}>
         <div className={styles.elementsWrapper}>
-          {this.getAvatars()}
+          {this.getAvatarSelections()}
           <TextBox
             isValid={!!teamName}
             onChange={this.onTeamNameChange}
