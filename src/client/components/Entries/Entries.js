@@ -27,10 +27,10 @@ const getValidEntries = entries =>
     ];
   }, []);
 
-const Entries = ({ currentPlayerId, entries }) => (
+const Entries = ({ currentId, entries }) => (
   <Fragment>
     {getValidEntries(entries).map(({ Comp, entry }, index) => (
-      <Comp currentPlayerId={currentPlayerId} entry={entry} key={index} />
+      <Comp currentId={currentId} entry={entry} key={index} />
     ))}
   </Fragment>
 );
@@ -40,7 +40,7 @@ Entries.defaultProps = {
 };
 
 Entries.propTypes = {
-  currentPlayerId: PropTypes.string,
+  currentId: PropTypes.string,
   entries: PropTypes.array
 };
 

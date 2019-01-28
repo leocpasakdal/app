@@ -8,10 +8,10 @@ import styles from './playerEntry.scss';
 import { joinArrayIgnoreInvalid } from '../../utils/misc';
 
 const PlayerEntry = ({
-  currentPlayerId,
-  entry: { avatarId, computation, move, playerId, result }
+  currentId,
+  entry: { avatarId, computation, move, id, result }
 }) => {
-  const compAlignment = styles[currentPlayerId === playerId ? 'left' : 'right'];
+  const compAlignment = styles[currentId === id ? 'left' : 'right'];
   const moveClass = joinArrayIgnoreInvalid([styles.move, compAlignment], ' ');
   const entryClass = joinArrayIgnoreInvalid([styles.entry, compAlignment], ' ');
 
@@ -32,7 +32,7 @@ const PlayerEntry = ({
 };
 
 PlayerEntry.propTypes = {
-  currentPlayerId: PropTypes.string,
+  currentId: PropTypes.string,
   entry: PropTypes.object
 };
 

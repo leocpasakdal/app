@@ -7,19 +7,31 @@ import * as reduxModules from '../../redux/modules';
 import { INPUTS, MODAL_TYPE } from '../../utils/constants';
 
 class UnconnectedFooter extends Component {
-  componentDidUpdate() {}
+  componentDidUpdate() {
+    console.log(this.props.start);
+  }
   getButtons = () =>
     INPUTS.map(value => (
-      <InputButton key={value} onClick={this.onClick} value={value} />
+      <InputButton
+        disabled={!this.props.start}
+        key={value}
+        onClick={this.onClick}
+        value={value}
+      />
     ));
 
   onClick = input => {
-    console.info(input);
-    this.props.showModal({ modalType: MODAL_TYPE.GAME_RESULT });
+    this.props.inputRequest(input);
+    // this.props.showModal({ modalType: MODAL_TYPE.GAME_RESULT });
   };
 
   render() {
-    return <FooterComponent>{this.getButtons()}</FooterComponent>;
+    return (
+      <FooterComponent>
+        <div>{this.props.clientErrorMessage}</div>
+        {this.getButtons()}{' '}
+      </FooterComponent>
+    );
   }
 }
 
@@ -27,12 +39,19 @@ UnconnectedFooter.propTypes = {
   showModal: PropTypes.func
 };
 
+const mapStateToProps = state => ({
+  entries: state.socket.entries,
+  start: state.socket.start,
+  clientErrorMessage: state.socket.clientErrorMessage
+});
+
 const mapDispatchToProps = {
-  showModal: reduxModules.modal.actions.showModal
+  showModal: reduxModules.modal.actions.showModal,
+  inputRequest: reduxModules.socket.actions.inputRequest
 };
 
 const Footer = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(UnconnectedFooter);
 

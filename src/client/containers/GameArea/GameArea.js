@@ -2,20 +2,27 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import * as reduxModules from '../../redux/modules';
 import Entries from '../../components/Entries/Entries';
 import Scrollable from '../../components/Scrollable/Scrollable';
 import Layout from '../Layout/Layout';
 
 class UnconnectedGameArea extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    if (this.props.connected && !this.props.start) {
+      this.props.startGameRequest();
+    }
+  }
+
+  componentDidUpdate() {}
 
   render() {
-    const { currentPlayerId, entries } = this.props;
+    const { socketId, entries } = this.props;
 
     return (
       <Layout>
         <Scrollable scrollToBottomOnUpdate>
-          <Entries currentPlayerId={currentPlayerId} entries={entries} />
+          <Entries currentId={socketId} entries={entries} />
         </Scrollable>
       </Layout>
     );
@@ -23,15 +30,23 @@ class UnconnectedGameArea extends Component {
 }
 
 UnconnectedGameArea.propTypes = {
-  currentPlayerId: PropTypes.string,
-  entries: PropTypes.array
+  entries: PropTypes.array,
+  socketId: PropTypes.string
 };
 
 const mapStateToProps = state => ({
-  currentPlayerId: state.player.currentPlayerId,
-  entries: state.game.entries
+  socketId: state.socket.socketId,
+  connected: state.socket.connected,
+  entries: state.socket.entries
 });
 
-const GameArea = connect(mapStateToProps)(UnconnectedGameArea);
+const mapDispatchToProps = {
+  startGameRequest: reduxModules.socket.actions.startGameRequest
+};
+
+const GameArea = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UnconnectedGameArea);
 
 export default GameArea;

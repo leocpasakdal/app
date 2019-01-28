@@ -12,9 +12,9 @@ import Modal from '../Modal/Modal';
 class UnconnectedLayout extends Component {
   componentDidUpdate() {}
   render() {
-    const { children, isGameInProgress } = this.props;
+    const { children, connected } = this.props;
 
-    if (!isGameInProgress) {
+    if (!connected) {
       return <Redirect to={ROUTES.START} />;
     }
 
@@ -31,13 +31,13 @@ class UnconnectedLayout extends Component {
 
 UnconnectedLayout.propTypes = {
   children: PropTypes.node,
-  isGameInProgress: PropTypes.bool
+  connected: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
   avatarId: state.player.avatarId,
   banner: state.player.banner,
-  isGameInProgress: state.game.isGameInProgress,
+  connected: state.socket.connected,
   teamName: state.player.teamName
 });
 

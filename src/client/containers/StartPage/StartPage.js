@@ -18,6 +18,13 @@ class UnconnectedStartPage extends Component {
     teamName: ''
   };
 
+  componentDidUpdate(prevProps) {
+    if (this.props.connected && prevProps.connected !== this.props.connected) {
+      this.setPlayerInfo();
+      this.goToGame();
+    }
+  }
+
   onTeamNameChange = evt => {
     this.setState({
       teamName: evt.target.value
@@ -31,16 +38,16 @@ class UnconnectedStartPage extends Component {
   };
 
   onClick = () => {
-    this.setGameInfo();
-    this.goToGame();
+    this.props.gameConnectionRequest({
+      avatarId: this.state.avatarId,
+      teamName: this.state.teamName
+    });
   };
 
-  setGameInfo = () => {
+  setPlayerInfo = () => {
     const { avatarId, teamName } = this.state;
-    const { startGame, setPlayer } = this.props;
 
-    startGame();
-    setPlayer({
+    this.props.setPlayer({
       avatarId,
       teamName
     });
@@ -65,6 +72,7 @@ class UnconnectedStartPage extends Component {
 
     return (
       <div className={styles.startPage}>
+        <div>{this.props.clientErrorMessage}</div>
         <div className={styles.elementsWrapper}>
           {this.getAvatarSelections()}
           <TextBox
@@ -82,19 +90,26 @@ class UnconnectedStartPage extends Component {
 }
 
 UnconnectedStartPage.propTypes = {
+  clientErrorMessage: PropTypes.string,
+  connected: PropTypes.bool,
+  gameConnectionRequest: PropTypes.func,
   history: PropTypes.object,
-  setPlayer: PropTypes.func,
-  startGame: PropTypes.func
+  setPlayer: PropTypes.func
 };
+
+const mapStateToProps = state => ({
+  connected: state.socket.connected,
+  clientErrorMessage: state.socket.clientErrorMessage
+});
 
 const mapDispatchToProps = {
   setPlayer: reduxModules.player.actions.setPlayer,
-  startGame: reduxModules.game.actions.startGame
+  gameConnectionRequest: reduxModules.socket.actions.gameConnectionRequest
 };
 
 const StartPage = withRouter(
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(UnconnectedStartPage)
 );

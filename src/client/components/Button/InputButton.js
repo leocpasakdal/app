@@ -11,7 +11,11 @@ class InputButton extends Component {
 
   render() {
     return (
-      <Button onClick={this.onButtonClick} type="circle">
+      <Button
+        disabled={this.props.disabled}
+        onClick={this.onButtonClick}
+        type="circle"
+      >
         {this.props.value}
       </Button>
     );
@@ -19,6 +23,7 @@ class InputButton extends Component {
 }
 
 InputButton.propTypes = {
+  disabled: PropTypes.bool,
   onClick: PropTypes.func,
   value: PropTypes.number
 };
