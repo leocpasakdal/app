@@ -1,4 +1,7 @@
+import { createAction } from 'redux-actions';
 import { emitActions } from '#/redux/utils';
+
+export const RESET_CLIENT_ERROR_MESSAGE = 'socket/RESET_CLIENT_ERROR_MESSAGE';
 
 // request
 export const GAME_CONNECTION_REQUEST = 'socket/GAME_CONNECTION_REQUEST';
@@ -12,6 +15,8 @@ export const GAME_CONNECTION_RESPONSE = 'socket/GAME_CONNECTION_RESPONSE';
 export const RESULT_NUMBER_RESPONSE = 'socket/RESULT_NUMBER_RESPONSE';
 export const START_GAME_RESPONSE = 'socket/START_GAME_RESPONSE';
 export const TURN_RESPONSE = 'socket/TURN_RESPONSE';
+
+export const resetClientErrorMessage = createAction(RESET_CLIENT_ERROR_MESSAGE);
 
 //request
 export const gameConnectionRequest = emitActions(GAME_CONNECTION_REQUEST);

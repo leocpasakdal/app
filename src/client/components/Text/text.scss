@@ -5,9 +5,15 @@
 .text {
   font-size: 12px;
   letter-spacing: 0;
+  color: $white;
+  text-transform: uppercase;
 
   &.banner {
-    color: $white
+    color: $white;
+  }
+
+  &.label {
+    font-size: 18px;
   }
 
   &.entry {
@@ -15,18 +21,21 @@
   }
   
   &.team {
-    color: $white;
     font-size: 21px;
   }
 
   &.move {
-    color: $white;
     font-size: 15px;
     text-align: center;
   }
 
   &.result {
-    color: $white;
     font-size: 41px;
+  }
+
+  &.error {
+    background-color: $theme-color;
+    font-size: 20px;
+    text-align: center;
   }
 }

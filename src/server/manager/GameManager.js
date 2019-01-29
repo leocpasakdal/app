@@ -4,6 +4,7 @@ const RESULT_NUMBER_RESPONSE = 'socket/RESULT_NUMBER_RESPONSE';
 const GAME_CONNECTION_RESPONSE = 'socket/GAME_CONNECTION_RESPONSE';
 const START_GAME_RESPONSE = 'socket/START_GAME_RESPONSE';
 const TURN_RESPONSE = 'socket/TURN_RESPONSE';
+const GAME_FINISH_RESPONSE = 'socket/GAME_FINISH_RESPONSE';
 
 const LIMIT = 1000;
 const DIVISOR = 3;
@@ -232,11 +233,11 @@ const setClientsTurn = selectedClient => {
   selectedClient.set('turn', false);
 };
 
-const dispatchTurnToClients = () => {
+const dispatchTurnToClients = forceOff => {
   for (let entry of clients.entries()) {
     dispatchClientTurn({
       dispatch: entry[1].get('context').dispatch,
-      payload: entry[1].get('turn')
+      payload: forceOff ? true : entry[1].get('turn')
     });
   }
 };
@@ -251,6 +252,28 @@ const addItemToEntries = ({ client, payload }) => {
     result: getComputedResult(payload),
     type: 'playerMove'
   });
+};
+
+const dispatchGameFinish = ({ dispatch, result }) =>
+  dispatch({
+    type: GAME_FINISH_RESPONSE,
+    payload: result
+  });
+
+const dispatchGameResult = ({ context, result }) => {
+  const currentClientId = context.client.id;
+  const shouldGameFinish = result === 1;
+
+  if (shouldGameFinish) {
+    clients.forEach((current, id) => {
+      dispatchGameFinish({
+        dispatch: current.get('context').dispatch,
+        payload: currentClientId === id
+      });
+    });
+  }
+
+  dispatchTurnToClients(shouldGameFinish);
 };
 
 const processInput = (context, action) => {
@@ -277,13 +300,14 @@ const processInput = (context, action) => {
   }
 
   const client = getClient(context);
+  const result = getComputedResult(payload);
 
   addItemToEntries({ client, payload });
-  updateCurrentResultNumber(getComputedResult(payload));
+  updateCurrentResultNumber(result);
   setClientsTurn(client);
-  dispatchTurnToClients();
+
   dispatchCurrentEntries(dispatchAll);
-  // determine winner
+  dispatchGameResult({ context, result });
 };
 
 module.exports = {

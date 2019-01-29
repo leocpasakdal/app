@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import FooterComponent from '#/components/Footer/Footer';
 import InputButton from '#/components/Button/InputButton';
+
 import * as reduxModules from '#/redux/modules';
 import { INPUTS, MODAL_TYPE } from '#/utils/constants';
 
@@ -19,17 +20,13 @@ class UnconnectedFooter extends Component {
     ));
 
   onClick = input => {
+    this.props.resetClientErrorMessage();
     this.props.inputRequest(input);
     // this.props.showModal({ modalType: MODAL_TYPE.GAME_RESULT });
   };
 
   render() {
-    return (
-      <FooterComponent>
-        <div>{this.props.clientErrorMessage}</div>
-        {this.getButtons()}{' '}
-      </FooterComponent>
-    );
+    return <FooterComponent>{this.getButtons()} </FooterComponent>;
   }
 }
 
@@ -39,11 +36,11 @@ UnconnectedFooter.propTypes = {
 
 const mapStateToProps = state => ({
   entries: state.socket.entries,
-  turn: state.socket.turn,
-  clientErrorMessage: state.socket.clientErrorMessage
+  turn: state.socket.turn
 });
 
 const mapDispatchToProps = {
+  resetClientErrorMessage: reduxModules.socket.actions.resetClientErrorMessage,
   showModal: reduxModules.modal.actions.showModal,
   inputRequest: reduxModules.socket.actions.inputRequest
 };

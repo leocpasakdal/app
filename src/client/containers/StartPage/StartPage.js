@@ -7,6 +7,7 @@ import * as reduxModules from '#/redux/modules';
 import Button from '#/components/Button/Button';
 import RadioButton from '#/components/RadioButton/RadioButton';
 import TextBox from '#/components/TextBox/TextBox';
+import Text from '#/components/Text/Text';
 import { AVATARS, ROUTES } from '#/utils/constants';
 import { START } from '#/utils/language';
 
@@ -72,7 +73,6 @@ class UnconnectedStartPage extends Component {
 
     return (
       <div className={styles.startPage}>
-        <div>{this.props.clientErrorMessage}</div>
         <div className={styles.elementsWrapper}>
           {this.getAvatarSelections()}
           <TextBox
@@ -83,6 +83,7 @@ class UnconnectedStartPage extends Component {
           <Button disabled={!enableButton} onClick={this.onClick} type="oblong">
             {START}
           </Button>
+          <Text type="error">{this.props.clientErrorMessage}</Text>
         </div>
       </div>
     );

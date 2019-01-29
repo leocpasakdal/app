@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { noop } from '#/utils/misc';
-
+import Text from '#/components/Text/Text';
 import styles from './radioButton.scss';
 
 const RadioButton = ({ checked, disabled, onChange, text, value }) => {
@@ -11,7 +11,7 @@ const RadioButton = ({ checked, disabled, onChange, text, value }) => {
 
   return (
     <div className={styles.wrapper} onClick={onClickHandler}>
-      <label className={styles.label}>
+      <Text type="label">
         <input
           checked={checked}
           className={styles.input}
@@ -19,7 +19,7 @@ const RadioButton = ({ checked, disabled, onChange, text, value }) => {
           type="radio"
         />
         {text}
-      </label>
+      </Text>
     </div>
   );
 };

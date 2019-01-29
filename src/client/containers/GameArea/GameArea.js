@@ -6,6 +6,7 @@ import * as reduxModules from '#/redux/modules';
 import Entries from '#/components/Entries/Entries';
 import Scrollable from '#/components/Scrollable/Scrollable';
 import Layout from '#/containers/Layout/Layout';
+import Texts from '#/components/Text/Text';
 
 class UnconnectedGameArea extends Component {
   componentDidMount() {
@@ -24,6 +25,7 @@ class UnconnectedGameArea extends Component {
         <Scrollable scrollToBottomOnUpdate>
           <Entries currentId={socketId} entries={entries} />
         </Scrollable>
+        <Texts type="error">{this.props.clientErrorMessage}</Texts>
       </Layout>
     );
   }
@@ -35,6 +37,7 @@ UnconnectedGameArea.propTypes = {
 };
 
 const mapStateToProps = state => ({
+  clientErrorMessage: state.socket.clientErrorMessage,
   socketId: state.socket.socketId,
   connected: state.socket.connected,
   entries: state.socket.entries

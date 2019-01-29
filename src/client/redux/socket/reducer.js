@@ -5,7 +5,8 @@ import {
   CLIENT_ERROR_RESPONSE,
   RESULT_NUMBER_RESPONSE,
   START_GAME_RESPONSE,
-  TURN_RESPONSE
+  TURN_RESPONSE,
+  RESET_CLIENT_ERROR_MESSAGE
 } from './actions';
 
 const initialState = {
@@ -22,9 +23,13 @@ const entriesResponse = (state, action) => ({
   entries: [...action.payload]
 });
 
+const resetClientErrorMessage = state => ({
+  ...state,
+  clientErrorMessage: ''
+});
+
 const clientErrorResponse = (state, action) => ({
   ...state,
-  connected: false,
   clientErrorMessage: action.payload
 });
 
@@ -56,7 +61,8 @@ const reducer = handleActions(
     [GAME_CONNECTION_RESPONSE]: gameConnectionReponse,
     [RESULT_NUMBER_RESPONSE]: resultNumberResponse,
     [START_GAME_RESPONSE]: startGameResponse,
-    [TURN_RESPONSE]: turnResponse
+    [TURN_RESPONSE]: turnResponse,
+    [RESET_CLIENT_ERROR_MESSAGE]: resetClientErrorMessage
   },
   initialState
 );
