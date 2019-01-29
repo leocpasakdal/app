@@ -5,6 +5,7 @@ const GAME_CONNECTION_RESPONSE = 'socket/GAME_CONNECTION_RESPONSE';
 const START_GAME_RESPONSE = 'socket/START_GAME_RESPONSE';
 const TURN_RESPONSE = 'socket/TURN_RESPONSE';
 const GAME_FINISH_RESPONSE = 'socket/GAME_FINISH_RESPONSE';
+const EXIT_GAME_RESPONSE = 'socket/EXIT_GAME_RESPONSE';
 
 const LIMIT = 1000;
 const DIVISOR = 3;
@@ -61,7 +62,7 @@ const dispatchResultNumber = context => {
       payload: currentResultNumber
     });
 
-    getClient(context).set('turn', true);
+    getClient(getClientId(context)).set('turn', true);
 
     return;
   }
@@ -121,7 +122,13 @@ const resetEntries = () => {
   entries = [];
 };
 
-const dispatchStartGame = context => {
+const dispatchStartGame = ({ dispatch, payload }) =>
+  dispatch({
+    type: START_GAME_RESPONSE,
+    payload: payload
+  });
+
+const startGame = context => {
   const { dispatch, dispatchAll } = context;
 
   if (!isGameInProgress()) {
@@ -131,10 +138,7 @@ const dispatchStartGame = context => {
   resetEntries();
 
   dispatchCurrentEntries(dispatchAll);
-  dispatchAll({
-    type: START_GAME_RESPONSE,
-    payload: true
-  });
+  dispatchStartGame({ dispatch: dispatchAll, payload: true });
 
   dispatchClientTurn({
     dispatch,
@@ -162,12 +166,14 @@ const connectSuccessfulUser = (context, action) => {
   console.info('dispatching game connected to true');
 };
 
-const getClient = context => clients.get(context.client.id);
+const getClientId = context => context.client.id;
 
-const isClientValid = context => !!getClient(context);
+const getClient = id => clients.get(id);
+
+const isClientValid = id => !!getClient(id);
 
 const start = context => {
-  if (!isClientValid(context)) {
+  if (!isClientValid(getClientId(context))) {
     dispatchClientError({
       dispatch: context.dispatch,
       payload: 'invalid client'
@@ -177,7 +183,7 @@ const start = context => {
   }
 
   dispatchResultNumber(context);
-  dispatchStartGame(context);
+  startGame(context);
 };
 
 const connect = (context, action) => {
@@ -203,7 +209,7 @@ const isInputValid = input =>
   ACCEPTED_INPUTS.includes(input) && isResultValid(input);
 
 const isClientTurn = context => {
-  const client = getClient(context);
+  const client = getClient(getClientId(context));
 
   if (!client) {
     return false;
@@ -276,10 +282,30 @@ const dispatchGameResult = ({ context, result }) => {
   dispatchTurnToClients(shouldGameFinish);
 };
 
+const dispatchExitGame = ({ dispatch, payload }) => {
+  dispatch({
+    type: EXIT_GAME_RESPONSE
+  });
+
+  dispatchClientError({
+    dispatch,
+    payload: payload
+  });
+
+  clients.clear();
+};
+
 const processInput = (context, action) => {
   const { payload } = action;
 
   const { dispatch, dispatchAll } = context;
+
+  if (!isGameInProgress()) {
+    dispatchExitGame({
+      dispatch: dispatchAll,
+      payload: 'Other player left the game'
+    });
+  }
 
   if (!isInputValid(payload)) {
     dispatchClientError({
@@ -299,7 +325,7 @@ const processInput = (context, action) => {
     return;
   }
 
-  const client = getClient(context);
+  const client = getClient(getClientId(context));
   const result = getComputedResult(payload);
 
   addItemToEntries({ client, payload });
@@ -310,9 +336,23 @@ const processInput = (context, action) => {
   dispatchGameResult({ context, result });
 };
 
+const exit = (id, payload) => {
+  clients;
+
+  if (isClientValid(id)) {
+    clients.forEach(current => {
+      dispatchExitGame({
+        dispatch: current.get('context').dispatchAll,
+        payload
+      });
+    });
+  }
+};
+
 module.exports = {
   connect,
   start,
+  exit,
   processInput,
   removePlayer
 };

@@ -8,9 +8,7 @@ import { WIN, LOSE } from '#/utils/language';
 
 class UnconnectedResultModal extends Component {
   onClick = () => {
-    const { closeModal } = this.props;
-
-    closeModal();
+    this.props.exitGameRequest('Start the game again!');
   };
 
   render() {
@@ -39,7 +37,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  closeModal: reduxModules.modal.actions.closeModal
+  closeModal: reduxModules.modal.actions.closeModal,
+  exitGameRequest: reduxModules.socket.actions.exitGameRequest
 };
 
 const ResultModal = connect(

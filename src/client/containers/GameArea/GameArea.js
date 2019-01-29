@@ -13,9 +13,9 @@ class UnconnectedGameArea extends Component {
     if (this.props.connected && !this.props.start) {
       this.props.startGameRequest();
     }
-  }
 
-  componentDidUpdate() {}
+    this.props.resetClientErrorMessage();
+  }
 
   render() {
     const { socketId, entries } = this.props;
@@ -44,7 +44,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  startGameRequest: reduxModules.socket.actions.startGameRequest
+  startGameRequest: reduxModules.socket.actions.startGameRequest,
+  resetClientErrorMessage: reduxModules.socket.actions.resetClientErrorMessage
 };
 
 const GameArea = connect(

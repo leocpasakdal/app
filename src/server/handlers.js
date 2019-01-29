@@ -1,6 +1,7 @@
 const GAME_CONNECTION_REQUEST = 'socket/GAME_CONNECTION_REQUEST';
 const START_GAME_REQUEST = 'socket/START_GAME_REQUEST';
 const INPUT_REQUEST = 'socket/INPUT_REQUEST';
+const EXIT_GAME_REQUEST = 'socket/EXIT_GAME_REQUEST';
 
 const gameManager = require('./manager/GameManager');
 
@@ -19,8 +20,13 @@ const inputRequest = (context, action) => {
   gameManager.processInput(context, action);
 };
 
+const exitRequest = (context, action) => {
+  gameManager.exit(context.client.id, action.payload);
+};
+
 module.exports = {
   [INPUT_REQUEST]: inputRequest,
   [GAME_CONNECTION_REQUEST]: connectGame,
-  [START_GAME_REQUEST]: startGame
+  [START_GAME_REQUEST]: startGame,
+  [EXIT_GAME_REQUEST]: exitRequest
 };

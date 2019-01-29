@@ -10,7 +10,7 @@ import Footer from '#/containers/Footer/Footer';
 import Modal from '#/containers/Modal/Modal';
 
 class UnconnectedLayout extends Component {
-  componentDidUpdate() {}
+  componentDidMount() {}
   render() {
     const { children, connected } = this.props;
 
@@ -35,10 +35,7 @@ UnconnectedLayout.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  avatarId: state.player.avatarId,
-  banner: state.player.banner,
-  connected: state.socket.connected,
-  teamName: state.player.teamName
+  connected: state.socket.connected
 });
 
 const Layout = connect(mapStateToProps)(UnconnectedLayout);

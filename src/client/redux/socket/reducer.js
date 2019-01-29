@@ -7,7 +7,9 @@ import {
   START_GAME_RESPONSE,
   TURN_RESPONSE,
   RESET_CLIENT_ERROR_MESSAGE,
-  GAME_FINISH_RESPONSE
+  GAME_FINISH_RESPONSE,
+  EXIT_GAME_RESPONSE,
+  EXIT_GAME_REQUEST
 } from './actions';
 
 const initialState = {
@@ -64,6 +66,10 @@ const turnResponse = (state, action) => ({
   turn: action.payload
 });
 
+const exitGameResponse = () => ({
+  ...initialState
+});
+
 const reducer = handleActions(
   {
     [CLIENT_ERROR_RESPONSE]: clientErrorResponse,
@@ -73,7 +79,8 @@ const reducer = handleActions(
     [START_GAME_RESPONSE]: startGameResponse,
     [TURN_RESPONSE]: turnResponse,
     [RESET_CLIENT_ERROR_MESSAGE]: resetClientErrorMessage,
-    [GAME_FINISH_RESPONSE]: gameFinishResponse
+    [GAME_FINISH_RESPONSE]: gameFinishResponse,
+    [EXIT_GAME_RESPONSE]: exitGameResponse
   },
   initialState
 );

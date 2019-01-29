@@ -5,7 +5,7 @@ const gameManager = require('./manager/GameManager');
 const startSocketDisconnectionHandler = IOInstance => {
   IOInstance.on('connection', socket => {
     socket.on('disconnect', () => {
-      gameManager.removePlayer(socket.id);
+      gameManager.exit(socket.id, 'Someone left the game');
     });
   });
 };
