@@ -104,5 +104,12 @@
       "imagemin-lint-staged",
       "git add"
     ]
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/helpers/setupTests.js",
+    "moduleNameMapper": {
+      "^.+\\.(css|scss)$": "<rootDir>/helpers/styleMock.js",
+      "^.+\\.(png|jpg|gif|svg)$": "<rootDir>/helpers/imageMock.js"
+    }
   }
 }
