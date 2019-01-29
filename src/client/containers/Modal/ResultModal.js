@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as reduxModules from '#/redux/modules';
-import ResultOverlay from '#/components/Overlay/ResultOverlay';
 import { getResultImage } from '#/utils/misc';
 import { WIN, LOSE } from '#/utils/language';
+import ResultOverlay from '#/components/Overlay/ResultOverlay';
 
 class UnconnectedResultModal extends Component {
   onClick = () => {
@@ -26,18 +26,17 @@ class UnconnectedResultModal extends Component {
 }
 
 UnconnectedResultModal.propTypes = {
-  closeModal: PropTypes.func,
+  exitGameRequest: PropTypes.func,
   result: PropTypes.bool,
   show: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-  show: state.modal.show,
-  result: state.socket.result
+  result: state.socket.result,
+  show: state.modal.show
 });
 
 const mapDispatchToProps = {
-  closeModal: reduxModules.modal.actions.closeModal,
   exitGameRequest: reduxModules.socket.actions.exitGameRequest
 };
 

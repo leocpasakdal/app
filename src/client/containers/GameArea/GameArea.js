@@ -4,36 +4,48 @@ import { connect } from 'react-redux';
 
 import * as reduxModules from '#/redux/modules';
 import Entries from '#/components/Entries/Entries';
-import Scrollable from '#/components/Scrollable/Scrollable';
 import Layout from '#/containers/Layout/Layout';
+import Scrollable from '#/components/Scrollable/Scrollable';
 import Texts from '#/components/Text/Text';
 
 class UnconnectedGameArea extends Component {
   componentDidMount() {
-    if (this.props.connected && !this.props.start) {
-      this.props.startGameRequest();
+    const {
+      connected,
+      resetClientErrorMessage,
+      start,
+      startGameRequest
+    } = this.props;
+
+    if (connected && !start) {
+      startGameRequest();
     }
 
-    this.props.resetClientErrorMessage();
+    resetClientErrorMessage();
   }
 
   render() {
-    const { socketId, entries } = this.props;
+    const { clientErrorMessage, entries, socketId } = this.props;
 
     return (
       <Layout>
         <Scrollable scrollToBottomOnUpdate>
           <Entries currentId={socketId} entries={entries} />
         </Scrollable>
-        <Texts type="error">{this.props.clientErrorMessage}</Texts>
+        <Texts type="error">{clientErrorMessage}</Texts>
       </Layout>
     );
   }
 }
 
 UnconnectedGameArea.propTypes = {
+  clientErrorMessage: PropTypes.string,
+  connected: PropTypes.bool,
   entries: PropTypes.array,
-  socketId: PropTypes.string
+  resetClientErrorMessage: PropTypes.func,
+  socketId: PropTypes.string,
+  start: PropTypes.bool,
+  startGameRequest: PropTypes.func
 };
 
 const mapStateToProps = state => ({

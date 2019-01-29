@@ -3,9 +3,9 @@
 @import '../../scss/mixins';
 
 .text {
+  color: $white;
   font-size: 12px;
   letter-spacing: 0;
-  color: $white;
   text-transform: uppercase;
 
   &.banner {

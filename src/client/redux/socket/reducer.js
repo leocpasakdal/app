@@ -8,15 +8,13 @@ import {
   TURN_RESPONSE,
   RESET_CLIENT_ERROR_MESSAGE,
   GAME_FINISH_RESPONSE,
-  EXIT_GAME_RESPONSE,
-  EXIT_GAME_REQUEST
+  EXIT_GAME_RESPONSE
 } from './actions';
 
 const initialState = {
   socketId: null,
   entries: [],
   connected: false,
-  // TODO add waiting for other plyaer to join
   start: false,
   turn: false,
   result: false,

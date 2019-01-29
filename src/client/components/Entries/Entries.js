@@ -28,8 +28,8 @@ const getValidEntries = entries =>
 
 const Entries = ({ currentId, entries }) => (
   <Fragment>
-    {getValidEntries(entries).map(({ Comp, entry }) => (
-      <Comp currentId={currentId} entry={entry} key={entry.id} />
+    {getValidEntries(entries).map(({ Comp, entry }, index) => (
+      <Comp currentId={currentId} entry={entry} key={index} />
     ))}
   </Fragment>
 );
