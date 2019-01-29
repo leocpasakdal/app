@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as reduxModules from '#/redux/modules';
 import ResultOverlay from '#/components/Overlay/ResultOverlay';
 import { getResultImage } from '#/utils/misc';
+import { WIN, LOSE } from '#/utils/language';
 
 class UnconnectedResultModal extends Component {
   onClick = () => {
@@ -13,13 +14,14 @@ class UnconnectedResultModal extends Component {
   };
 
   render() {
-    const { show, won } = this.props;
+    const { show, result } = this.props;
 
     return (
       <ResultOverlay
         onClick={this.onClick}
+        result={result ? WIN : LOSE}
         show={show}
-        src={getResultImage(won ? 'WIN' : 'LOSE')}
+        src={getResultImage(result ? 'WIN' : 'LOSE')}
       />
     );
   }
@@ -27,13 +29,13 @@ class UnconnectedResultModal extends Component {
 
 UnconnectedResultModal.propTypes = {
   closeModal: PropTypes.func,
-  show: PropTypes.bool,
-  won: PropTypes.bool
+  result: PropTypes.bool,
+  show: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
   show: state.modal.show,
-  won: state.modal.won
+  result: state.socket.result
 });
 
 const mapDispatchToProps = {

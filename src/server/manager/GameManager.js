@@ -237,7 +237,7 @@ const dispatchTurnToClients = forceOff => {
   for (let entry of clients.entries()) {
     dispatchClientTurn({
       dispatch: entry[1].get('context').dispatch,
-      payload: forceOff ? true : entry[1].get('turn')
+      payload: forceOff ? false : entry[1].get('turn')
     });
   }
 };
@@ -254,10 +254,10 @@ const addItemToEntries = ({ client, payload }) => {
   });
 };
 
-const dispatchGameFinish = ({ dispatch, result }) =>
+const dispatchGameFinish = ({ dispatch, payload }) =>
   dispatch({
     type: GAME_FINISH_RESPONSE,
-    payload: result
+    payload: { result: payload, finish: true }
   });
 
 const dispatchGameResult = ({ context, result }) => {

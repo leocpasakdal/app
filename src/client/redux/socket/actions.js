@@ -15,6 +15,7 @@ export const GAME_CONNECTION_RESPONSE = 'socket/GAME_CONNECTION_RESPONSE';
 export const RESULT_NUMBER_RESPONSE = 'socket/RESULT_NUMBER_RESPONSE';
 export const START_GAME_RESPONSE = 'socket/START_GAME_RESPONSE';
 export const TURN_RESPONSE = 'socket/TURN_RESPONSE';
+export const GAME_FINISH_RESPONSE = 'socket/GAME_FINISH_RESPONSE';
 
 export const resetClientErrorMessage = createAction(RESET_CLIENT_ERROR_MESSAGE);
 
@@ -30,3 +31,4 @@ export const gameConnectionResponse = emitActions(GAME_CONNECTION_RESPONSE);
 export const resultNumberReponse = emitActions(RESULT_NUMBER_RESPONSE);
 export const startGameResponse = emitActions(START_GAME_RESPONSE);
 export const turnResponse = emitActions(START_GAME_RESPONSE);
+export const gameFinishResponse = emitActions(GAME_FINISH_RESPONSE);

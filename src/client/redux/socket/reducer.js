@@ -6,17 +6,27 @@ import {
   RESULT_NUMBER_RESPONSE,
   START_GAME_RESPONSE,
   TURN_RESPONSE,
-  RESET_CLIENT_ERROR_MESSAGE
+  RESET_CLIENT_ERROR_MESSAGE,
+  GAME_FINISH_RESPONSE
 } from './actions';
 
 const initialState = {
   socketId: null,
   entries: [],
   connected: false,
+  // TODO add waiting for other plyaer to join
   start: false,
   turn: false,
+  result: false,
+  finish: false,
   clientErrorMessage: ''
 };
+
+const gameFinishResponse = (state, action) => ({
+  ...state,
+  result: action.payload.result,
+  finish: action.payload.finish
+});
 
 const entriesResponse = (state, action) => ({
   ...state,
@@ -62,7 +72,8 @@ const reducer = handleActions(
     [RESULT_NUMBER_RESPONSE]: resultNumberResponse,
     [START_GAME_RESPONSE]: startGameResponse,
     [TURN_RESPONSE]: turnResponse,
-    [RESET_CLIENT_ERROR_MESSAGE]: resetClientErrorMessage
+    [RESET_CLIENT_ERROR_MESSAGE]: resetClientErrorMessage,
+    [GAME_FINISH_RESPONSE]: gameFinishResponse
   },
   initialState
 );

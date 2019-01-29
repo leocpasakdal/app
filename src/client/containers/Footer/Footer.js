@@ -26,7 +26,11 @@ class UnconnectedFooter extends Component {
   };
 
   render() {
-    return <FooterComponent>{this.getButtons()} </FooterComponent>;
+    return (
+      <FooterComponent show={!this.props.finish}>
+        {this.getButtons()}{' '}
+      </FooterComponent>
+    );
   }
 }
 
@@ -36,7 +40,8 @@ UnconnectedFooter.propTypes = {
 
 const mapStateToProps = state => ({
   entries: state.socket.entries,
-  turn: state.socket.turn
+  turn: state.socket.turn,
+  finish: state.socket.finish
 });
 
 const mapDispatchToProps = {
