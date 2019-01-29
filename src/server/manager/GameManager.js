@@ -337,8 +337,6 @@ const processInput = (context, action) => {
 };
 
 const exit = (id, payload) => {
-  clients;
-
   if (isClientValid(id)) {
     clients.forEach(current => {
       dispatchExitGame({
