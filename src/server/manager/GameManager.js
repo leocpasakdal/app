@@ -6,8 +6,10 @@ const START_GAME_RESPONSE = 'socket/START_GAME_RESPONSE';
 const TURN_RESPONSE = 'socket/TURN_RESPONSE';
 
 const LIMIT = 1000;
-const clients = new Map();
+const DIVISOR = 3;
 const ACCEPTED_INPUTS = [-1, 0, 1];
+const clients = new Map();
+
 let entries = [];
 let currentResultNumber = 0;
 
@@ -19,23 +21,27 @@ const isLastConnectedClient = context => {
   return context.client.id === lastClient.get('context').client.id;
 };
 
-const getRandomNumber = () => Math.floor(Math.random() * LIMIT) + 1;
+const getRandomNumber = () => Math.ceil(Math.random() * LIMIT) + 1;
 
 const removePlayer = id => {
   clients.delete(id);
 };
 
-const addPlayer = (context, data) => {
+const addPlayer = (context, action) => {
   const {
     client: { id }
   } = context;
+
+  const {
+    payload: { teamName, avatarId }
+  } = action;
 
   const player = new Map();
 
   player.set('context', context);
   player.set('id', id);
-  player.set('teamName', data.teamName);
-  player.set('avatarId', data.avatarId);
+  player.set('teamName', teamName);
+  player.set('avatarId', avatarId);
   player.set('turn', false);
 
   clients.set(id, player);
@@ -65,7 +71,6 @@ const dispatchResultNumber = context => {
 };
 
 const dispatchCurrentEntries = dispatch => {
-  console.log(entries);
   dispatch({
     type: ENTRIES_RESPONSE,
     payload: entries
@@ -116,27 +121,32 @@ const resetEntries = () => {
 };
 
 const dispatchStartGame = context => {
+  const { dispatch, dispatchAll } = context;
+
   if (!isGameInProgress()) {
     return;
   }
 
-  const { dispatchAll, dispatch } = context;
-
   resetEntries();
 
   dispatchCurrentEntries(dispatchAll);
-  dispatch({
+  dispatchAll({
     type: START_GAME_RESPONSE,
+    payload: true
+  });
+
+  dispatchClientTurn({
+    dispatch,
     payload: true
   });
 };
 
-const connectSuccessfulUser = (context, data) => {
+const connectSuccessfulUser = (context, action) => {
   const { dispatch } = context;
 
   console.info('connection available');
 
-  addPlayer(context, data);
+  addPlayer(context, action);
 
   console.info('add new client');
 
@@ -169,14 +179,14 @@ const start = context => {
   dispatchStartGame(context);
 };
 
-const connect = (context, data) => {
+const connect = (context, action) => {
   if (isGameInProgress()) {
     dispatchGameIsFullActions(context);
 
     return;
   }
 
-  connectSuccessfulUser(context, data);
+  connectSuccessfulUser(context, action);
 };
 
 const updateCurrentResultNumber = result => {
@@ -184,7 +194,7 @@ const updateCurrentResultNumber = result => {
 };
 
 const getComputedResult = input =>
-  Math.round((input + currentResultNumber) / 3);
+  Math.round((input + currentResultNumber) / DIVISOR);
 
 const isResultValid = input => !!getComputedResult(input);
 
@@ -212,6 +222,7 @@ const getComputation = move =>
   getComputedResult(move);
 
 const setClientsTurn = selectedClient => {
+  // refactor this!!
   const values = Array.from(clients.values());
   const selectedId = selectedClient.get('id');
   const foundClient = values.find(client => client.get('id') !== selectedId);
@@ -230,22 +241,24 @@ const dispatchTurnToClients = () => {
   }
 };
 
-const addItemToEntries = ({ client, input }) => {
+const addItemToEntries = ({ client, payload }) => {
   entries.push({
     id: client.get('id'),
     teamName: client.get('teamName'),
     avatarId: client.get('avatarId'),
-    move: input,
-    computation: getComputation(input),
-    result: getComputedResult(input),
+    move: payload,
+    computation: getComputation(payload),
+    result: getComputedResult(payload),
     type: 'playerMove'
   });
 };
 
 const processInput = (context, action) => {
-  const input = action.payload;
+  const { payload } = action;
 
-  if (!isInputValid(input)) {
+  const { dispatch, dispatchAll } = context;
+
+  if (!isInputValid(payload)) {
     dispatchClientError({
       dispatch: context.dispatch,
       payload: 'invalid input'
@@ -256,7 +269,7 @@ const processInput = (context, action) => {
 
   if (!isClientTurn(context)) {
     dispatchClientError({
-      dispatch: context.dispatch,
+      dispatch,
       payload: 'not your turn yet'
     });
 
@@ -265,11 +278,11 @@ const processInput = (context, action) => {
 
   const client = getClient(context);
 
-  addItemToEntries({ client, input });
-  updateCurrentResultNumber(getComputedResult(input));
+  addItemToEntries({ client, payload });
+  updateCurrentResultNumber(getComputedResult(payload));
   setClientsTurn(client);
   dispatchTurnToClients();
-  dispatchCurrentEntries(context.dispatchAll);
+  dispatchCurrentEntries(dispatchAll);
   // determine winner
 };
 

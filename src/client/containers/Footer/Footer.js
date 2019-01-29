@@ -7,13 +7,11 @@ import * as reduxModules from '#/redux/modules';
 import { INPUTS, MODAL_TYPE } from '#/utils/constants';
 
 class UnconnectedFooter extends Component {
-  componentDidUpdate() {
-    console.log(this.props.start);
-  }
+  componentDidUpdate() {}
   getButtons = () =>
     INPUTS.map(value => (
       <InputButton
-        disabled={!this.props.start}
+        disabled={!this.props.turn}
         key={value}
         onClick={this.onClick}
         value={value}
@@ -41,7 +39,7 @@ UnconnectedFooter.propTypes = {
 
 const mapStateToProps = state => ({
   entries: state.socket.entries,
-  start: state.socket.start,
+  turn: state.socket.turn,
   clientErrorMessage: state.socket.clientErrorMessage
 });
 

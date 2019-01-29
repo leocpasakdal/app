@@ -11,6 +11,7 @@ export const ENTRIES_RESPONSE = 'socket/ENTRIES_RESPONSE';
 export const GAME_CONNECTION_RESPONSE = 'socket/GAME_CONNECTION_RESPONSE';
 export const RESULT_NUMBER_RESPONSE = 'socket/RESULT_NUMBER_RESPONSE';
 export const START_GAME_RESPONSE = 'socket/START_GAME_RESPONSE';
+export const TURN_RESPONSE = 'socket/TURN_RESPONSE';
 
 //request
 export const gameConnectionRequest = emitActions(GAME_CONNECTION_REQUEST);
@@ -23,3 +24,4 @@ export const entriesReceived = emitActions(ENTRIES_RESPONSE);
 export const gameConnectionResponse = emitActions(GAME_CONNECTION_RESPONSE);
 export const resultNumberReponse = emitActions(RESULT_NUMBER_RESPONSE);
 export const startGameResponse = emitActions(START_GAME_RESPONSE);
+export const turnResponse = emitActions(START_GAME_RESPONSE);
