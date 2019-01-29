@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import * as reduxModules from '../../redux/modules';
-import Entries from '../../components/Entries/Entries';
-import Scrollable from '../../components/Scrollable/Scrollable';
-import Layout from '../Layout/Layout';
+import * as reduxModules from '#/redux/modules';
+import Entries from '#/components/Entries/Entries';
+import Scrollable from '#/components/Scrollable/Scrollable';
+import Layout from '#/containers/Layout/Layout';
 
 class UnconnectedGameArea extends Component {
   componentDidMount() {

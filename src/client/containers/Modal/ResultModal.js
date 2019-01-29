@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as reduxModules from '../../redux/modules';
-import ResultOverlay from '../../components/Overlay/ResultOverlay';
-import { getResultImage } from '../../utils/misc';
+import * as reduxModules from '#/redux/modules';
+import ResultOverlay from '#/components/Overlay/ResultOverlay';
+import { getResultImage } from '#/utils/misc';
 
 class UnconnectedResultModal extends Component {
   onClick = () => {

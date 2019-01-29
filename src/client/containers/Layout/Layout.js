@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { ROUTES } from '../../utils/constants';
-import Body from '../../components/Body/Body';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
-import Modal from '../Modal/Modal';
+import { ROUTES } from '#/utils/constants';
+import Body from '#/components/Body/Body';
+import Header from '#/containers/Header/Header';
+import Footer from '#/containers/Footer/Footer';
+import Modal from '#/containers/Modal/Modal';
 
 class UnconnectedLayout extends Component {
   componentDidUpdate() {}

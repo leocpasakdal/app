@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { noop } from '../../utils/misc';
+import { noop } from '#/utils/misc';
 
 import styles from './radioButton.scss';
 

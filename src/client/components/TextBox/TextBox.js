@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { joinArrayIgnoreInvalid, noop } from '../../utils/misc';
+import { joinArrayIgnoreInvalid, noop } from '#/utils/misc';
 
-import commonStyles from '../../scss/_common.scss';
+import commonStyles from '#/scss/_common.scss';
 import styles from './textbox.scss';
 
 const TextBox = ({

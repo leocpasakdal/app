@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Avatar from '../Image/Avatar';
-import MoveEntry from '../Entry/MoveEntry';
-import ResultEntry from '../Entry/ResultEntry';
+import Avatar from '#/components/Image/Avatar';
+import MoveEntry from '#/components/Entry/MoveEntry';
+import ResultEntry from '#/components/Entry/ResultEntry';
 import styles from './playerEntry.scss';
-import { joinArrayIgnoreInvalid } from '../../utils/misc';
+import { joinArrayIgnoreInvalid } from '#/utils/misc';
 
 const PlayerEntry = ({
   currentId,

@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import * as reduxModules from '../../redux/modules';
-import Button from '../../components/Button/Button';
-import RadioButton from '../../components/RadioButton/RadioButton';
-import TextBox from '../../components/TextBox/TextBox';
-import { AVATARS, ROUTES } from '../../utils/constants';
-import { START } from '../../utils/language';
+import * as reduxModules from '#/redux/modules';
+import Button from '#/components/Button/Button';
+import RadioButton from '#/components/RadioButton/RadioButton';
+import TextBox from '#/components/TextBox/TextBox';
+import { AVATARS, ROUTES } from '#/utils/constants';
+import { START } from '#/utils/language';
 
 import styles from './startPage.scss';
 

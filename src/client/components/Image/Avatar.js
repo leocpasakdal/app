@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Image from './Image';
-import { getAvatar } from '../../utils/misc';
+import { getAvatar } from '#/utils/misc';
 
 const Avatar = ({ id }) => <Image src={getAvatar(id)} type="avatar" />;
 

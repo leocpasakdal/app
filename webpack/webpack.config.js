@@ -11,6 +11,11 @@ module.exports = {
     path: path.join(__dirname, outputDirectory),
     filename: 'bundle.js'
   },
+  resolve: {
+    alias: {
+      '#': path.resolve(__dirname, '../src/client')
+    }
+  },
   module: {
     rules: [
       {

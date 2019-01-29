@@ -4,9 +4,9 @@
   "description": "",
   "main": "src/server/index.js",
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "webpack --config=./webpack/webpack.config.js --mode production",
     "start": "npm run build && node src/server/index.js",
-    "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
+    "client": "webpack-dev-server --config=./webpack/webpack.config.js  --mode development --devtool inline-source-map --hot",
     "server": "nodemon src/server/index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "precommit": "lint-staged",
@@ -109,7 +109,28 @@
     "setupTestFrameworkScriptFile": "<rootDir>/helpers/setupTests.js",
     "moduleNameMapper": {
       "^.+\\.(css|scss)$": "<rootDir>/helpers/styleMock.js",
-      "^.+\\.(png|jpg|gif|svg)$": "<rootDir>/helpers/imageMock.js"
-    }
+      "^.+\\.(png|jpg|gif|svg)$": "<rootDir>/helpers/imageMock.js",
+      "^#/(.*)": "<rootDir>/src/client/$1"
+    },
+    "notify": true,
+    "resetMocks": true,
+    "coveragePathIgnorePatterns": [
+      "__tests__",
+      "src/static",
+      "helpers/",
+      "webpack/"
+    ],
+    "collectCoverageFrom": [
+      "**/*.js",
+      "!**/node_modules/**"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "statements": 90,
+        "functions": 90,
+        "lines": 90
+      }
+    }    
   }
 }

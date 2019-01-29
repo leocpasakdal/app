@@ -1,4 +1,4 @@
-import { emitActions } from '../utils';
+import { emitActions } from '#/redux/utils';
 
 // request
 export const GAME_CONNECTION_REQUEST = 'socket/GAME_CONNECTION_REQUEST';

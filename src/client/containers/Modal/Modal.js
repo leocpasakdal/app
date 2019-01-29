@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as reduxModules from '../../redux/modules';
-import { MODAL_TYPE } from '../../utils/constants';
+import * as reduxModules from '#/redux/modules';
+import { MODAL_TYPE } from '#/utils/constants';
 import ResultModal from './ResultModal';
 
 class UnconnectedModal extends Component {

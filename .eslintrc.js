@@ -1,3 +1,4 @@
+const path = require('path');
 const MULTILINE_BLOCK_LIKE = 'multiline-block-like';
 
 module.exports = {
@@ -20,7 +21,10 @@ module.exports = {
     jest: true
   },
   settings: {
-    'import/parser': 'babel-eslint'
+    'import/parser': 'babel-eslint',
+    'import/resolver': {
+      alias: [['#', path.resolve(path.join(__dirname, './src/client'))]]
+    }
   },
   parserOptions: {
     sourceType: 'module'

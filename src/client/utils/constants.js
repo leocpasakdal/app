@@ -1,7 +1,7 @@
-import avatar1 from '../static/images/avatar1.png';
-import avatar2 from '../static/images/avatar2.png';
-import win from '../static/images/win.png';
-import lose from '../static/images/lose.png';
+import avatar1 from '#/static/images/avatar1.png';
+import avatar2 from '#/static/images/avatar2.png';
+import win from '#/static/images/win.png';
+import lose from '#/static/images/lose.png';
 
 export const AVATARS = [
   { avatar: avatar1, id: 'avatar1', name: 'avatar 1' },
