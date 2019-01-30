@@ -17,6 +17,7 @@ module.exports = {
     'eslint:recommended'
   ],
   globals: {
+    __TEST__: true,
     expect: true,
     jest: true
   },

@@ -10,13 +10,11 @@ class InputButton extends Component {
   };
 
   render() {
+    const { disabled, value } = this.props;
+
     return (
-      <Button
-        disabled={this.props.disabled}
-        onClick={this.onButtonClick}
-        type="circle"
-      >
-        {this.props.value}
+      <Button disabled={disabled} onClick={this.onButtonClick} type="circle">
+        {value}
       </Button>
     );
   }

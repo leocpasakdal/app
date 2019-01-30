@@ -9,7 +9,7 @@ const ENTRY = {
   [ENTRY_TYPE.PLAYER_MOVE]: PlayerEntry
 };
 
-const getValidEntries = entries =>
+const getValidEntries = (entries = []) =>
   entries.reduce((acc, entry) => {
     const type = _get(entry, 'type');
 

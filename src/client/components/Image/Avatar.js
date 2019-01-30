@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Image from './Image';
 import { getAvatar } from '#/utils/misc';
 
-const Avatar = ({ id, className }) => (
+const Avatar = ({ className, id }) => (
   <Image className={className} src={getAvatar(id)} type="avatar" />
 );
 

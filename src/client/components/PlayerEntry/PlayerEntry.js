@@ -9,7 +9,7 @@ import { joinArrayIgnoreInvalid } from '#/utils/misc';
 
 const PlayerEntry = ({
   currentId,
-  entry: { avatarId, computation, move, id, result }
+  entry: { avatarId, computation, id, move, result } = {}
 }) => {
   const compAlignment = styles[currentId === id ? 'left' : 'right'];
   const moveClass = joinArrayIgnoreInvalid([styles.move, compAlignment], ' ');

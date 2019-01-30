@@ -3,14 +3,14 @@ import React from 'react';
 import Body from '../Body';
 import styles from '../body.scss';
 
-describe('test describe', () => {
+describe('Body', () => {
   styles.body = 'bodyCssValue';
 
-  it('test it', () => {
+  it('returns an instance of div with correct class name', () => {
     const wrapper = shallow(<Body />);
     const child = wrapper.find('div');
 
-    expect(wrapper.find('div')).toHaveLength(1);
+    expect(child).toHaveLength(1);
     expect(child.props().className).toEqual('bodyCssValue');
   });
 });
