@@ -4,15 +4,21 @@
 
 .text {
   color: $white;
+  font-family: 'Roboto-Regular', sans-serif;
   font-size: 12px;
+  
   letter-spacing: 0;
   text-transform: uppercase;
-
+  
+  &:focus {
+    box-shadow:0 2px 4px 0 $button-shadow;
+  }
   &.banner {
     color: $white;
   }
 
   &.label {
+    font-family: 'Roboto-Bold', sans-serif;
     font-size: 18px;
   }
 
@@ -35,7 +41,9 @@
 
   &.error {
     background-color: $theme-color;
+    font-family: 'Roboto-Italic';
     font-size: 20px;
+    line-height: 5vh;
     text-align: center;
   }
 }

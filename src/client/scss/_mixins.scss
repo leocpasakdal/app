@@ -16,12 +16,10 @@ $desktopsmall-desktophd-overlap: 1440px;
     @content;
   }
 
-  // Firefox 18-
   &:-moz-placeholder {
     @content;
   }
 
-  // Firefox 19+
   &::-moz-placeholder { 
     @content;
   }
@@ -31,9 +29,18 @@ $desktopsmall-desktophd-overlap: 1440px;
   }
 }
 
+@mixin roboto-screen-font-face($suffixes...) {
+  @each $suffix in $suffixes {
+    @font-face {
+      font-family: 'Roboto-' + $suffix;
+      src: url('../static/fonts/Roboto-'+$suffix+'.ttf');
+    }
+  }
+}
+
 @mixin font-smoothing {
-  -moz-osx-font-smoothing: grayscale; /* NOSONAR */
-  -webkit-font-smoothing: antialiased; /* NOSONAR */
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 
 @mixin mobile {
@@ -51,7 +58,6 @@ $desktopsmall-desktophd-overlap: 1440px;
   }
 }
 
-// This method is being used now for both mobile and tablet as we have only one design for both of them
 @mixin tablet-and-mobile {
   @media only screen
     and (max-width: $tablet-desktop-overlap - 1) {

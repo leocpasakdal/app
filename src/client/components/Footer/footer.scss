@@ -1,7 +1,12 @@
+@import '../../scss/colors';
+@import '../../scss/mixins';
+
 .footer {
   align-items: center;
+  background-color: $white;
   display: flex;
   flex-direction: row;
-  height: 88px;
-  justify-content: space-evenly;
+  height: 15vh;
+  justify-content: center;
+  
 }

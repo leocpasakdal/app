@@ -6,7 +6,9 @@ import * as reduxModules from '#/redux/modules';
 import Entries from '#/components/Entries/Entries';
 import Layout from '#/containers/Layout/Layout';
 import Scrollable from '#/components/Scrollable/Scrollable';
-import Texts from '#/components/Text/Text';
+import Text from '#/components/Text/Text';
+
+import styles from './gameArea.scss';
 
 class UnconnectedGameArea extends Component {
   componentDidMount() {
@@ -32,7 +34,9 @@ class UnconnectedGameArea extends Component {
         <Scrollable scrollToBottomOnUpdate>
           <Entries currentId={socketId} entries={entries} />
         </Scrollable>
-        <Texts type="error">{clientErrorMessage}</Texts>
+        <Text className={styles.gameError} type="label">
+          {clientErrorMessage}
+        </Text>
       </Layout>
     );
   }

@@ -3,17 +3,20 @@
 
 .header {
   background: $header-background;
-  box-shadow: 0 2px 4px 0 $header-shadow;
+  box-shadow: 0 0 4px 0 $header-shadow;
   display: flex;
   flex-direction: row;
-  height: 74px;
-  width: 100%;
+  height: 10vh;
 }
 
 .left {
   @include flex-center;
+  width: 80px;
 
-  width: 30%;
+  @include desktop {
+    width: 100px
+  }
+  
 }
 
 .right {
@@ -21,5 +24,4 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 70%;
 }

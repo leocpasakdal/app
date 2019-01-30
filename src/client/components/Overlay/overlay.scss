@@ -6,8 +6,6 @@
   background-color: $theme-color;
   display: none;
   opacity: .9;
-  padding-bottom: 30px;
-  padding-top: 30px;
   position: absolute;
   width: 100%;
   z-index: 1;
@@ -16,9 +14,7 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-    height: 494px;
+    height: 90vh;
     justify-content: space-evenly;
-    left: 0;
-    top: 74px;   
   }
 }

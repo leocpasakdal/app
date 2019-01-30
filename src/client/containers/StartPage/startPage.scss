@@ -4,13 +4,13 @@
 .start-page {
   @include flex-center;
   background-color: $theme-color;
-  height: $mobile-height;
+  height: 100vh;
 }
 
 .elements-wrapper {
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 200px;
+  height: 30vh;
   justify-content: space-evenly;
 }

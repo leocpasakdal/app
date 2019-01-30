@@ -4,12 +4,15 @@ import PropTypes from 'prop-types';
 import styles from './image.scss';
 import { joinArrayIgnoreInvalid } from '#/utils/misc';
 
-const Image = ({ alt, src, type }) => {
-  const className = joinArrayIgnoreInvalid([styles.image, styles[type]], ' ');
+const Image = ({ alt, className, src, type }) => {
+  const classNames = joinArrayIgnoreInvalid(
+    [styles.image, styles[type], className],
+    ' '
+  );
 
   return (
     <div>
-      <img alt={alt} className={className} src={src} />
+      <img alt={alt} className={classNames} src={src} />
     </div>
   );
 };
@@ -21,6 +24,7 @@ Image.defaultProps = {
 
 Image.propTypes = {
   alt: PropTypes.string,
+  className: PropTypes.string,
   src: PropTypes.string,
   type: PropTypes.oneOf(['avatar', 'result']).isRequired
 };

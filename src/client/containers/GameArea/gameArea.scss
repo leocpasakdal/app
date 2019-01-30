@@ -1,0 +1,10 @@
+
+@import '../../scss/colors';
+@import '../../scss/mixins';
+
+.game-error {
+  background-color: $white;
+  color: $theme-color;
+  height: 5vh;
+  text-align: center;
+}

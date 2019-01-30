@@ -3,14 +3,18 @@ import PropTypes from 'prop-types';
 import styles from './text.scss';
 import { joinArrayIgnoreInvalid } from '#/utils/misc';
 
-const Text = ({ children, type }) => {
-  const className = joinArrayIgnoreInvalid([styles.text, styles[type]], ' ');
+const Text = ({ className, children, type }) => {
+  const classNames = joinArrayIgnoreInvalid(
+    [className, styles.text, styles[type]],
+    ' '
+  );
 
-  return <div className={className}>{children}</div>;
+  return <div className={classNames}>{children}</div>;
 };
 
 Text.propTypes = {
   children: PropTypes.node,
+  className: PropTypes.string,
   type: PropTypes.oneOf([
     'banner',
     'circle',

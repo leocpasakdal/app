@@ -1,3 +1,6 @@
+@import '../../scss/colors';
+@import '../../scss/mixins';
+
 .player-entry {
   display: flex;
   flex-direction: column;
@@ -13,14 +16,39 @@
     }
   }
 
+  .player-avatar {
+    margin: 0 10px;
+  }
+
   .entry {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     margin-bottom: 8px;
+    margin-left: 50px;
+    
 
     &.right {
+      justify-content: flex-end;
+      margin-left: 0px;
+      margin-right: 50px;
       text-align: right;
+    }
+  }
+}
+
+@include desktop {
+  .player-entry {
+    .player-avatar {
+      margin: 0 15px;
+    }
+
+    .entry {
+      margin-left: 70px;
+
+      &.right {
+        margin-right: 70px;
+      }
     }
   }
 }

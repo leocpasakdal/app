@@ -7,22 +7,27 @@
   border: 0;
   color: $white;
   cursor: pointer;
+  font-family: 'Roboto-Bold', sans-serif;
   font-size: 15px;
   height: 56px;
   outline: 0;
+  text-transform: uppercase;
   width: 56px;
 
   &.oblong {
     background-color: $white;
     border-radius: 100px;
     color: $theme-color;
-    font-size: 16px;
+    font-size: 18px;
     height: 56px;
     width: 243px;
+
+   
   }
 
   &.circle {
     border-radius: 100%;
+    margin: 0 10px;
   }
 
   &:hover {
@@ -31,6 +36,18 @@
     }
   }
 }
+
+@include desktop {
+  .button {
+    &.oblong {
+      font-size: 28px;
+    }
+
+    &.circle {
+      margin: 0 15px;
+    }
+  }
+}   
 
 .disabled {
   cursor: default;

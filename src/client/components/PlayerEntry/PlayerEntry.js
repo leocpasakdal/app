@@ -18,7 +18,7 @@ const PlayerEntry = ({
   return (
     <div className={styles.playerEntry}>
       <div className={moveClass}>
-        <Avatar id={avatarId} />
+        <Avatar className={styles.playerAvatar} id={avatarId} />
         <MoveEntry>{move}</MoveEntry>
       </div>
       <div className={entryClass}>

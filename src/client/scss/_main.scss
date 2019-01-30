@@ -1,6 +1,8 @@
 @import './colors';
 @import './mixins';
 
+@include roboto-screen-font-face('Bold', 'Regular', 'Italic');
+
 div,
 span {
   @include font-smoothing;
@@ -10,7 +12,7 @@ span {
 }
 
 body {
-  background-color: $white;
+  background-color: $theme-color;
   font-size: 15px;
   font-stretch: normal;
   font-style: normal;
@@ -18,10 +20,8 @@ body {
   font-variant-ligatures: normal; 
   font-variant-numeric: normal; 
   font-weight: lighter;
-  height: 100%;
   line-height: 22px;
   margin: 0;
-  width: 100%;
 }
 
 a {

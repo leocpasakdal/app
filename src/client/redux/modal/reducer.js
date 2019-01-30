@@ -3,7 +3,7 @@ import { CLOSE_MODAL, SHOW_MODAL } from './actions';
 
 const initialState = {
   modalContent: {},
-  modalType: '',
+  modalType: 'GAME_RESULT',
   show: false
 };
 

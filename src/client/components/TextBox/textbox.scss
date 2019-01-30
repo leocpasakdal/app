@@ -12,10 +12,16 @@
 
   .textbox {
     box-sizing: border-box;
+    color: $theme-color;
+    font-family: 'Roboto-Regular', sans-serif;
     font-size: 32px;
     height: 46px;
     outline: none;
     padding: 0 20px;
     width: 246px;
   }
+}
+
+@include desktop {
+
 }
