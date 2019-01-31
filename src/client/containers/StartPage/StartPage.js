@@ -20,8 +20,9 @@ class UnconnectedStartPage extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    if (this.props.connected && prevProps.connected !== this.props.connected) {
-      this.setPlayerInfo();
+    const { connected } = this.props;
+
+    if (connected && prevProps.connected !== connected) {
       this.goToGame();
     }
   }
@@ -39,16 +40,9 @@ class UnconnectedStartPage extends Component {
   };
 
   onClick = () => {
-    this.props.gameConnectionRequest({
-      avatarId: this.state.avatarId,
-      teamName: this.state.teamName
-    });
-  };
-
-  setPlayerInfo = () => {
     const { avatarId, teamName } = this.state;
 
-    this.props.setPlayer({
+    this.props.gameConnectionRequest({
       avatarId,
       teamName
     });
@@ -94,8 +88,7 @@ UnconnectedStartPage.propTypes = {
   clientErrorMessage: PropTypes.string,
   connected: PropTypes.bool,
   gameConnectionRequest: PropTypes.func,
-  history: PropTypes.object,
-  setPlayer: PropTypes.func
+  history: PropTypes.object
 };
 
 const mapStateToProps = state => ({
@@ -104,7 +97,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  setPlayer: reduxModules.player.actions.setPlayer,
   gameConnectionRequest: reduxModules.socket.actions.gameConnectionRequest
 };
 
@@ -114,5 +106,11 @@ const StartPage = withRouter(
     mapDispatchToProps
   )(UnconnectedStartPage)
 );
+
+if (__TEST__) {
+  StartPage._test = {
+    UnconnectedStartPage
+  };
+}
 
 export default StartPage;

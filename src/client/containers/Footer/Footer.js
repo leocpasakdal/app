@@ -9,6 +9,7 @@ import { INPUTS } from '#/utils/constants';
 
 class UnconnectedFooter extends Component {
   getButtons = () =>
+    // TODO move to server
     INPUTS.map(value => (
       <InputButton
         disabled={!this.props.turn}
@@ -28,7 +29,7 @@ class UnconnectedFooter extends Component {
   render() {
     return (
       <FooterComponent show={!this.props.finish}>
-        {this.getButtons()}{' '}
+        {this.getButtons()}
       </FooterComponent>
     );
   }
@@ -55,5 +56,11 @@ const Footer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(UnconnectedFooter);
+
+if (__TEST__) {
+  Footer._test = {
+    UnconnectedFooter
+  };
+}
 
 export default Footer;

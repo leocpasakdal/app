@@ -12,6 +12,7 @@ class Scrollable extends Component {
   componentDidMount() {
     this.scrollToBottom();
   }
+
   componentDidUpdate() {
     this.scrollToBottom();
   }

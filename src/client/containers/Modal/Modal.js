@@ -1,25 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as reduxModules from '#/redux/modules';
 import { MODAL_TYPE } from '#/utils/constants';
 import ResultModal from './ResultModal';
 
-class UnconnectedModal extends Component {
-  modalType = {
-    [MODAL_TYPE.GAME_RESULT]: ResultModal
-  };
-  render() {
-    const { show, modalType } = this.props;
-    const Comp = this.modalType[modalType];
+const modalMap = {
+  [MODAL_TYPE.GAME_RESULT]: ResultModal
+};
 
-    if (!Comp) {
-      return null;
-    }
+const UnconnectedModal = ({ modalType, show }) => {
+  const Comp = modalMap[modalType];
 
-    return <Comp show={show} />;
+  if (!Comp) {
+    return null;
   }
-}
+
+  return <Comp show={show} />;
+};
 
 UnconnectedModal.propTypes = {
   modalType: PropTypes.string,
@@ -39,5 +37,11 @@ const Modal = connect(
   mapStateToProps,
   mapDispatchToProps
 )(UnconnectedModal);
+
+if (__TEST__) {
+  Modal._test = {
+    UnconnectedModal
+  };
+}
 
 export default Modal;

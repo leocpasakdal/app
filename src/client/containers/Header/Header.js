@@ -1,23 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import HeaderComponent from '#/components/Header/Header';
 
-class UnconnectedHeader extends Component {
-  componentDidUpdate() {}
-
-  render() {
-    const { avatarId, banner, teamName } = this.props;
-
-    return (
-      <HeaderComponent
-        avatarId={avatarId}
-        banner={banner}
-        teamName={teamName}
-      />
-    );
-  }
-}
+const UnconnectedHeader = ({ avatarId, banner, teamName }) => (
+  <HeaderComponent avatarId={avatarId} banner={banner} teamName={teamName} />
+);
 
 UnconnectedHeader.propTypes = {
   avatarId: PropTypes.string,
@@ -32,5 +20,11 @@ const mapStateToProps = state => ({
 });
 
 const Header = connect(mapStateToProps)(UnconnectedHeader);
+
+if (__TEST__) {
+  Header._test = {
+    UnconnectedHeader
+  };
+}
 
 export default Header;

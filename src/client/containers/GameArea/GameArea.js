@@ -69,4 +69,10 @@ const GameArea = connect(
   mapDispatchToProps
 )(UnconnectedGameArea);
 
+if (__TEST__) {
+  GameArea._test = {
+    UnconnectedGameArea
+  };
+}
+
 export default GameArea;

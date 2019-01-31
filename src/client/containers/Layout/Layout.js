@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -9,25 +9,20 @@ import Header from '#/containers/Header/Header';
 import Footer from '#/containers/Footer/Footer';
 import Modal from '#/containers/Modal/Modal';
 
-class UnconnectedLayout extends Component {
-  componentDidMount() {}
-  render() {
-    const { children, connected } = this.props;
-
-    if (!connected) {
-      return <Redirect to={ROUTES.START} />;
-    }
-
-    return (
-      <div>
-        <Header />
-        <Modal />
-        <Body>{children}</Body>
-        <Footer />
-      </div>
-    );
+const UnconnectedLayout = ({ children, connected }) => {
+  if (!connected) {
+    return <Redirect to={ROUTES.START} />;
   }
-}
+
+  return (
+    <div>
+      <Header />
+      <Modal />
+      <Body>{children}</Body>
+      <Footer />
+    </div>
+  );
+};
 
 UnconnectedLayout.propTypes = {
   children: PropTypes.node,
@@ -39,5 +34,11 @@ const mapStateToProps = state => ({
 });
 
 const Layout = connect(mapStateToProps)(UnconnectedLayout);
+
+if (__TEST__) {
+  Layout._test = {
+    UnconnectedLayout
+  };
+}
 
 export default Layout;

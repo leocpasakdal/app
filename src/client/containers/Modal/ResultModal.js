@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as reduxModules from '#/redux/modules';
 import { getResultImage } from '#/utils/misc';
-import { WIN, LOSE } from '#/utils/language';
+import { LOSE, WIN, RESTART } from '#/utils/language';
 import ResultOverlay from '#/components/Overlay/ResultOverlay';
 
 class UnconnectedResultModal extends Component {
   onClick = () => {
-    this.props.exitGameRequest('Start the game again!');
+    this.props.exitGameRequest(RESTART);
   };
 
   render() {
-    const { show, result } = this.props;
+    const { result, show } = this.props;
 
     return (
       <ResultOverlay
@@ -44,5 +44,11 @@ const ResultModal = connect(
   mapStateToProps,
   mapDispatchToProps
 )(UnconnectedResultModal);
+
+if (__TEST__) {
+  ResultModal._test = {
+    UnconnectedResultModal
+  };
+}
 
 export default ResultModal;
