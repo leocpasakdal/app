@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/server/index.js",
   "scripts": {
+    "heroku-prebuild": "npm install --dev",
     "build": "webpack --config=./webpack/webpack.config.js --mode production",
     "start": "npm run build && node src/server/index.js",
     "client": "webpack-dev-server --config=./webpack/webpack.config.js  --mode development --devtool inline-source-map --hot",
@@ -14,8 +15,7 @@
     "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "eslint .",
     "lint:css": "stylelint \"./src/**/*.scss\" \"./src/**/*.css\" --syntax scss",
-    "test": "jest --watch",
-    "heroku-postbuild": "webpack -p"
+    "test": "jest --watch"
   },
   "author": "",
   "license": "ISC",
