@@ -15,7 +15,7 @@
     "lint:js": "eslint .",
     "lint:css": "stylelint \"./src/**/*.scss\" \"./src/**/*.css\" --syntax scss",
     "test": "jest --watch",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "webpack -p"
   },
   "author": "",
   "license": "ISC",
