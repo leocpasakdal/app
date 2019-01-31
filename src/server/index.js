@@ -8,7 +8,9 @@ app.get('/api/getUsername', (req, res) =>
   res.send({ username: os.userInfo().username })
 );
 
-const server = app.listen(8080, () => console.info('Listening on port 8080!'));
+const server = app.listen(process.env.PORT || 8080, () =>
+  console.info('Listening on port 8080!')
+);
 const io = require('./socket').init(server);
 const handlers = require('./handlers');
 
