@@ -26,7 +26,7 @@ const socket = store => next => action => {
       store.dispatch(
         reduxModules.player.actions.setPlayer({
           avatarId: action.payload.avatarId,
-          teamName: action.payload.teamNames
+          teamName: action.payload.teamName
         })
       );
       break;
