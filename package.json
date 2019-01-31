@@ -14,7 +14,8 @@
     "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "eslint .",
     "lint:css": "stylelint \"./src/**/*.scss\" \"./src/**/*.css\" --syntax scss",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "heroku-postbuild": "npm run build"
   },
   "author": "",
   "license": "ISC",
