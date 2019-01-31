@@ -13,7 +13,7 @@ import socketMiddleware from '#/redux/middleware/socket';
 const middleware = [socketMiddleware];
 
 const tools = [];
-const client = createClient(io(`${__HOST__}:${__PORT__}`));
+const client = createClient(io('http://localhost:8080'));
 
 if (process.env.NODE_ENV === 'development') {
   const devToolsExtensionExists =

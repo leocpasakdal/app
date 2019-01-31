@@ -5,8 +5,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const outputDirectory = '../dist';
-const PORT = process.env.PORT || '8080';
-const HOST = process.env.HOST || 'http://localhost';
 
 module.exports = {
   entry: ['babel-polyfill', './src/client/index.js'],
@@ -67,14 +65,12 @@ module.exports = {
     port: 3000,
     open: true,
     proxy: {
-      '/api': `${HOST}:${PORT}`
+      '/api': 'http://localhost:8080'
     }
   },
   plugins: [
     new webpack.DefinePlugin({
-      __TEST__: false,
-      __PORT__: PORT,
-      __HOST__: HOST
+      __TEST__: false
     }),
     new CleanWebpackPlugin([outputDirectory]),
     new HtmlWebpackPlugin({
