@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './scrollable.scss';
 
 class Scrollable extends Component {
+  // TODO move to member
   constructor(props) {
     super(props);
 

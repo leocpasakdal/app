@@ -1,26 +1,37 @@
 import { handleActions } from 'redux-actions';
 import {
-  GAME_CONNECTION_RESPONSE,
-  ENTRIES_RESPONSE,
   CLIENT_ERROR_RESPONSE,
+  ENTRIES_RESPONSE,
+  EXIT_GAME_RESPONSE,
+  GAME_CONNECTION_RESPONSE,
+  GAME_FINISH_RESPONSE,
+  RESET_CLIENT_ERROR_MESSAGE,
   RESULT_NUMBER_RESPONSE,
   START_GAME_RESPONSE,
-  TURN_RESPONSE,
-  RESET_CLIENT_ERROR_MESSAGE,
-  GAME_FINISH_RESPONSE,
-  EXIT_GAME_RESPONSE
+  TURN_RESPONSE
 } from './actions';
 
 const initialState = {
-  socketId: null,
   entries: [],
+  clientErrorMessage: '',
   connected: false,
+  result: false,
   start: false,
   turn: false,
-  result: false,
   finish: false,
-  clientErrorMessage: ''
+  socketId: null
 };
+
+const clientErrorResponse = (state, action) => ({
+  ...state,
+  clientErrorMessage: action.payload
+});
+
+const gameConnectionReponse = (state, action) => ({
+  ...state,
+  connected: action.payload.connected,
+  socketId: action.payload.id
+});
 
 const gameFinishResponse = (state, action) => ({
   ...state,
@@ -33,25 +44,18 @@ const entriesResponse = (state, action) => ({
   entries: [...action.payload]
 });
 
+const exitGameResponse = () => ({
+  ...initialState
+});
+
 const resetClientErrorMessage = state => ({
   ...state,
   clientErrorMessage: ''
 });
 
-const clientErrorResponse = (state, action) => ({
-  ...state,
-  clientErrorMessage: action.payload
-});
-
 const resultNumberResponse = (state, action) => ({
   ...state,
   resultNumber: action.payload
-});
-
-const gameConnectionReponse = (state, action) => ({
-  ...state,
-  connected: action.payload.connected,
-  socketId: action.payload.id
 });
 
 const startGameResponse = (state, action) => ({
@@ -62,10 +66,6 @@ const startGameResponse = (state, action) => ({
 const turnResponse = (state, action) => ({
   ...state,
   turn: action.payload
-});
-
-const exitGameResponse = () => ({
-  ...initialState
 });
 
 const reducer = handleActions(
