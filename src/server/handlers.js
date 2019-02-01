@@ -1,25 +1,25 @@
 const { REQUEST } = require('../common/socketActions');
 const gameManager = require('./manager/GameManager');
 
-const connectGame = (context, action) => {
+const connect = (context, action) => {
   gameManager.connect(context, action);
 };
 
-const requestStart = context => {
-  gameManager.start(context);
-};
-
-const requestInput = (context, action) => {
-  gameManager.processInput(context, action);
-};
-
-const exitRequest = (context, action) => {
+const exit = (context, action) => {
   gameManager.exit(context.client.id, action.payload);
 };
 
+const input = (context, action) => {
+  gameManager.processInput(context, action);
+};
+
+const start = context => {
+  gameManager.start(context);
+};
+
 module.exports = {
-  [REQUEST.INPUT]: requestInput,
-  [REQUEST.EXIT]: exitRequest,
-  [REQUEST.CONNECTION]: connectGame,
-  [REQUEST.START]: requestStart
+  [REQUEST.CONNECTION]: connect,
+  [REQUEST.EXIT]: exit,
+  [REQUEST.INPUT]: input,
+  [REQUEST.START]: start
 };

@@ -1,9 +1,7 @@
 const { RESPONSE } = require('../../common/socketActions');
-
-const LIMIT = 1000;
-const DIVISOR = 3;
-const ACCEPTED_INPUTS = [-1, 0, 1];
-
+const { DIVISOR, INPUTS } = require('../helpers/constants');
+const { ERROR } = require('../helpers/language');
+const { getRandomNumber } = require('../helpers/utils');
 const clients = new Map();
 
 let entries = [];
@@ -11,13 +9,13 @@ let currentResultNumber = 0;
 
 const getLastConnectedClient = () => Array.from(clients.values()).pop();
 
+const isGameInProgress = () => clients.size === 2;
+
 const isLastConnectedClient = context => {
   const lastClient = getLastConnectedClient();
 
   return context.client.id === lastClient.get('context').client.id;
 };
-
-const getRandomNumber = () => Math.ceil(Math.random() * LIMIT) + 1;
 
 const removePlayer = id => {
   clients.delete(id);
@@ -43,13 +41,10 @@ const addPlayer = (context, action) => {
   clients.set(id, player);
 };
 
-const isGameInProgress = () => clients.size === 2;
-
 const dispatchResultNumber = context => {
   const { dispatch } = context;
 
   if (isLastConnectedClient(context) && isGameInProgress()) {
-    console.info('dispatching starting number to last connected client');
     updateCurrentResultNumber(getRandomNumber());
     dispatch({
       type: RESPONSE.RESULT,
@@ -60,10 +55,6 @@ const dispatchResultNumber = context => {
 
     return;
   }
-
-  console.info(
-    'prevent dispatiching starting number for not last connected client'
-  );
 };
 
 const dispatchCurrentEntries = dispatch => {
@@ -96,10 +87,8 @@ const dispatchGameIsFullActions = context => {
 
   dispatchClientError({
     dispatch,
-    payload: 'Game in progress'
+    payload: ERROR.IN_PROGRESS
   });
-
-  console.info('dispatching game in progress');
 
   dispatchConnectionStatus({
     dispatch,
@@ -108,8 +97,6 @@ const dispatchGameIsFullActions = context => {
       id: context.client.id
     }
   });
-
-  console.info('dispatching game connected to false');
 };
 
 const resetEntries = () => {
@@ -143,11 +130,7 @@ const startGame = context => {
 const connectSuccessfulUser = (context, action) => {
   const { dispatch } = context;
 
-  console.info('connection available');
-
   addPlayer(context, action);
-
-  console.info('add new client');
 
   dispatchConnectionStatus({
     dispatch,
@@ -156,8 +139,6 @@ const connectSuccessfulUser = (context, action) => {
       id: context.client.id
     }
   });
-
-  console.info('dispatching game connected to true');
 };
 
 const getClientId = context => context.client.id;
@@ -170,7 +151,7 @@ const start = context => {
   if (!isClientValid(getClientId(context))) {
     dispatchClientError({
       dispatch: context.dispatch,
-      payload: 'invalid client'
+      payload: ERROR.INVALID_CLIENT
     });
 
     return;
@@ -199,8 +180,7 @@ const getComputedResult = input =>
 
 const isResultValid = input => !!getComputedResult(input);
 
-const isInputValid = input =>
-  ACCEPTED_INPUTS.includes(input) && isResultValid(input);
+const isInputValid = input => INPUTS.includes(input) && isResultValid(input);
 
 const isClientTurn = context => {
   const client = getClient(getClientId(context));
@@ -297,14 +277,14 @@ const processInput = (context, action) => {
   if (!isGameInProgress()) {
     dispatchExitGame({
       dispatch: dispatchAll,
-      payload: 'Other player left the game'
+      payload: ERROR.PLAYER_LEFT_GAME
     });
   }
 
   if (!isInputValid(payload)) {
     dispatchClientError({
       dispatch: context.dispatch,
-      payload: 'invalid input'
+      payload: ERROR.INVALID_INPUT
     });
 
     return;
@@ -313,7 +293,7 @@ const processInput = (context, action) => {
   if (!isClientTurn(context)) {
     dispatchClientError({
       dispatch,
-      payload: 'not your turn yet'
+      payload: ERROR.TURN_DISABLED
     });
 
     return;
