@@ -12,7 +12,7 @@ import socketMiddleware from '#/redux/middleware/socket';
 
 const middleware = [socketMiddleware];
 
-console.log(__HOST__);
+console.log(__BASE_URL__);
 console.log(__PORT__);
 
 const tools = [];

@@ -18,7 +18,7 @@ module.exports = {
   ],
   globals: {
     __TEST__: true,
-    __HOST__: true,
+    __BASE_URL__: true,
     __PORT__: true,
     expect: true,
     jest: true
