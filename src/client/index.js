@@ -16,7 +16,7 @@ console.log(__BASE_URL__);
 console.log(__PORT__);
 
 const tools = [];
-const client = createClient(io(`${__BASE_URL__}:${__PORT__}`));
+const client = createClient(io(`${__BASE_URL__}`));
 
 if (process.env.NODE_ENV === 'development') {
   const devToolsExtensionExists =
