@@ -3,14 +3,14 @@ import { MODAL_TYPE } from '#/utils/constants';
 
 const socket = store => next => action => {
   const {
-    EXIT_GAME_RESPONSE,
-    GAME_CONNECTION_REQUEST,
-    GAME_FINISH_RESPONSE
+    REQUEST_CONNECTION,
+    RESPONSE_EXIT,
+    RESPONSE_FINISH
   } = reduxModules.socket.actions;
   const { closeModal, showModal } = reduxModules.modal.actions;
 
   switch (action.type) {
-    case GAME_FINISH_RESPONSE:
+    case RESPONSE_FINISH:
       store.dispatch(
         showModal({
           modalType: MODAL_TYPE.GAME_RESULT
@@ -18,11 +18,11 @@ const socket = store => next => action => {
       );
 
       break;
-    case EXIT_GAME_RESPONSE:
+    case RESPONSE_EXIT:
       store.dispatch(closeModal());
 
       break;
-    case GAME_CONNECTION_REQUEST:
+    case REQUEST_CONNECTION:
       store.dispatch(
         reduxModules.player.actions.setPlayer({
           avatarId: action.payload.avatarId,

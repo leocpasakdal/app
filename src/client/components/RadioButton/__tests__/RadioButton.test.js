@@ -2,7 +2,6 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import Text from '#/components/Text/Text';
-
 import RadioButton from '../RadioButton';
 
 describe('RadioButton', () => {

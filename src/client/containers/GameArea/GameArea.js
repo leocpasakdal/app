@@ -16,11 +16,11 @@ class UnconnectedGameArea extends Component {
       connected,
       resetClientErrorMessage,
       start,
-      startGameRequest
+      requestStart
     } = this.props;
 
     if (connected && !start) {
-      startGameRequest();
+      requestStart();
     }
 
     resetClientErrorMessage();
@@ -46,21 +46,21 @@ UnconnectedGameArea.propTypes = {
   clientErrorMessage: PropTypes.string,
   connected: PropTypes.bool,
   entries: PropTypes.array,
+  requestStart: PropTypes.func,
   resetClientErrorMessage: PropTypes.func,
   socketId: PropTypes.string,
-  start: PropTypes.bool,
-  startGameRequest: PropTypes.func
+  start: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
   clientErrorMessage: state.socket.clientErrorMessage,
-  socketId: state.socket.socketId,
   connected: state.socket.connected,
-  entries: state.socket.entries
+  entries: state.socket.entries,
+  socketId: state.socket.socketId
 });
 
 const mapDispatchToProps = {
-  startGameRequest: reduxModules.socket.actions.startGameRequest,
+  requestStart: reduxModules.socket.actions.requestStart,
   resetClientErrorMessage: reduxModules.socket.actions.resetClientErrorMessage
 };
 

@@ -11,7 +11,7 @@ import GameArea from '../GameArea';
 const { UnconnectedGameArea } = GameArea._test;
 
 const defaultProps = {
-  startGameRequest: jest.fn(),
+  requestStart: jest.fn(),
   resetClientErrorMessage: jest.fn()
 };
 
@@ -39,7 +39,7 @@ describe('GameArea', () => {
   });
 
   describe('componentDidMount', () => {
-    it('calls startGameRequest if connected and game is not yet started', () => {
+    it('calls requestStart if connected and game is not yet started', () => {
       const { instance } = prepareTest({
         ...defaultProps,
         connected: true,
@@ -48,11 +48,11 @@ describe('GameArea', () => {
 
       instance.componentDidMount();
 
-      expect(defaultProps.startGameRequest).toHaveBeenCalled();
+      expect(defaultProps.requestStart).toHaveBeenCalled();
       expect(defaultProps.resetClientErrorMessage).toHaveBeenCalled();
     });
 
-    it('does not call startGamRequest if game has already started', () => {
+    it('does not call requestStart if game has already started', () => {
       const { instance } = prepareTest({
         ...defaultProps,
         connected: true,
@@ -61,7 +61,7 @@ describe('GameArea', () => {
 
       instance.componentDidMount();
 
-      expect(defaultProps.startGameRequest).not.toHaveBeenCalled();
+      expect(defaultProps.requestStart).not.toHaveBeenCalled();
       expect(defaultProps.resetClientErrorMessage).toHaveBeenCalled();
     });
   });

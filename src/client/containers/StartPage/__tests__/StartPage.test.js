@@ -10,10 +10,10 @@ import styles from '../startPage.scss';
 const { UnconnectedStartPage } = StartPage._test;
 
 const defaultProps = {
-  gameConnectionRequest: jest.fn(),
   history: {
     replace: jest.fn()
   },
+  requestConnection: jest.fn(),
   teamName: jest.fn()
 };
 
@@ -54,7 +54,7 @@ describe('StartPage', () => {
   });
 
   describe('onClick', () => {
-    it('calls gameConnectionRequest with correct values', () => {
+    it('calls requestConnection with correct values', () => {
       const { instance } = prepareTest();
 
       instance.setState({
@@ -64,7 +64,7 @@ describe('StartPage', () => {
 
       instance.onClick();
 
-      expect(defaultProps.gameConnectionRequest.mock.calls).toEqual([
+      expect(defaultProps.requestConnection.mock.calls).toEqual([
         [
           {
             avatarId: 'avatarIdValue',

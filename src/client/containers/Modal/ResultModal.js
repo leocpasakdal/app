@@ -8,7 +8,7 @@ import ResultOverlay from '#/components/Overlay/ResultOverlay';
 
 class UnconnectedResultModal extends Component {
   onClick = () => {
-    this.props.exitGameRequest(RESTART);
+    this.props.requestExit(RESTART);
   };
 
   render() {
@@ -26,7 +26,7 @@ class UnconnectedResultModal extends Component {
 }
 
 UnconnectedResultModal.propTypes = {
-  exitGameRequest: PropTypes.func,
+  requestExit: PropTypes.func,
   result: PropTypes.bool,
   show: PropTypes.bool
 };
@@ -37,7 +37,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  exitGameRequest: reduxModules.socket.actions.exitGameRequest
+  requestExit: reduxModules.socket.actions.requestExit
 };
 
 const ResultModal = connect(

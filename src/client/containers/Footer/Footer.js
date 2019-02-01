@@ -20,10 +20,10 @@ class UnconnectedFooter extends Component {
     ));
 
   onClick = input => {
-    const { inputRequest, resetClientErrorMessage } = this.props;
+    const { requestInput, resetClientErrorMessage } = this.props;
 
     resetClientErrorMessage();
-    inputRequest(input);
+    requestInput(input);
   };
 
   render() {
@@ -37,7 +37,7 @@ class UnconnectedFooter extends Component {
 
 UnconnectedFooter.propTypes = {
   finish: PropTypes.bool,
-  inputRequest: PropTypes.func,
+  requestInput: PropTypes.func,
   resetClientErrorMessage: PropTypes.func,
   turn: PropTypes.bool
 };
@@ -48,7 +48,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  inputRequest: reduxModules.socket.actions.inputRequest,
+  requestInput: reduxModules.socket.actions.requestInput,
   resetClientErrorMessage: reduxModules.socket.actions.resetClientErrorMessage
 };
 

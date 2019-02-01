@@ -1,11 +1,4 @@
-const ENTRIES_RESPONSE = 'socket/ENTRIES_RESPONSE';
-const EXIT_GAME_RESPONSE = 'socket/EXIT_GAME_RESPONSE';
-const CLIENT_ERROR_RESPONSE = 'socket/CLIENT_ERROR_RESPONSE';
-const GAME_CONNECTION_RESPONSE = 'socket/GAME_CONNECTION_RESPONSE';
-const GAME_FINISH_RESPONSE = 'socket/GAME_FINISH_RESPONSE';
-const RESULT_NUMBER_RESPONSE = 'socket/RESULT_NUMBER_RESPONSE';
-const START_GAME_RESPONSE = 'socket/START_GAME_RESPONSE';
-const TURN_RESPONSE = 'socket/TURN_RESPONSE';
+const { RESPONSE } = require('../../common/socketActions');
 
 const LIMIT = 1000;
 const DIVISOR = 3;
@@ -59,7 +52,7 @@ const dispatchResultNumber = context => {
     console.info('dispatching starting number to last connected client');
     updateCurrentResultNumber(getRandomNumber());
     dispatch({
-      type: RESULT_NUMBER_RESPONSE,
+      type: RESPONSE.RESULT,
       payload: currentResultNumber
     });
 
@@ -75,26 +68,26 @@ const dispatchResultNumber = context => {
 
 const dispatchCurrentEntries = dispatch => {
   dispatch({
-    type: ENTRIES_RESPONSE,
+    type: RESPONSE.ENTRIES,
     payload: entries
   });
 };
 
 const dispatchClientTurn = ({ dispatch, payload }) =>
   dispatch({
-    type: TURN_RESPONSE,
+    type: RESPONSE.TURN,
     payload
   });
 
 const dispatchConnectionStatus = ({ dispatch, payload }) =>
   dispatch({
-    type: GAME_CONNECTION_RESPONSE,
+    type: RESPONSE.CONNECTION,
     payload
   });
 
 const dispatchClientError = ({ dispatch, payload }) =>
   dispatch({
-    type: CLIENT_ERROR_RESPONSE,
+    type: RESPONSE.ERROR,
     payload
   });
 
@@ -125,7 +118,7 @@ const resetEntries = () => {
 
 const dispatchStartGame = ({ dispatch, payload }) =>
   dispatch({
-    type: START_GAME_RESPONSE,
+    type: RESPONSE.START,
     payload: payload
   });
 
@@ -263,7 +256,7 @@ const addItemToEntries = ({ client, payload }) => {
 
 const dispatchGameFinish = ({ dispatch, payload }) =>
   dispatch({
-    type: GAME_FINISH_RESPONSE,
+    type: RESPONSE.FINISH,
     payload: { result: payload, finish: true }
   });
 
@@ -285,7 +278,7 @@ const dispatchGameResult = ({ context, result }) => {
 
 const dispatchExitGame = ({ dispatch, payload }) => {
   dispatch({
-    type: EXIT_GAME_RESPONSE
+    type: RESPONSE.EXIT
   });
 
   dispatchClientError({

@@ -29,9 +29,9 @@ describe('socket middleware', () => {
     getState: jest.fn()
   };
 
-  it('calls the expected functions when the action is reduxModules.socket.GAME_FINISH_RESPONSE.', () => {
+  it('calls the expected functions when the action is reduxModules.socket.RESPONSE_FINISH.', () => {
     const action = {
-      type: reduxModules.socket.actions.GAME_FINISH_RESPONSE
+      type: reduxModules.socket.actions.RESPONSE_FINISH
     };
 
     socket(store)(next)(action);
@@ -47,9 +47,9 @@ describe('socket middleware', () => {
     expect(store.dispatch.mock.calls).toEqual([['showModalAction']]);
   });
 
-  it('calls the expected functions when the action is reduxModules.socket.EXIT_GAME_RESPONSE.', () => {
+  it('calls the expected functions when the action is reduxModules.socket.RESPONSE_EXIT.', () => {
     const action = {
-      type: reduxModules.socket.actions.EXIT_GAME_RESPONSE
+      type: reduxModules.socket.actions.RESPONSE_EXIT
     };
 
     socket(store)(next)(action);
@@ -59,9 +59,9 @@ describe('socket middleware', () => {
     expect(store.dispatch.mock.calls).toEqual([['closeModalAction']]);
   });
 
-  it('calls the expected functions when the action is reduxModules.socket.GAME_CONNECTION_REQUEST.', () => {
+  it('calls the expected functions when the action is reduxModules.socket.RESPONSE_CONNECTION.', () => {
     const action = {
-      type: reduxModules.socket.actions.GAME_CONNECTION_REQUEST,
+      type: reduxModules.socket.actions.REQUEST_CONNECTION,
       payload: { avatarId: 'avatarIdValue', teamName: 'teamNameValue' }
     };
 

@@ -42,7 +42,7 @@ class UnconnectedStartPage extends Component {
   onClick = () => {
     const { avatarId, teamName } = this.state;
 
-    this.props.gameConnectionRequest({
+    this.props.requestConnection({
       avatarId,
       teamName
     });
@@ -87,8 +87,8 @@ class UnconnectedStartPage extends Component {
 UnconnectedStartPage.propTypes = {
   clientErrorMessage: PropTypes.string,
   connected: PropTypes.bool,
-  gameConnectionRequest: PropTypes.func,
-  history: PropTypes.object
+  history: PropTypes.object,
+  requestConnection: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -97,7 +97,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  gameConnectionRequest: reduxModules.socket.actions.gameConnectionRequest
+  requestConnection: reduxModules.socket.actions.requestConnection
 };
 
 const StartPage = withRouter(

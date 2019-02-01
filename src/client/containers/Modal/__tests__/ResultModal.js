@@ -7,7 +7,7 @@ import ResultOverlay from '#/components/Overlay/ResultOverlay';
 const { UnconnectedResultModal } = ResultModal._test;
 
 const defaultProps = {
-  exitGameRequest: jest.fn()
+  requestExit: jest.fn()
 };
 
 const prepareTest = (props = defaultProps) => {
@@ -26,12 +26,12 @@ describe('ResultModal', () => {
       expect(overlayComp).toHaveLength(1);
     });
 
-    it('onClick', () => {
+    it('calls requestExit onClick', () => {
       const { instance } = prepareTest();
 
       instance.onClick();
 
-      expect(defaultProps.exitGameRequest).toHaveBeenCalled();
+      expect(defaultProps.requestExit).toHaveBeenCalled();
     });
   });
 });
