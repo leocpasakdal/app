@@ -70,7 +70,9 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      __TEST__: false
+      __TEST__: false,
+      __HOST__: JSON.stringify(process.env.HOST || 'http://localhost'),
+      __PORT__: JSON.stringify(process.env.PORT || 8080)
     }),
     new CleanWebpackPlugin([outputDirectory]),
     new HtmlWebpackPlugin({
