@@ -1,12 +1,11 @@
 const path = require('path');
-const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const outputDirectory = '../dist';
 
-module.exports = {
+const client = {
   entry: ['babel-polyfill', './src/client/index.js'],
   output: {
     path: path.join(__dirname, outputDirectory),
@@ -17,7 +16,7 @@ module.exports = {
       '#': path.resolve(__dirname, '../src/client')
     }
   },
-  module: {
+  modules: {
     rules: [
       {
         test: /\.js$/,
@@ -69,11 +68,6 @@ module.exports = {
     }
   },
   plugins: [
-    new webpack.DefinePlugin({
-      __TEST__: false,
-      __BASE_URL__: JSON.stringify(process.env.BASE_URL || 'http://localhost'),
-      __PORT__: JSON.stringify(process.env.PORT || 8080)
-    }),
     new CleanWebpackPlugin([outputDirectory]),
     new HtmlWebpackPlugin({
       template: './public/index.html',
@@ -81,3 +75,5 @@ module.exports = {
     })
   ]
 };
+
+module.exports = client;

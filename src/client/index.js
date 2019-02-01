@@ -12,11 +12,11 @@ import socketMiddleware from '#/redux/middleware/socket';
 
 const middleware = [socketMiddleware];
 
-console.log(__BASE_URL__);
-console.log(__PORT__);
+const PORT = __DEVELOPMENT__ ? `:${process.env.PORT}` : '';
+const URL = `${process.env.BASE_URL}${PORT}`;
 
 const tools = [];
-const client = createClient(io(`${__BASE_URL__}`));
+const client = createClient(io(`${URL}`));
 
 if (process.env.NODE_ENV === 'development') {
   const devToolsExtensionExists =
