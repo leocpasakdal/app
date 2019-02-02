@@ -20,9 +20,9 @@ class UnconnectedFooter extends Component {
     ));
 
   onClick = input => {
-    const { requestInput, resetClientErrorMessage } = this.props;
+    const { clearError, requestInput } = this.props;
 
-    resetClientErrorMessage();
+    clearError();
     requestInput(input);
   };
 
@@ -36,9 +36,9 @@ class UnconnectedFooter extends Component {
 }
 
 UnconnectedFooter.propTypes = {
+  clearError: PropTypes.func,
   finish: PropTypes.bool,
   requestInput: PropTypes.func,
-  resetClientErrorMessage: PropTypes.func,
   turn: PropTypes.bool
 };
 
@@ -48,8 +48,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  requestInput: reduxModules.socket.actions.requestInput,
-  resetClientErrorMessage: reduxModules.socket.actions.resetClientErrorMessage
+  clearError: reduxModules.socket.actions.clearError,
+  requestInput: reduxModules.socket.actions.requestInput
 };
 
 const Footer = connect(

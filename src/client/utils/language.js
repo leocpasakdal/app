@@ -4,3 +4,4 @@ export const NEW_GAME = 'New game';
 export const RESTART = 'Start the game again!';
 export const START = 'Start';
 export const WIN = 'You won';
+export const SELECT_AVATAR = 'Please select an avatar';

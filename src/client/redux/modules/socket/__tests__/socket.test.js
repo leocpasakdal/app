@@ -18,11 +18,11 @@ describe('socket reducer', () => {
     expect(actualState).toEqual(initalState);
   });
 
-  describe('responseError', () => {
+  describe('setError', () => {
     it('sets clientErrorMessage', () => {
       const result = reducer(
         undefined,
-        actions.responseError('clientErrorMessageValue')
+        actions.setError('clientErrorMessageValue')
       );
 
       expect(result).toEqual({
@@ -32,9 +32,9 @@ describe('socket reducer', () => {
     });
   });
 
-  describe('resetClientErrorMessage', () => {
+  describe('clearError', () => {
     it('resets clientErrorMessage', () => {
-      const result = reducer(undefined, actions.resetClientErrorMessage());
+      const result = reducer(undefined, actions.clearError());
 
       expect(result).toEqual(initalState);
     });

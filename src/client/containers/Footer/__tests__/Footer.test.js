@@ -7,8 +7,8 @@ import Footer from '../Footer';
 const { UnconnectedFooter } = Footer._test;
 
 const defaultProps = {
-  requestInput: jest.fn(),
-  resetClientErrorMessage: jest.fn()
+  clearError: jest.fn(),
+  requestInput: jest.fn()
 };
 
 const prepareTest = (props = defaultProps) => {
@@ -35,7 +35,7 @@ describe('Footer', () => {
       instance.onClick('test');
 
       expect(defaultProps.requestInput.mock.calls).toEqual([['test']]);
-      expect(defaultProps.resetClientErrorMessage).toHaveBeenCalled();
+      expect(defaultProps.clearError).toHaveBeenCalled();
     });
   });
 });

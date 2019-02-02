@@ -13,4 +13,20 @@
   flex-direction: column;
   height: 30vh;
   justify-content: space-evenly;
+  width: 100vh;
+}
+
+.avatars-wrapper {
+  display: flex;
+  flex-direction: row;
+  height: 10vh;
+  justify-content: space-evenly;
+  width: 26vh;
+}
+
+.button {
+  height: 10vh;
+}
+.text {
+  height: 10vh;
 }

@@ -2,7 +2,6 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import Button from '#/components/Button/Button';
-import TextBox from '#/components/TextBox/TextBox';
 import { ROUTES } from '#/utils/constants';
 import StartPage from '../StartPage';
 import styles from '../startPage.scss';
@@ -27,18 +26,19 @@ const prepareTest = (props = defaultProps) => {
 describe('StartPage', () => {
   styles.startPage = 'startPageCssValue';
   styles.elementsWrapper = 'elementWrapperCssValue';
+  styles.avatarsWrapper = 'avatarsWrapperCssValue';
 
   describe('render', () => {
     it('renders the children correct', () => {
       const { wrapper } = prepareTest();
       const parentWrapper = wrapper.find('.startPageCssValue');
       const elementWrapper = wrapper.find('.elementWrapperCssValue');
-      const textBoxComp = wrapper.find(TextBox);
+      const avatarsWrapper = wrapper.find('.avatarsWrapperCssValue');
       const buttonComp = wrapper.find(Button);
 
       expect(parentWrapper).toHaveLength(1);
       expect(elementWrapper).toHaveLength(1);
-      expect(textBoxComp).toHaveLength(1);
+      expect(avatarsWrapper).toHaveLength(1);
       expect(buttonComp).toHaveLength(1);
     });
   });
@@ -75,23 +75,21 @@ describe('StartPage', () => {
     });
   });
 
-  describe('onTeamNameChange', () => {
-    it('set teamName state', () => {
-      const { instance } = prepareTest();
-
-      instance.onTeamNameChange({ target: { value: 'newTeamNameValue' } });
-
-      expect(instance.state.teamName).toEqual('newTeamNameValue');
-    });
-  });
-
   describe('onAvatarChange', () => {
     it('set avatarId state', () => {
       const { instance } = prepareTest();
 
-      instance.onAvatarChange({ target: { value: 'avatarId' } });
+      instance.onAvatarChange({
+        target: {
+          value: {
+            id: 'avatarId',
+            name: 'avatarName'
+          }
+        }
+      });
 
       expect(instance.state.avatarId).toEqual('avatarId');
+      expect(instance.state.teamName).toEqual('avatarName');
     });
   });
 

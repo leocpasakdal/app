@@ -3,9 +3,18 @@ import PropTypes from 'prop-types';
 import styles from './button.scss';
 import { joinArrayIgnoreInvalid, noop } from '#/utils/misc';
 
-const Button = ({ children, color, disabled, hoverColor, onClick, type }) => {
-  const className = joinArrayIgnoreInvalid(
+const Button = ({
+  children,
+  className,
+  color,
+  disabled,
+  hoverColor,
+  onClick,
+  type
+}) => {
+  const classNames = joinArrayIgnoreInvalid(
     [
+      className,
       styles.button,
       styles[color],
       styles[type],
@@ -16,7 +25,7 @@ const Button = ({ children, color, disabled, hoverColor, onClick, type }) => {
   );
 
   return (
-    <button className={className} onClick={disabled ? noop : onClick}>
+    <button className={classNames} onClick={disabled ? noop : onClick}>
       {children}
     </button>
   );
@@ -31,11 +40,12 @@ Button.defaultProps = {
 
 Button.propTypes = {
   children: PropTypes.node,
+  className: PropTypes.string,
   color: PropTypes.string,
   disabled: PropTypes.bool,
   hoverColor: PropTypes.string,
   onClick: PropTypes.func,
-  type: PropTypes.oneOf(['circle', 'oblong']).isRequired
+  type: PropTypes.oneOf(['circle', 'image', 'oblong']).isRequired
 };
 
 export default Button;

@@ -5,18 +5,16 @@ import { withRouter } from 'react-router-dom';
 
 import * as reduxModules from '#/redux/modules';
 import Button from '#/components/Button/Button';
-import RadioButton from '#/components/RadioButton/RadioButton';
-import TextBox from '#/components/TextBox/TextBox';
+import AvatarButton from '#/components/Button/AvatarButton';
 import Text from '#/components/Text/Text';
 import { AVATARS, ROUTES } from '#/utils/constants';
-import { START } from '#/utils/language';
+import { SELECT_AVATAR, START } from '#/utils/language';
 
 import styles from './startPage.scss';
 
 class UnconnectedStartPage extends Component {
   state = {
-    avatarId: '',
-    teamName: ''
+    avatarId: ''
   };
 
   componentDidUpdate(prevProps) {
@@ -27,57 +25,63 @@ class UnconnectedStartPage extends Component {
     }
   }
 
-  onTeamNameChange = evt => {
-    this.setState({
-      teamName: evt.target.value
-    });
-  };
-
   onAvatarChange = evt => {
+    const {
+      target: {
+        value: { id, name }
+      }
+    } = evt;
+
     this.setState({
-      avatarId: evt.target.value
+      avatarId: id,
+      teamName: name
     });
   };
 
   onClick = () => {
     const { avatarId, teamName } = this.state;
 
-    this.props.requestConnection({
-      avatarId,
-      teamName
-    });
+    if (!avatarId) {
+      this.props.setError(SELECT_AVATAR);
+    } else {
+      this.props.requestConnection({
+        avatarId,
+        teamName
+      });
+    }
   };
 
   goToGame = () => this.props.history.replace(ROUTES.GAME);
 
   getAvatarSelections = () =>
     AVATARS.map(({ id, name }) => (
-      <RadioButton
-        checked={this.state.avatarId === id}
+      <AvatarButton
+        id={id}
         key={id}
-        onChange={this.onAvatarChange}
-        text={name}
-        value={id}
+        name={name}
+        onClick={this.onAvatarChange}
+        selected={this.state.avatarId === id}
       />
     ));
 
   render() {
-    const { avatarId, teamName } = this.state;
-    const enableButton = teamName && avatarId;
-
     return (
       <div className={styles.startPage}>
         <div className={styles.elementsWrapper}>
-          {this.getAvatarSelections()}
-          <TextBox
-            isValid={!!teamName}
-            onChange={this.onTeamNameChange}
-            value={teamName}
-          />
-          <Button disabled={!enableButton} onClick={this.onClick} type="oblong">
+          <div className={styles.avatarsWrapper}>
+            {this.getAvatarSelections()}
+          </div>
+
+          <Button
+            className={styles.button}
+            onClick={this.onClick}
+            type="oblong"
+          >
             {START}
           </Button>
-          <Text type="error">{this.props.clientErrorMessage}</Text>
+          <Text className={styles.text} type="error">
+            {this.props.clientErrorMessage}
+          </Text>
         </div>
       </div>
     );
@@ -88,7 +92,8 @@ UnconnectedStartPage.propTypes = {
   clientErrorMessage: PropTypes.string,
   connected: PropTypes.bool,
   history: PropTypes.object,
-  requestConnection: PropTypes.func
+  requestConnection: PropTypes.func,
+  setError: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -97,7 +102,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  requestConnection: reduxModules.socket.actions.requestConnection
+  requestConnection: reduxModules.socket.actions.requestConnection,
+  setError: reduxModules.socket.actions.setError
 };
 
 const StartPage = withRouter(

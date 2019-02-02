@@ -12,73 +12,73 @@ import {
 } from './actions';
 
 const initialState = {
-  entries: [],
   clientErrorMessage: '',
   connected: false,
+  entries: [],
+  finish: false,
   result: false,
   start: false,
   turn: false,
-  finish: false,
+
   socketId: null
 };
 
-const responseConnection = (state, action) => ({
+const clearError = state => ({
+  ...state,
+  clientErrorMessage: ''
+});
+const setConnection = (state, action) => ({
   ...state,
   connected: action.payload.connected,
   socketId: action.payload.id
 });
 
-const responseError = (state, action) => ({
-  ...state,
-  clientErrorMessage: action.payload
-});
-
-const responseEntries = (state, action) => ({
+const setEntries = (state, action) => ({
   ...state,
   entries: [...action.payload]
 });
 
-const responseExit = () => ({
-  ...initialState
+const setError = (state, action) => ({
+  ...state,
+  clientErrorMessage: action.payload
 });
 
-const responseFinish = (state, action) => ({
+const setFinish = (state, action) => ({
   ...state,
   result: action.payload.result,
   finish: action.payload.finish
 });
 
-const responseResult = (state, action) => ({
+const setExit = () => ({
+  ...initialState
+});
+
+const setResult = (state, action) => ({
   ...state,
   resultNumber: action.payload
 });
 
-const responseStart = (state, action) => ({
+const setStart = (state, action) => ({
   ...state,
   start: action.payload
 });
 
-const responseTurn = (state, action) => ({
+const setTurn = (state, action) => ({
   ...state,
   turn: action.payload
 });
 
-const resetClientErrorMessage = state => ({
-  ...state,
-  clientErrorMessage: ''
-});
-
 const reducer = handleActions(
   {
-    [RESPONSE_CONNECTION]: responseConnection,
-    [RESPONSE_ENTRIES]: responseEntries,
-    [RESPONSE_ERROR]: responseError,
-    [RESPONSE_EXIT]: responseExit,
-    [RESPONSE_FINISH]: responseFinish,
-    [RESPONSE_RESULT]: responseResult,
-    [RESPONSE_START]: responseStart,
-    [RESPONSE_TURN]: responseTurn,
-    [RESET_CLIENT_ERROR_MESSAGE]: resetClientErrorMessage
+    [RESPONSE_CONNECTION]: setConnection,
+    [RESPONSE_ENTRIES]: setEntries,
+    [RESPONSE_ERROR]: setError,
+    [RESPONSE_EXIT]: setExit,
+    [RESPONSE_FINISH]: setFinish,
+    [RESPONSE_RESULT]: setResult,
+    [RESPONSE_START]: setStart,
+    [RESPONSE_TURN]: setTurn,
+    [RESET_CLIENT_ERROR_MESSAGE]: clearError
   },
   initialState
 );

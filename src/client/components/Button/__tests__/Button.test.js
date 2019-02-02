@@ -19,7 +19,7 @@ describe('Button', () => {
 
     expect(button).toHaveLength(1);
     expect(button.props().className).toEqual(
-      'buttonCssValue colorCssValue typeCssValue enabledValue'
+      'classNameValue buttonCssValue colorCssValue typeCssValue enabledValue'
     );
     expect(button.props().onClick).toEqual(noop);
   });

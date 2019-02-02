@@ -12,18 +12,13 @@ import styles from './gameArea.scss';
 
 class UnconnectedGameArea extends Component {
   componentDidMount() {
-    const {
-      connected,
-      resetClientErrorMessage,
-      start,
-      requestStart
-    } = this.props;
+    const { clearError, connected, requestStart, start } = this.props;
 
     if (connected && !start) {
       requestStart();
     }
 
-    resetClientErrorMessage();
+    clearError();
   }
 
   render() {
@@ -43,11 +38,11 @@ class UnconnectedGameArea extends Component {
 }
 
 UnconnectedGameArea.propTypes = {
+  clearError: PropTypes.func,
   clientErrorMessage: PropTypes.string,
   connected: PropTypes.bool,
   entries: PropTypes.array,
   requestStart: PropTypes.func,
-  resetClientErrorMessage: PropTypes.func,
   socketId: PropTypes.string,
   start: PropTypes.bool
 };
@@ -60,8 +55,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  requestStart: reduxModules.socket.actions.requestStart,
-  resetClientErrorMessage: reduxModules.socket.actions.resetClientErrorMessage
+  clearError: reduxModules.socket.actions.clearError,
+  requestStart: reduxModules.socket.actions.requestStart
 };
 
 const GameArea = connect(
