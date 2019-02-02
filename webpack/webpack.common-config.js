@@ -3,19 +3,22 @@ const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
+const PORT = process.env.PORT || 8080;
+const BASE_URL = process.env.BASE_URL || 'http://localhost';
+
 const client = {
   devServer: {
     historyApiFallback: true,
     port: 3000,
     open: true,
     proxy: {
-      '/api': 'http://localhost:8080'
+      '/api': `${BASE_URL}:${PORT}`
     }
   },
   entry: ['babel-polyfill', './src/client/index.js'],
   globals: {
-    'process.env.BASE_URL': JSON.stringify(process.env.BASE_URL || 'localhost'),
-    'process.env.PORT': JSON.stringify(process.env.PORT || 8080)
+    'process.env.BASE_URL': JSON.stringify(BASE_URL),
+    'process.env.PORT': JSON.stringify(PORT)
   },
   modules: {
     rules: [
