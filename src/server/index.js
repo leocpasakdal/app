@@ -1,12 +1,19 @@
 const express = require('express');
-const os = require('os');
+const path = require('path');
 const { createServer, createHandler } = require('redux-socket.io-connect');
 const app = express();
 
-app.use(express.static('dist'));
-app.get('/api/getUsername', (req, res) =>
-  res.send({ username: os.userInfo().username })
-);
+app.use(express.static('./dist'));
+
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../../', 'dist', 'index.html'), function(
+    err
+  ) {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
 
 const PORT = process.env.PORT || 8080;
 const server = app.listen(PORT, () =>

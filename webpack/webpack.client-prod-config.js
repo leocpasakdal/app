@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const {
   entry,
   output,
+  globals,
   resolve,
   modules,
   devServer,
@@ -10,15 +11,16 @@ const {
 } = require('./webpack.common-config');
 
 module.exports = {
+  devServer,
   entry,
   output,
   resolve,
+
   module: modules,
-  devServer,
   plugins: [
     ...plugins,
     new webpack.DefinePlugin({
-      'process.env.BASE_URL': JSON.stringify(process.env.BASE_URL),
+      ...globals,
       __DEVELOPMENT__: false,
       __TEST__: true
     })

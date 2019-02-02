@@ -3,18 +3,19 @@ const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-const outputDirectory = '../dist';
-
 const client = {
-  entry: ['babel-polyfill', './src/client/index.js'],
-  output: {
-    path: path.join(__dirname, outputDirectory),
-    filename: 'bundle.js'
-  },
-  resolve: {
-    alias: {
-      '#': path.resolve(__dirname, '../src/client')
+  devServer: {
+    historyApiFallback: true,
+    port: 3000,
+    open: true,
+    proxy: {
+      '/api': 'http://localhost:8080'
     }
+  },
+  entry: ['babel-polyfill', './src/client/index.js'],
+  globals: {
+    'process.env.BASE_URL': JSON.stringify(process.env.BASE_URL || 'localhost'),
+    'process.env.PORT': JSON.stringify(process.env.PORT || 8080)
   },
   modules: {
     rules: [
@@ -59,21 +60,25 @@ const client = {
       }
     ]
   },
-  devServer: {
-    historyApiFallback: true,
-    port: 3000,
-    open: true,
-    proxy: {
-      '/api': 'http://localhost:8080'
-    }
+  output: {
+    path: path.join(__dirname, '../dist'),
+    filename: 'bundle.js'
   },
   plugins: [
-    new CleanWebpackPlugin([outputDirectory]),
+    new CleanWebpackPlugin(['dist'], {
+      root: path.resolve(__dirname, '../'),
+      verbose: true
+    }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
       favicon: './public/favicon.ico'
     })
-  ]
+  ],
+  resolve: {
+    alias: {
+      '#': path.resolve(__dirname, '../src/client')
+    }
+  }
 };
 
 module.exports = client;

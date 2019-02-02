@@ -147,30 +147,6 @@ const getClient = id => clients.get(id);
 
 const isClientValid = id => !!getClient(id);
 
-const start = context => {
-  if (!isClientValid(getClientId(context))) {
-    dispatchClientError({
-      dispatch: context.dispatch,
-      payload: ERROR.INVALID_CLIENT
-    });
-
-    return;
-  }
-
-  dispatchResultNumber(context);
-  startGame(context);
-};
-
-const connect = (context, action) => {
-  if (isGameInProgress()) {
-    dispatchGameIsFullActions(context);
-
-    return;
-  }
-
-  connectSuccessfulUser(context, action);
-};
-
 const updateCurrentResultNumber = result => {
   currentResultNumber = result;
 };
@@ -269,7 +245,7 @@ const dispatchExitGame = ({ dispatch, payload }) => {
   clients.clear();
 };
 
-const processInput = (context, action) => {
+const getInput = (context, action) => {
   const { payload } = action;
 
   const { dispatch, dispatchAll } = context;
@@ -310,6 +286,16 @@ const processInput = (context, action) => {
   dispatchGameResult({ context, result });
 };
 
+const connect = (context, action) => {
+  if (isGameInProgress()) {
+    dispatchGameIsFullActions(context);
+
+    return;
+  }
+
+  connectSuccessfulUser(context, action);
+};
+
 const exit = (id, payload) => {
   if (isClientValid(id)) {
     clients.forEach(current => {
@@ -321,10 +307,24 @@ const exit = (id, payload) => {
   }
 };
 
+const start = context => {
+  if (!isClientValid(getClientId(context))) {
+    dispatchClientError({
+      dispatch: context.dispatch,
+      payload: ERROR.INVALID_CLIENT
+    });
+
+    return;
+  }
+
+  dispatchResultNumber(context);
+  startGame(context);
+};
+
 module.exports = {
   connect,
   start,
   exit,
-  processInput,
+  getInput,
   removePlayer
 };

@@ -1,27 +1,26 @@
 const webpack = require('webpack');
 
 const {
-  entry,
-  output,
-  resolve,
-  modules,
   devServer,
-  plugins
+  entry,
+  globals,
+  modules,
+  output,
+  plugins,
+  resolve
 } = require('./webpack.common-config');
 
 module.exports = {
+  devServer,
   entry,
   output,
   resolve,
+
   module: modules,
-  devServer,
   plugins: [
     ...plugins,
     new webpack.DefinePlugin({
-      'process.env.BASE_URL': JSON.stringify(
-        process.env.BASE_URL || 'localhost'
-      ),
-      'process.env.PORT': JSON.stringify(process.env.PORT || 8080),
+      ...globals,
       __DEVELOPMENT__: true,
       __TEST__: false
     })

@@ -10,7 +10,7 @@ const exit = (context, action) => {
 };
 
 const input = (context, action) => {
-  gameManager.processInput(context, action);
+  gameManager.getInput(context, action);
 };
 
 const start = context => {
