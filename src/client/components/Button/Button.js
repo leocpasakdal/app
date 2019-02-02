@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './button.scss';
 import { joinArrayIgnoreInvalid, noop } from '#/utils/misc';
+import { pure } from 'recompose';
 
-const Button = ({
+const OrigButton = ({
   children,
   className,
   color,
@@ -31,14 +32,14 @@ const Button = ({
   );
 };
 
-Button.defaultProps = {
+OrigButton.defaultProps = {
   color: 'main',
   disabled: false,
   hoverColor: 'main',
   onClick: noop
 };
 
-Button.propTypes = {
+OrigButton.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   color: PropTypes.string,
@@ -47,5 +48,13 @@ Button.propTypes = {
   onClick: PropTypes.func,
   type: PropTypes.oneOf(['circle', 'image', 'oblong']).isRequired
 };
+
+const Button = pure(OrigButton);
+
+if (__TEST__) {
+  Button._test = {
+    OrigButton
+  };
+}
 
 export default Button;

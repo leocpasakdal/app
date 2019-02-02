@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Button from './Button';
 import Avatar from '#/components/Image/Avatar';
 import styles from './button.scss';
 
-class AvatarButton extends Component {
+class AvatarButton extends PureComponent {
   onButtonClick = () => {
     const { onClick, name, id } = this.props;
 

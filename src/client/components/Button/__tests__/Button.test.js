@@ -11,9 +11,11 @@ describe('Button', () => {
   styles.circle = 'typeCssValue';
   styles.enabled = 'enabledValue';
 
+  const { OrigButton } = Button._test;
+
   it('returns an instance of button with correct props', () => {
     const wrapper = shallow(
-      <Button className="classNameValue" color="blue" type="circle" />
+      <OrigButton className="classNameValue" color="blue" type="circle" />
     );
     const button = wrapper.find('button');
 

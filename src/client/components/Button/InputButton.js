@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Button from './Button';
 
-class InputButton extends Component {
+class InputButton extends PureComponent {
   onButtonClick = () => {
     const { onClick, value } = this.props;
 
