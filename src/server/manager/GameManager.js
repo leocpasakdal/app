@@ -1,330 +1,154 @@
-const { RESPONSE } = require('../../common/socketActions');
-const { DIVISOR, INPUTS } = require('../helpers/constants');
 const { ERROR } = require('../helpers/language');
-const { getRandomNumber } = require('../helpers/utils');
-const clients = new Map();
+const {
+  getRandomNumber,
+  isInputValid,
+  getComputedResult,
+  getContextId
+} = require('../helpers/utils');
 
-let entries = [];
-let currentResultNumber = 0;
+module.exports = ({ dispatchManager, playerManager, entryManager }) => {
+  let currentResultNumber = 0;
 
-const getLastConnectedClient = () => Array.from(clients.values()).pop();
+  const updateCurrentResultNumber = result => {
+    currentResultNumber = result;
+  };
 
-const isGameInProgress = () => clients.size === 2;
+  const removePlayer = id => {
+    playerManager.removePlayer(id);
+  };
 
-const isLastConnectedClient = context => {
-  const lastClient = getLastConnectedClient();
+  const startGame = context => {
+    const { dispatch, dispatchAll } = context;
 
-  return context.client.id === lastClient.get('context').client.id;
-};
-
-const removePlayer = id => {
-  clients.delete(id);
-};
-
-const addPlayer = (context, action) => {
-  const {
-    client: { id }
-  } = context;
-
-  const {
-    payload: { teamName, avatarId }
-  } = action;
-
-  const player = new Map();
-
-  player.set('context', context);
-  player.set('id', id);
-  player.set('teamName', teamName);
-  player.set('avatarId', avatarId);
-  player.set('turn', false);
-
-  clients.set(id, player);
-};
-
-const dispatchResultNumber = context => {
-  const { dispatch } = context;
-
-  if (isLastConnectedClient(context) && isGameInProgress()) {
-    updateCurrentResultNumber(getRandomNumber());
-    dispatch({
-      type: RESPONSE.RESULT,
-      payload: currentResultNumber
-    });
-
-    getClient(getClientId(context)).set('turn', true);
-
-    return;
-  }
-};
-
-const dispatchCurrentEntries = dispatch => {
-  dispatch({
-    type: RESPONSE.ENTRIES,
-    payload: entries
-  });
-};
-
-const dispatchClientTurn = ({ dispatch, payload }) =>
-  dispatch({
-    type: RESPONSE.TURN,
-    payload
-  });
-
-const dispatchConnectionStatus = ({ dispatch, payload }) =>
-  dispatch({
-    type: RESPONSE.CONNECTION,
-    payload
-  });
-
-const dispatchClientError = ({ dispatch, payload }) =>
-  dispatch({
-    type: RESPONSE.ERROR,
-    payload
-  });
-
-const dispatchGameIsFullActions = context => {
-  const { dispatch } = context;
-
-  dispatchClientError({
-    dispatch,
-    payload: ERROR.IN_PROGRESS
-  });
-
-  dispatchConnectionStatus({
-    dispatch,
-    payload: {
-      connected: false,
-      id: context.client.id
+    if (!playerManager.isPlayerListFull()) {
+      return;
     }
-  });
-};
 
-const resetEntries = () => {
-  entries = [];
-};
+    entryManager.clear();
+    entryManager.dispatch(dispatchAll);
+    dispatchManager.start({ dispatch, shouldStart: true });
+  };
 
-const dispatchStartGame = ({ dispatch, payload }) =>
-  dispatch({
-    type: RESPONSE.START,
-    payload: payload
-  });
-
-const startGame = context => {
-  const { dispatch, dispatchAll } = context;
-
-  if (!isGameInProgress()) {
-    return;
-  }
-
-  resetEntries();
-
-  dispatchCurrentEntries(dispatchAll);
-  dispatchStartGame({ dispatch: dispatchAll, payload: true });
-
-  dispatchClientTurn({
-    dispatch,
-    payload: true
-  });
-};
-
-const connectSuccessfulUser = (context, action) => {
-  const { dispatch } = context;
-
-  addPlayer(context, action);
-
-  dispatchConnectionStatus({
-    dispatch,
-    payload: {
-      connected: true,
-      id: context.client.id
+  const disconnect = ({ dispatch, payload }) => {
+    if (dispatch) {
+      dispatchManager.disconnect({ dispatch, message: payload });
+      playerManager.clear();
     }
-  });
-};
+  };
 
-const getClientId = context => context.client.id;
+  const hasInputErrors = ({ input, context }) => {
+    const { dispatch, dispatchAll } = context;
 
-const getClient = id => clients.get(id);
+    if (!playerManager.isPlayerListFull()) {
+      disconnect({ dispatch: dispatchAll, payload: ERROR.PLAYER_LEFT_GAME });
 
-const isClientValid = id => !!getClient(id);
+      return true;
+    }
 
-const updateCurrentResultNumber = result => {
-  currentResultNumber = result;
-};
+    if (
+      !isInputValid({
+        input,
+        result: currentResultNumber
+      })
+    ) {
+      dispatchManager.invalidInput(dispatch);
 
-const getComputedResult = input =>
-  Math.round((input + currentResultNumber) / DIVISOR);
+      return true;
+    }
 
-const isResultValid = input => !!getComputedResult(input);
+    if (!playerManager.isPlayerTurn(getContextId(context))) {
+      dispatchManager.disabledTurn(dispatch);
 
-const isInputValid = input => INPUTS.includes(input) && isResultValid(input);
+      return true;
+    }
 
-const isClientTurn = context => {
-  const client = getClient(getClientId(context));
-
-  if (!client) {
     return false;
-  }
+  };
 
-  return client.get('turn');
-};
-
-const getComputation = move =>
-  '[(' +
-  move +
-  ') + ' +
-  currentResultNumber +
-  ' / ' +
-  3 +
-  '] = ' +
-  getComputedResult(move);
-
-const setClientsTurn = selectedClient => {
-  // refactor this!!
-  const values = Array.from(clients.values());
-  const selectedId = selectedClient.get('id');
-  const foundClient = values.find(client => client.get('id') !== selectedId);
-  const next = clients.get(foundClient.get('id'));
-
-  next.set('turn', true);
-  selectedClient.set('turn', false);
-};
-
-const dispatchTurnToClients = forceOff => {
-  for (let entry of clients.entries()) {
-    dispatchClientTurn({
-      dispatch: entry[1].get('context').dispatch,
-      payload: forceOff ? false : entry[1].get('turn')
-    });
-  }
-};
-
-const addItemToEntries = ({ client, payload }) => {
-  entries.push({
-    id: client.get('id'),
-    teamName: client.get('teamName'),
-    avatarId: client.get('avatarId'),
-    move: payload,
-    computation: getComputation(payload),
-    result: getComputedResult(payload),
-    type: 'playerMove'
-  });
-};
-
-const dispatchGameFinish = ({ dispatch, payload }) =>
-  dispatch({
-    type: RESPONSE.FINISH,
-    payload: { result: payload, finish: true }
-  });
-
-const dispatchGameResult = ({ context, result }) => {
-  const currentClientId = context.client.id;
-  const shouldGameFinish = result === 1;
-
-  if (shouldGameFinish) {
-    clients.forEach((current, id) => {
-      dispatchGameFinish({
-        dispatch: current.get('context').dispatch,
-        payload: currentClientId === id
-      });
-    });
-  }
-
-  dispatchTurnToClients(shouldGameFinish);
-};
-
-const dispatchExitGame = ({ dispatch, payload }) => {
-  dispatch({
-    type: RESPONSE.EXIT
-  });
-
-  dispatchClientError({
-    dispatch,
-    payload: payload
-  });
-
-  clients.clear();
-};
-
-const getInput = (context, action) => {
-  const { payload } = action;
-
-  const { dispatch, dispatchAll } = context;
-
-  if (!isGameInProgress()) {
-    dispatchExitGame({
-      dispatch: dispatchAll,
-      payload: ERROR.PLAYER_LEFT_GAME
-    });
-  }
-
-  if (!isInputValid(payload)) {
-    dispatchClientError({
-      dispatch: context.dispatch,
-      payload: ERROR.INVALID_INPUT
+  const processInput = (context, action) => {
+    const { payload } = action;
+    const { dispatchAll } = context;
+    const hasErrors = hasInputErrors({
+      input: action.payload,
+      context
     });
 
-    return;
-  }
+    if (hasErrors) {
+      return;
+    }
 
-  if (!isClientTurn(context)) {
-    dispatchClientError({
+    const id = getContextId(context);
+    const result = getComputedResult({
+      input: payload,
+      result: currentResultNumber
+    });
+
+    entryManager.addAndDispatch({
+      action: dispatchAll,
+      info: playerManager.getPlayerInfo(id),
+      input: payload,
+      result: currentResultNumber
+    });
+
+    updateCurrentResultNumber(result);
+    playerManager.sendStatus({ id, hasWinner: result === 1 });
+  };
+
+  const connect = (context, action) => {
+    const { dispatch } = context;
+    const canUserConnect = !playerManager.isPlayerListFull();
+
+    if (canUserConnect) {
+      playerManager.addPlayer(context, action.payload);
+    } else {
+      dispatchManager.inProgress(dispatch);
+    }
+
+    dispatchManager.connectionStatus({
       dispatch,
-      payload: ERROR.TURN_DISABLED
+      payload: {
+        connected: canUserConnect,
+        id: getContextId(context)
+      }
     });
+  };
 
-    return;
-  }
+  const exit = (id, payload) => {
+    const { dispatchAll } = playerManager.getPlayerContext(id);
 
-  const client = getClient(getClientId(context));
-  const result = getComputedResult(payload);
-
-  addItemToEntries({ client, payload });
-  updateCurrentResultNumber(result);
-  setClientsTurn(client);
-
-  dispatchCurrentEntries(dispatchAll);
-  dispatchGameResult({ context, result });
-};
-
-const connect = (context, action) => {
-  if (isGameInProgress()) {
-    dispatchGameIsFullActions(context);
-
-    return;
-  }
-
-  connectSuccessfulUser(context, action);
-};
-
-const exit = (id, payload) => {
-  if (isClientValid(id)) {
-    clients.forEach(current => {
-      dispatchExitGame({
-        dispatch: current.get('context').dispatchAll,
-        payload
-      });
+    disconnect({
+      dispatch: dispatchAll,
+      payload
     });
-  }
-};
+  };
 
-const start = context => {
-  if (!isClientValid(getClientId(context))) {
-    dispatchClientError({
-      dispatch: context.dispatch,
-      payload: ERROR.INVALID_CLIENT
-    });
+  const setInitialValues = context => {
+    const id = getContextId(context);
 
-    return;
-  }
+    if (playerManager.isLastConnectedPlayer(id)) {
+      updateCurrentResultNumber(getRandomNumber());
+      playerManager.sendResult({ id, result: currentResultNumber });
+    }
+  };
 
-  dispatchResultNumber(context);
-  startGame(context);
-};
+  const start = context => {
+    const isPlayerValid = playerManager.isPlayerValid(getContextId(context));
 
-module.exports = {
-  connect,
-  start,
-  exit,
-  getInput,
-  removePlayer
+    if (isPlayerValid) {
+      setInitialValues(context);
+      startGame(context);
+
+      return;
+    }
+
+    dispatchManager.invalidClient(context.dispatch);
+  };
+
+  return {
+    connect,
+    exit,
+    processInput,
+    start,
+    removePlayer
+  };
 };
