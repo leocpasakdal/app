@@ -21,6 +21,7 @@ module.exports = {
     ...plugins,
     new webpack.DefinePlugin({
       ...globals,
+      __PORT__: JSON.stringify(process.env.PORT || 8080),
       __DEVELOPMENT__: true,
       __TEST__: false
     })

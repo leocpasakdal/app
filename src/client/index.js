@@ -12,7 +12,7 @@ import socketMiddleware from '#/redux/middleware/socket';
 
 const middleware = [socketMiddleware];
 
-const PORT = __DEVELOPMENT__ ? `:${process.env.PORT}` : '';
+const PORT = __PORT__ ? `:${__PORT__}` : '';
 const URL = `${process.env.BASE_URL}${PORT}`;
 
 const tools = [];

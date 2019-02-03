@@ -17,8 +17,7 @@ const client = {
   },
   entry: ['babel-polyfill', './src/client/index.js'],
   globals: {
-    'process.env.BASE_URL': JSON.stringify(BASE_URL),
-    'process.env.PORT': JSON.stringify(PORT)
+    'process.env.BASE_URL': JSON.stringify(BASE_URL)
   },
   modules: {
     rules: [
