@@ -51,7 +51,7 @@ install [nodejs](https://nodejs.org/en/download/). Version 10 atleast
     |- <dist>
     |  |- # Generated folder containing compiled code
     |- <coverage>
-    |  |- # Generated folder containing code coverage information (after running 'npm test')
+    |  |- # Generated folder containing code coverage information (after running 'npm runt test:once:coverage')
     |- <node_modules>
        |_ # Generated folder where all NPM dependencies will be downloaded
 
@@ -85,4 +85,4 @@ After plugins installed, you need to update User Settings in VSCode with the fol
 -   Refactor
 -   Push your changes running the whole `prepush` Git hook. This will make sure all the quality checks pass
 -   Create a PR pointing to `develop`, address comments and merge once approved.
--   To maintaing the quality of the code NEVER run `git commit` or `git push` with `--no-verify`!! as it will bypass all the pre commit hooks and push that will run all necessary quality checks.
+-   To maintain the quality of the code. NEVER run `git commit` or `git push` with `--no-verify` as it will bypass all the pre commit and push hooks that will run all necessary quality checks.
