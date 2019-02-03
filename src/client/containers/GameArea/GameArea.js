@@ -71,8 +71,8 @@ const mapStateToProps = state => ({
   connected: state.socket.connected,
   entries: state.socket.entries,
   socketId: state.socket.socketId,
-  turn: state.socket.turn,
-  start: state.socket.start
+  start: state.socket.start,
+  turn: state.socket.turn
 });
 
 const mapDispatchToProps = {

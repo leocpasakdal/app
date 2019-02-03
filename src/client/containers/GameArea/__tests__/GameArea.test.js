@@ -12,7 +12,8 @@ const { UnconnectedGameArea } = GameArea._test;
 
 const defaultProps = {
   clearError: jest.fn(),
-  requestStart: jest.fn()
+  requestStart: jest.fn(),
+  setError: jest.fn()
 };
 
 const prepareTest = (props = defaultProps) => {
