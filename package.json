@@ -14,7 +14,9 @@
     "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "eslint .",
     "lint:css": "stylelint \"./src/**/*.scss\" \"./src/**/*.css\" --syntax scss",
-    "test": "jest * --watch"
+    "test": "node ./node_modules/jest/bin/jest.js * --watch",
+    "test:once": "node ./node_modules/jest/bin/jest.js",
+    "test:once:coverage": "node ./node_modules/jest/bin/jest.js -i --coverage"
   },
   "author": "",
   "license": "ISC",
@@ -117,22 +119,15 @@
     "resetMocks": true,
     "coveragePathIgnorePatterns": [
       "__tests__",
+      "coverage/",
       "src/static",
       "helpers/",
       "webpack/"
     ],
     "collectCoverageFrom": [
-      "**/*.js",
+      "src/**/*.js",
       "!**/node_modules/**"
     ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 90,
-        "statements": 90,
-        "functions": 90,
-        "lines": 90
-      }
-    },
     "globals": {
       "__TEST__": true
     }

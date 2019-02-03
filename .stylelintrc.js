@@ -1,0 +1,18 @@
+module.exports = {
+  rules: {
+    'block-opening-brace-space-before': 'always',
+    indentation: 2,
+    'max-empty-lines': 1,
+    'max-line-length': 120,
+    'max-nesting-depth': 3,
+    'no-duplicate-selectors': true,
+    'no-invalid-double-slash-comments': null,
+    'number-leading-zero': 'never',
+    'string-quotes': 'single',
+    'selector-list-comma-newline-after': 'always',
+
+    'order/properties-alphabetical-order': true
+  },
+
+  plugins: ['stylelint-order']
+};
