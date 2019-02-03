@@ -2,7 +2,7 @@
 
 ### Pre-requisite
 
-install (nodejs)[https://nodejs.org/en/download/] version 10 atleast
+install [nodejs](https://nodejs.org/en/download/). Version 10 atleast
 
 ### Install and run for development
 
