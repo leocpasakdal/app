@@ -4,8 +4,8 @@ import win from '#/static/images/win.png';
 import lose from '#/static/images/lose.png';
 
 export const AVATARS = [
-  { avatar: avatar1, id: 'avatar1', name: 'avatar 1' },
-  { avatar: avatar2, id: 'avatar2', name: 'avatar 2' }
+  { avatar: avatar1, id: 'geek', name: 'Geek' },
+  { avatar: avatar2, id: 'star', name: 'Star' }
 ];
 
 export const INPUTS = [-1, 0, 1];

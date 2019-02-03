@@ -68,10 +68,12 @@ class UnconnectedStartPage extends Component {
     return (
       <div className={styles.startPage}>
         <div className={styles.elementsWrapper}>
+          <Text className={styles.avatar} type="label">
+            Choose Your Avatar
+          </Text>
           <div className={styles.avatarsWrapper}>
             {this.getAvatarSelections()}
           </div>
-
           <Button
             className={styles.button}
             onClick={this.onClick}

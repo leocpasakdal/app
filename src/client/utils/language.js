@@ -1,3 +1,4 @@
+export const CHOOSE_AVATAR = 'Choose Your Avatar';
 export const DEFAULT_BANNER = 'Win the Game or Win the Job.';
 export const LOSE = 'You Lose.';
 export const NEW_GAME = 'New game.';
