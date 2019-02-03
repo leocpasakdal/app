@@ -11,9 +11,9 @@ const ENTRY = {
 
 const getValidEntries = (entries = []) =>
   entries.reduce((acc, entry) => {
-    const type = _get(entry, 'type');
+    const Comp = ENTRY[_get(entry, 'type')];
 
-    if (!type) {
+    if (!Comp) {
       return acc;
     }
 
@@ -21,7 +21,7 @@ const getValidEntries = (entries = []) =>
       ...acc,
       {
         entry,
-        Comp: ENTRY[type]
+        Comp
       }
     ];
   }, []);
