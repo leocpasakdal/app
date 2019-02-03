@@ -62,9 +62,9 @@ module.exports = () => {
     });
   };
 
-  const start = ({ dispatch, shouldStart }) => {
+  const start = ({ dispatch, dispatchAll, shouldStart }) => {
     dispatchStart({
-      dispatch,
+      dispatch: dispatchAll,
       payload: shouldStart
     });
 

@@ -26,7 +26,7 @@ module.exports = ({ dispatchManager, playerManager, entryManager }) => {
 
     entryManager.clear();
     entryManager.dispatch(dispatchAll);
-    dispatchManager.start({ dispatch, shouldStart: true });
+    dispatchManager.start({ dispatch, dispatchAll, shouldStart: true });
   };
 
   const disconnect = ({ dispatch, payload }) => {
