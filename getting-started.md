@@ -1,5 +1,9 @@
 # Getting Started
 
+### Pre-requisite
+
+install (nodejs)[https://nodejs.org/en/download/] version 10 atleast
+
 ### Install and run for development
 
     $ npm install
