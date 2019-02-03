@@ -35,6 +35,7 @@ const mapStateToProps = state => ({
 
 const Layout = connect(mapStateToProps)(UnconnectedLayout);
 
+// istanbul ignore if
 if (__TEST__) {
   Layout._test = {
     UnconnectedLayout

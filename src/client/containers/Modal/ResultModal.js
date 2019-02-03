@@ -45,6 +45,7 @@ const ResultModal = connect(
   mapDispatchToProps
 )(UnconnectedResultModal);
 
+// istanbul ignore if
 if (__TEST__) {
   ResultModal._test = {
     UnconnectedResultModal

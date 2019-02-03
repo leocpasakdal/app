@@ -57,6 +57,7 @@ const Footer = connect(
   mapDispatchToProps
 )(UnconnectedFooter);
 
+// istanbul ignore if
 if (__TEST__) {
   Footer._test = {
     UnconnectedFooter

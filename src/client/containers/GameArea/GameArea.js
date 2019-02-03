@@ -86,6 +86,7 @@ const GameArea = connect(
   mapDispatchToProps
 )(UnconnectedGameArea);
 
+// istanbul ignore if
 if (__TEST__) {
   GameArea._test = {
     UnconnectedGameArea

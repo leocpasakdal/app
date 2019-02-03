@@ -51,6 +51,7 @@ OrigButton.propTypes = {
 
 const Button = pure(OrigButton);
 
+// istanbul ignore if
 if (__TEST__) {
   Button._test = {
     OrigButton

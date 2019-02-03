@@ -113,6 +113,7 @@ const StartPage = withRouter(
   )(UnconnectedStartPage)
 );
 
+// istanbul ignore if
 if (__TEST__) {
   StartPage._test = {
     UnconnectedStartPage

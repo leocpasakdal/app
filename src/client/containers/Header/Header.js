@@ -21,6 +21,7 @@ const mapStateToProps = state => ({
 
 const Header = connect(mapStateToProps)(UnconnectedHeader);
 
+// istanbul ignore if
 if (__TEST__) {
   Header._test = {
     UnconnectedHeader
