@@ -8,7 +8,7 @@ import Button from '#/components/Button/Button';
 import AvatarButton from '#/components/Button/AvatarButton';
 import Text from '#/components/Text/Text';
 import { AVATARS, ROUTES } from '#/utils/constants';
-import { SELECT_AVATAR, START } from '#/utils/language';
+import { CHOOSE_AVATAR, SELECT_AVATAR, START } from '#/utils/language';
 
 import styles from './startPage.scss';
 
@@ -69,7 +69,7 @@ class UnconnectedStartPage extends Component {
       <div className={styles.startPage}>
         <div className={styles.elementsWrapper}>
           <Text className={styles.avatar} type="label">
-            Choose Your Avatar
+            {CHOOSE_AVATAR}
           </Text>
           <div className={styles.avatarsWrapper}>
             {this.getAvatarSelections()}
