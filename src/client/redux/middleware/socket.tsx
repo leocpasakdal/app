@@ -1,7 +1,7 @@
 import * as reduxModules from '../modules';
 import { MODAL_TYPE } from '../../utils/constants';
 import { Store, Dispatch, AnyAction } from 'redux';
-import { RequestConnection } from 'redux/modules/socket/actions';
+import { RequestConnection } from '../modules/socket/actions';
 
 const responseFinish = (store: Store) => {
   store.dispatch(

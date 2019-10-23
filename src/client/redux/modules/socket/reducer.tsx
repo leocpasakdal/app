@@ -15,7 +15,7 @@ import {
   SetFinish,
   SetError
 } from './actions';
-import { Emit } from 'redux/utils';
+import { Emit } from '../../utils';
 
 export interface SocketInterface {
   clientErrorMessage: string;

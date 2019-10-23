@@ -12,7 +12,7 @@ import { AVATARS, ROUTES } from '../../utils/constants';
 import { CHOOSE_AVATAR, SELECT_AVATAR, START } from '../../utils/language';
 
 import styles from './startPage.scss';
-import { AppState } from 'redux/reducers';
+import { AppState } from '../../redux/reducers';
 
 interface Props {
   clientErrorMessage: string;

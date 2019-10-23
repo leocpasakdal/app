@@ -59,7 +59,8 @@ module.exports = {
     'prefer-destructuring': ['error'],
     'prefer-promise-reject-errors': 0,
     'require-await': 'error',
-
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/explicit-function-return-type': 0,
     'padding-line-between-statements': [
       'error',
       { blankLine: 'always', prev: '*', next: ['const', 'let'] },
