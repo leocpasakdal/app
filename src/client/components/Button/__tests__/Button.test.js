@@ -3,7 +3,7 @@ import React from 'react';
 import Button from '../Button';
 import styles from '../button.scss';
 
-import { noop } from '#/utils/misc';
+import { noop } from '../../../utils/misc';
 
 describe('Button', () => {
   styles.button = 'buttonCssValue';

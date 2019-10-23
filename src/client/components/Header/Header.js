@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './header.scss';
-import Avatar from '#/components/Image/Avatar';
-import Text from '#/components/Text/Text';
+import Avatar from '../Image/Avatar';
+import Text from '../Text/Text';
 
 const Header = ({ avatarId, banner, teamName }) => (
   <div className={styles.header}>

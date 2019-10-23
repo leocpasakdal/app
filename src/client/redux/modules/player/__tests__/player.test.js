@@ -1,5 +1,5 @@
 import { reducer, actions } from '..';
-import { DEFAULT_BANNER } from '#/utils/language';
+import { DEFAULT_BANNER } from '../../../../utils/language';
 
 describe('player reducer', () => {
   it('contains the expected initial state', () => {

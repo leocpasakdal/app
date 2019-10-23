@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Button from '#/components/Button/Button';
-import Image from '#/components/Image/Image';
-import Text from '#/components/Text/Text';
+import Button from '../Button/Button';
+import Image from '../Image/Image';
+import Text from '../Text/Text';
 import Overlay from './Overlay';
-import { NEW_GAME } from '#/utils/language';
+import { NEW_GAME } from '../../utils/language';
 
 const ResultOverlay = ({ onClick, result, show, src }) => (
   <Overlay show={show} type="result">

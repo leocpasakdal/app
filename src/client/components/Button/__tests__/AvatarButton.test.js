@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import Button from '../Button';
 import AvatarButton from '../AvatarButton';
-import Avatar from '#/components/Image/Avatar';
+import Avatar from '../../Image/Avatar';
 
 describe('AvatarButton', () => {
   it('returns an instance of Button component with correct props', () => {

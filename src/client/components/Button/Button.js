@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './button.scss';
-import { joinArrayIgnoreInvalid, noop } from '#/utils/misc';
+import { joinArrayIgnoreInvalid, noop } from '../../utils/misc';
 import { pure } from 'recompose';
 
 const OrigButton = ({

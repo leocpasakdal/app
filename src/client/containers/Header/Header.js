@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import HeaderComponent from '#/components/Header/Header';
+import HeaderComponent from '../../components/Header/Header';
 
 const UnconnectedHeader = ({ avatarId, banner, teamName }) => (
   <HeaderComponent avatarId={avatarId} banner={banner} teamName={teamName} />

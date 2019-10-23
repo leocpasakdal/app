@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './text.scss';
-import { joinArrayIgnoreInvalid } from '#/utils/misc';
+import { joinArrayIgnoreInvalid } from '../../utils/misc';
 
 const Text = ({ className, children, type }) => {
   const classNames = joinArrayIgnoreInvalid(

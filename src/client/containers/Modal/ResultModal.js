@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as reduxModules from '#/redux/modules';
-import { getResultImage } from '#/utils/misc';
-import { LOSE, WIN, RESTART } from '#/utils/language';
-import ResultOverlay from '#/components/Overlay/ResultOverlay';
+import * as reduxModules from '../../redux/modules';
+import { getResultImage } from '../../utils/misc';
+import { LOSE, WIN, RESTART } from '../../utils/language';
+import ResultOverlay from '../../components/Overlay/ResultOverlay';
 
 class UnconnectedResultModal extends Component {
   onClick = () => {

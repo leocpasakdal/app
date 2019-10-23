@@ -1,9 +1,9 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import Button from '#/components/Button/Button';
-import Image from '#/components/Image/Image';
-import Text from '#/components/Text/Text';
+import Button from '../../Button/Button';
+import Image from '../../Image/Image';
+import Text from '../../Text/Text';
 
 import ResultOverlay from '../ResultOverlay';
 import Overlay from '../Overlay';

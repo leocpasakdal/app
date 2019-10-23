@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import * as reduxModules from '#/redux/modules';
-import Entries from '#/components/Entries/Entries';
-import Layout from '#/containers/Layout/Layout';
-import Scrollable from '#/components/Scrollable/Scrollable';
-import Text from '#/components/Text/Text';
+import * as reduxModules from '../../redux/modules';
+import Entries from '../../components/Entries/Entries';
+import Layout from '../Layout/Layout';
+import Scrollable from '../../components/Scrollable/Scrollable';
+import Text from '../../components/Text/Text';
 
-import { WAIT_OTHER_PLAYER, WAIT_TURN } from '#/utils/language';
+import { WAIT_OTHER_PLAYER, WAIT_TURN } from '../../utils/language';
 import styles from './gameArea.scss';
 
 class UnconnectedGameArea extends Component {

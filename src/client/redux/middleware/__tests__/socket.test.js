@@ -1,5 +1,5 @@
-import * as reduxModules from '#/redux/modules';
-import { MODAL_TYPE } from '#/utils/constants';
+import * as reduxModules from '../../modules';
+import { MODAL_TYPE } from '../../../utils/constants';
 import socket from '../socket';
 
 beforeEach(() => {

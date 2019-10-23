@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import FooterComponent from '#/components/Footer/Footer';
+import FooterComponent from '../../../components/Footer/Footer';
 import Footer from '../Footer';
 
 const { UnconnectedFooter } = Footer._test;

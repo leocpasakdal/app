@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import ResultModal from '../ResultModal';
-import ResultOverlay from '#/components/Overlay/ResultOverlay';
+import ResultOverlay from '../../../components/Overlay/ResultOverlay';
 
 const { UnconnectedResultModal } = ResultModal._test;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './overlay.scss';
-import { joinArrayIgnoreInvalid } from '#/utils/misc';
+import { joinArrayIgnoreInvalid } from '../../utils/misc';
 
 const Overlay = ({ children, show, type }) => {
   const className = joinArrayIgnoreInvalid(

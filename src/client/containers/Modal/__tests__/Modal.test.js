@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Redirect } from 'react-router-dom';
 
-import { MODAL_TYPE } from '#/utils/constants';
+import { MODAL_TYPE } from '../../../utils/constants';
 import ResultModal from '../ResultModal';
 import Modal from '../Modal';
 

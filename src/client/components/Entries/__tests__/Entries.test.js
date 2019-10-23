@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import Entries from '../Entries';
-import PlayerEntry from '#/components/PlayerEntry/PlayerEntry';
+import PlayerEntry from '../../PlayerEntry/PlayerEntry';
 
 describe('Entries', () => {
   it('returns an array of components', () => {

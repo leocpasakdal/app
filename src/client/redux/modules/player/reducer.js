@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 import { SET_PLAYER } from './actions';
-import { DEFAULT_BANNER } from '#/utils/language';
+import { DEFAULT_BANNER } from '../../../utils/language';
 
 const initialState = {
   avatarId: '',

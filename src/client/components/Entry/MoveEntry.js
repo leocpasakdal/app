@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Entry from './Entry';
-import Text from '#/components/Text/Text';
+import Text from '../Text/Text';
 
 const MoveEntry = ({ children }) => (
   <Entry type="circle">

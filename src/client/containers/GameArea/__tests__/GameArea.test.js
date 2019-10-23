@@ -1,10 +1,10 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import Entries from '#/components/Entries/Entries';
-import Layout from '#/containers/Layout/Layout';
-import Scrollable from '#/components/Scrollable/Scrollable';
-import Text from '#/components/Text/Text';
+import Entries from '../../../components/Entries/Entries';
+import Layout from '../../Layout/Layout';
+import Scrollable from '../../../components/Scrollable/Scrollable';
+import Text from '../../../components/Text/Text';
 
 import GameArea from '../GameArea';
 

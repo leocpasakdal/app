@@ -3,10 +3,10 @@ import React from 'react';
 
 import { Redirect } from 'react-router-dom';
 
-import Body from '#/components/Body/Body';
-import HeaderContainer from '#/containers/Header/Header';
-import FooterContainer from '#/containers/Footer/Footer';
-import ModalContainer from '#/containers/Modal/Modal';
+import Body from '../../../components/Body/Body';
+import HeaderContainer from '../../Header/Header';
+import FooterContainer from '../../Footer/Footer';
+import ModalContainer from '../../Modal/Modal';
 import Layout from '../Layout';
 
 const { UnconnectedLayout } = Layout._test;

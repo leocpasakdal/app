@@ -1,11 +1,17 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent, ReactNode } from 'react';
 import Button from './Button';
-import Avatar from '#/components/Image/Avatar';
+import Avatar from '../Image/Avatar';
 import styles from './button.scss';
 
-class AvatarButton extends PureComponent {
-  onButtonClick = () => {
+interface Props {
+  onClick: (event: any) => void;
+  name: string;
+  id: string;
+  selected: boolean;
+}
+
+class AvatarButton extends PureComponent<Props> {
+  onButtonClick = (): void => {
     const { onClick, name, id } = this.props;
 
     onClick({
@@ -18,7 +24,7 @@ class AvatarButton extends PureComponent {
     });
   };
 
-  render() {
+  render(): ReactNode {
     const { selected, id } = this.props;
 
     return (
@@ -32,12 +38,5 @@ class AvatarButton extends PureComponent {
     );
   }
 }
-
-AvatarButton.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string,
-  onClick: PropTypes.func,
-  selected: PropTypes.bool
-};
 
 export default AvatarButton;

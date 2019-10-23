@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import Entry from '../Entry';
 import ResultEntry from '../ResultEntry';
-import Text from '#/components/Text/Text';
+import Text from '../../Text/Text';
 
 describe('ResultEntry', () => {
   it('returns an instance of Entry and Text', () => {

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import FooterComponent from '#/components/Footer/Footer';
-import InputButton from '#/components/Button/InputButton';
+import FooterComponent from '../../components/Footer/Footer';
+import InputButton from '../../components/Button/InputButton';
 
-import * as reduxModules from '#/redux/modules';
-import { INPUTS } from '#/utils/constants';
+import * as reduxModules from '../../redux/modules';
+import { INPUTS } from '../../utils/constants';
 
 class UnconnectedFooter extends Component {
   getButtons = () =>

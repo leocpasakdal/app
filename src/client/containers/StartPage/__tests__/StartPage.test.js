@@ -1,8 +1,8 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import Button from '#/components/Button/Button';
-import { ROUTES } from '#/utils/constants';
+import Button from '../../../components/Button/Button';
+import { ROUTES } from '../../../utils/constants';
 import StartPage from '../StartPage';
 import styles from '../startPage.scss';
 

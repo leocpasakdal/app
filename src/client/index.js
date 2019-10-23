@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { compose, createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import rootReducer from '#/redux/reducers';
+import rootReducer from './redux/reducers';
 import App from './App';
 import './scss/_main.scss';
 import io from 'socket.io-client';
 import { createClient } from 'redux-socket.io-connect';
-import socketMiddleware from '#/redux/middleware/socket';
+import socketMiddleware from './redux/middleware/socket';
 
 const middleware = [socketMiddleware];
 

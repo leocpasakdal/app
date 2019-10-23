@@ -2,8 +2,8 @@ import _get from 'lodash/get';
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import PlayerEntry from '#/components/PlayerEntry/PlayerEntry';
-import { ENTRY_TYPE } from '#/utils/constants';
+import PlayerEntry from '../PlayerEntry/PlayerEntry';
+import { ENTRY_TYPE } from '../../utils/constants';
 
 const ENTRY = {
   [ENTRY_TYPE.PLAYER_MOVE]: PlayerEntry

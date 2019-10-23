@@ -1,8 +1,8 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import Header from '../Header';
-import Avatar from '#/components/Image/Avatar';
-import Text from '#/components/Text/Text';
+import Avatar from '../../Image/Avatar';
+import Text from '../../Text/Text';
 
 describe('Header', () => {
   it('renders children components correctly', () => {
