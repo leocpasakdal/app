@@ -1,8 +1,7 @@
-const path = require('path');
 const MULTILINE_BLOCK_LIKE = 'multiline-block-like';
 
 module.exports = {
-  parser: 'babel-eslint',
+  parser: '@typescript-eslint/parser',
   env: {
     browser: true,
     node: true,
@@ -10,11 +9,19 @@ module.exports = {
     es6: true
   },
 
-  plugins: ['react', 'import', 'jest', 'sonarjs', 'prettier'],
+  plugins: [
+    'react',
+    'import',
+    'jest',
+    'sonarjs',
+    'prettier',
+    '@typescript-eslint'
+  ],
   extends: [
     'plugin:sonarjs/recommended',
     'plugin:react/recommended',
-    'eslint:recommended'
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended'
   ],
   globals: {
     __TEST__: true,
@@ -27,7 +34,9 @@ module.exports = {
   settings: {
     'import/parser': 'babel-eslint',
     'import/resolver': {
-      alias: [['#', path.resolve(path.join(__dirname, './src/client'))]]
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx']
+      }
     }
   },
   parserOptions: {
@@ -35,7 +44,6 @@ module.exports = {
   },
   rules: {
     indent: 0,
-
     'arrow-parens': 0,
     'arrow-body-style': ['error', 'as-needed'],
     'consistent-return': 'error',

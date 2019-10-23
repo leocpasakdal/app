@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -22,10 +23,10 @@ const client = {
   modules: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(t|j)sx?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
+          loader: 'awesome-typescript-loader'
         }
       },
       {
@@ -77,9 +78,7 @@ const client = {
     })
   ],
   resolve: {
-    alias: {
-      '#': path.resolve(__dirname, '../src/client')
-    }
+    extensions: ['.ts', '.js', '.tsx', '.jsx', '.scss']
   }
 };
 
