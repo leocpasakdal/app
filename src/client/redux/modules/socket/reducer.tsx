@@ -23,6 +23,7 @@ export interface Socket {
   socketId?: string;
   resultNumber?: number;
 }
+
 const initialState: Socket = {
   clientErrorMessage: '',
   connected: false,

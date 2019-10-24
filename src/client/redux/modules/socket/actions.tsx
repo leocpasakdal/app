@@ -24,14 +24,14 @@ export type ClearError = ReturnType<typeof clearError>;
 
 //request
 
-interface Payload {
+export interface RequestConnectionPayload {
   avatarId: string;
   teamName: string;
 }
 
 export const requestConnection = emitActions<
   typeof REQUEST_CONNECTION,
-  Payload
+  RequestConnectionPayload
 >(REQUEST_CONNECTION);
 export type RequestConnection = ReturnType<typeof requestConnection>;
 

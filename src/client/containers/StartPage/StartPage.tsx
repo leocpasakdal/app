@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
+import { History } from 'history';
 import * as reduxModules from '../../redux/modules';
 import Button from '../../components/Button/Button';
 import AvatarButton from '../../components/Button/AvatarButton';
@@ -11,14 +11,29 @@ import { AVATARS, ROUTES } from '../../utils/constants';
 import { CHOOSE_AVATAR, SELECT_AVATAR, START } from '../../utils/language';
 
 import styles from './startPage.scss';
+import { AppState } from '../../redux/reducers';
+import { RequestConnectionPayload } from '../../redux/modules/socket/actions';
 
-class UnconnectedStartPage extends Component {
+interface Props {
+  clientErrorMessage: string;
+  connected: boolean;
+  history: History;
+  requestConnection: (options: RequestConnectionPayload) => void;
+  setError: (error: string) => void;
+}
+
+interface State {
+  avatarId: string;
+  teamName: string;
+}
+
+class UnconnectedStartPage extends Component<Props, State> {
   state = {
     avatarId: '',
     teamName: ''
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props) {
     const { connected } = this.props;
 
     if (connected && prevProps.connected !== connected) {
@@ -26,7 +41,7 @@ class UnconnectedStartPage extends Component {
     }
   }
 
-  onAvatarChange = evt => {
+  onAvatarChange = (evt: any) => {
     const {
       target: {
         value: { id, name }
@@ -91,7 +106,7 @@ class UnconnectedStartPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: AppState) => ({
   connected: state.socket.connected,
   clientErrorMessage: state.socket.clientErrorMessage
 });
@@ -108,16 +123,17 @@ const StartPage = withRouter(
   )(UnconnectedStartPage)
 );
 
-UnconnectedStartPage.propTypes = {
-  clientErrorMessage: PropTypes.string,
-  connected: PropTypes.bool,
-  history: PropTypes.object,
-  requestConnection: PropTypes.func,
-  setError: PropTypes.func
-};
+// UnconnectedStartPage.propTypes = {
+//   clientErrorMessage: PropTypes.string,
+//   connected: PropTypes.bool,
+//   history: PropTypes.object,
+//   requestConnection: PropTypes.func,
+//   setError: PropTypes.func
+// };
 
 // istanbul ignore if
 if (__TEST__) {
+  // @ts-ignore
   StartPage._test = {
     UnconnectedStartPage
   };
