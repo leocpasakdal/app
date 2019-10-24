@@ -1,10 +1,9 @@
-import React, { Component, ReactNode } from 'react';
-import { History } from 'history';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import * as reduxModules from '../../redux/modules';
-import { RequestConnectionPayload } from '../../redux/modules/socket/actions';
 import Button from '../../components/Button/Button';
 import AvatarButton from '../../components/Button/AvatarButton';
 import Text from '../../components/Text/Text';
@@ -12,28 +11,14 @@ import { AVATARS, ROUTES } from '../../utils/constants';
 import { CHOOSE_AVATAR, SELECT_AVATAR, START } from '../../utils/language';
 
 import styles from './startPage.scss';
-import { AppState } from '../../redux/reducers';
 
-interface Props {
-  clientErrorMessage: string;
-  connected: boolean;
-  history: History;
-  requestConnection: (options: RequestConnectionPayload) => void;
-  setError: (error: string) => void;
-}
-
-interface State {
-  avatarId: string;
-  teamName: string;
-}
-
-class UnconnectedStartPage extends Component<Props, State> {
+class UnconnectedStartPage extends Component {
   state = {
     avatarId: '',
     teamName: ''
   };
 
-  componentDidUpdate(prevProps: Props): void {
+  componentDidUpdate(prevProps) {
     const { connected } = this.props;
 
     if (connected && prevProps.connected !== connected) {
@@ -41,7 +26,7 @@ class UnconnectedStartPage extends Component<Props, State> {
     }
   }
 
-  onAvatarChange = (evt: any) => {
+  onAvatarChange = evt => {
     const {
       target: {
         value: { id, name }
@@ -54,7 +39,7 @@ class UnconnectedStartPage extends Component<Props, State> {
     });
   };
 
-  onClick = (): void => {
+  onClick = () => {
     const { avatarId, teamName } = this.state;
 
     if (!avatarId) {
@@ -67,7 +52,7 @@ class UnconnectedStartPage extends Component<Props, State> {
     }
   };
 
-  goToGame = (): void => this.props.history.replace(ROUTES.GAME);
+  goToGame = () => this.props.history.replace(ROUTES.GAME);
 
   getAvatarSelections = () =>
     AVATARS.map(({ id, name }) => (
@@ -80,7 +65,7 @@ class UnconnectedStartPage extends Component<Props, State> {
       />
     ));
 
-  render(): ReactNode {
+  render() {
     return (
       <div className={styles.startPage}>
         <div className={styles.elementsWrapper}>
@@ -106,7 +91,7 @@ class UnconnectedStartPage extends Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: AppState) => ({
+const mapStateToProps = state => ({
   connected: state.socket.connected,
   clientErrorMessage: state.socket.clientErrorMessage
 });
@@ -123,9 +108,16 @@ const StartPage = withRouter(
   )(UnconnectedStartPage)
 );
 
+UnconnectedStartPage.propTypes = {
+  clientErrorMessage: PropTypes.string,
+  connected: PropTypes.bool,
+  history: PropTypes.object,
+  requestConnection: PropTypes.func,
+  setError: PropTypes.func
+};
+
 // istanbul ignore if
 if (__TEST__) {
-  //@ts-ignore
   StartPage._test = {
     UnconnectedStartPage
   };

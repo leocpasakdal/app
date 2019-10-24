@@ -19,14 +19,11 @@
     "lint:css": "stylelint \"./src/**/*.scss\" \"./src/**/*.css\" --syntax scss",
     "test": "node ./node_modules/jest/bin/jest.js * --watch",
     "test:once": "node ./node_modules/jest/bin/jest.js",
-    "test:once:coverage": "node ./node_modules/jest/bin/jest.js -i --coverage",
-    "check-types": "tsc"
+    "test:once:coverage": "node ./node_modules/jest/bin/jest.js -i --coverage"
   },
   "author": "leo pasakdal",
   "license": "",
   "dependencies": {
-    "@types/react": "^16.9.9",
-    "@types/react-dom": "^16.9.2",
     "awesome-typescript-loader": "^5.2.1",
     "babel-polyfill": "^6.26.0",
     "express": "^4.17.1",
@@ -44,12 +41,6 @@
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
     "@babel/preset-typescript": "^7.6.0",
-    "@types/lodash": "^4.14.144",
-    "@types/react-redux": "^7.1.5",
-    "@types/react-router-dom": "^5.1.0",
-    "@types/redux-actions": "^2.6.1",
-    "@typescript-eslint/eslint-plugin": "^2.4.0",
-    "@typescript-eslint/parser": "^2.4.0",
     "autoprefixer": "^9.6.5",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.3",
@@ -125,10 +116,6 @@
     ]
   },
   "jest": {
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest",
-      "^.+\\.js$": "babel-jest"
-    },
     "setupTestFrameworkScriptFile": "<rootDir>/helpers/setupTests.js",
     "moduleFileExtensions": [
       "tsx",

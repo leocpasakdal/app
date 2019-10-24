@@ -1,9 +1,7 @@
 import * as reduxModules from '../modules';
 import { MODAL_TYPE } from '../../utils/constants';
-import { Store, Dispatch, AnyAction } from 'redux';
-import { RequestConnection } from '../modules/socket/actions';
 
-const responseFinish = (store: Store) => {
+const responseFinish = store => {
   store.dispatch(
     reduxModules.modal.actions.showModal({
       modalType: MODAL_TYPE.GAME_RESULT
@@ -11,11 +9,11 @@ const responseFinish = (store: Store) => {
   );
 };
 
-const responseExit = (store: Store) => {
+const responseExit = store => {
   store.dispatch(reduxModules.modal.actions.closeModal());
 };
 
-const requestConnection = (store: Store, action: RequestConnection) => {
+const requestConnection = (store, action) => {
   store.dispatch(
     reduxModules.player.actions.setPlayer({
       avatarId: action.payload.avatarId,
@@ -24,7 +22,7 @@ const requestConnection = (store: Store, action: RequestConnection) => {
   );
 };
 
-const socket = (store: Store) => (next: Dispatch) => (action: AnyAction) => {
+const socket = store => next => action => {
   const {
     REQUEST_CONNECTION,
     RESPONSE_EXIT,
@@ -41,7 +39,7 @@ const socket = (store: Store) => (next: Dispatch) => (action: AnyAction) => {
 
       break;
     case REQUEST_CONNECTION:
-      requestConnection(store, action as RequestConnection);
+      requestConnection(store, action);
       break;
 
     default:

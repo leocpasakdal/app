@@ -26,7 +26,7 @@ const client = {
         test: /\.(t|j)sx?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'awesome-typescript-loader'
+          loader: 'babel-loader'
         }
       },
       {
@@ -78,7 +78,7 @@ const client = {
     })
   ],
   resolve: {
-    extensions: ['.ts', '.js', '.tsx', '.jsx', '.scss']
+    extensions: ['.js', '.jsx', '.scss']
   }
 };
 

@@ -1,7 +1,7 @@
 const MULTILINE_BLOCK_LIKE = 'multiline-block-like';
 
 module.exports = {
-  parser: '@typescript-eslint/parser',
+  parser: 'babel-eslint',
   env: {
     browser: true,
     node: true,
@@ -9,19 +9,11 @@ module.exports = {
     es6: true
   },
 
-  plugins: [
-    'react',
-    'import',
-    'jest',
-    'sonarjs',
-    'prettier',
-    '@typescript-eslint'
-  ],
+  plugins: ['react', 'import', 'jest', 'sonarjs', 'prettier'],
   extends: [
     'plugin:sonarjs/recommended',
     'plugin:react/recommended',
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended'
+    'eslint:recommended'
   ],
   globals: {
     __TEST__: true,
@@ -35,7 +27,7 @@ module.exports = {
     'import/parser': 'babel-eslint',
     'import/resolver': {
       node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx']
+        extensions: ['.js', '.jsx']
       }
     }
   },
@@ -59,8 +51,6 @@ module.exports = {
     'prefer-destructuring': ['error'],
     'prefer-promise-reject-errors': 0,
     'require-await': 'error',
-    '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/explicit-function-return-type': 0,
     'padding-line-between-statements': [
       'error',
       { blankLine: 'always', prev: '*', next: ['const', 'let'] },

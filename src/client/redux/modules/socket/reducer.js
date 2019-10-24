@@ -8,28 +8,10 @@ import {
   RESET_CLIENT_ERROR_MESSAGE,
   RESPONSE_RESULT,
   RESPONSE_START,
-  RESPONSE_TURN,
-  SetResult,
-  SetStart,
-  SetTurn,
-  SetFinish,
-  SetError
+  RESPONSE_TURN
 } from './actions';
-import { Emit } from '../../utils';
 
-export interface SocketInterface {
-  clientErrorMessage: string;
-  connected: boolean;
-  entries: any[];
-  finish: boolean;
-  result: boolean;
-  start: boolean;
-  turn: boolean;
-  socketId?: any;
-  resultNumber?: number;
-}
-
-const initialState: SocketInterface = {
+const initialState = {
   clientErrorMessage: '',
   connected: false,
   entries: [],
@@ -41,67 +23,52 @@ const initialState: SocketInterface = {
   resultNumber: undefined
 };
 
-const clearError = (state: SocketInterface): SocketInterface => ({
+const clearError = state => ({
   ...state,
   clientErrorMessage: ''
 });
-const setConnection = (
-  state: SocketInterface,
-  action: any
-): SocketInterface => ({
+const setConnection = (state, action) => ({
   ...state,
   connected: action.payload.connected,
   socketId: action.payload.id
 });
 
-const setEntries = (state: SocketInterface, action: any): SocketInterface => ({
+const setEntries = (state, action) => ({
   ...state,
   entries: [...action.payload]
 });
 
-const setError = (
-  state: SocketInterface,
-  action: SetError
-): SocketInterface => ({
+const setError = (state, action) => ({
   ...state,
   clientErrorMessage: action.payload
 });
 
-const setFinish = (
-  state: SocketInterface,
-  action: SetFinish
-): SocketInterface => ({
+const setFinish = (state, action) => ({
   ...state,
   result: action.payload.result,
   finish: action.payload.finish
 });
 
-const setExit = (): SocketInterface => ({
+const setExit = () => ({
   ...initialState
 });
 
-const setResult = (
-  state: SocketInterface,
-  action: SetResult
-): SocketInterface => ({
+const setResult = (state, action) => ({
   ...state,
   resultNumber: action.payload
 });
 
-const setStart = (
-  state: SocketInterface,
-  action: SetStart
-): SocketInterface => ({
+const setStart = (state, action) => ({
   ...state,
   start: action.payload
 });
 
-const setTurn = (state: SocketInterface, action: SetTurn): SocketInterface => ({
+const setTurn = (state, action) => ({
   ...state,
   turn: action.payload
 });
 
-const reducer = handleActions<SocketInterface, any, Emit>(
+const reducer = handleActions(
   {
     [RESPONSE_CONNECTION]: setConnection,
     [RESPONSE_ENTRIES]: setEntries,
