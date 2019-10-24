@@ -8,10 +8,22 @@ import {
   RESET_CLIENT_ERROR_MESSAGE,
   RESPONSE_RESULT,
   RESPONSE_START,
-  RESPONSE_TURN
+  RESPONSE_TURN,
+  SetFinish
 } from './actions';
 
-const initialState = {
+export interface Socket {
+  clientErrorMessage: string;
+  connected: boolean;
+  entries: any[];
+  finish: boolean;
+  result: boolean;
+  start: boolean;
+  turn: boolean;
+  socketId?: string;
+  resultNumber?: number;
+}
+const initialState: Socket = {
   clientErrorMessage: '',
   connected: false,
   entries: [],
@@ -23,47 +35,46 @@ const initialState = {
   resultNumber: undefined
 };
 
-const clearError = state => ({
+const clearError = (state: Socket): Socket => ({
   ...state,
   clientErrorMessage: ''
 });
-const setConnection = (state, action) => ({
+
+const setConnection = (state: Socket, action: any): Socket => ({
   ...state,
   connected: action.payload.connected,
   socketId: action.payload.id
 });
 
-const setEntries = (state, action) => ({
+const setEntries = (state: Socket, action: any): Socket => ({
   ...state,
   entries: [...action.payload]
 });
 
-const setError = (state, action) => ({
+const setError = (state: Socket, action: any): Socket => ({
   ...state,
   clientErrorMessage: action.payload
 });
 
-const setFinish = (state, action) => ({
+const setFinish = (state: Socket, action: SetFinish): Socket => ({
   ...state,
   result: action.payload.result,
   finish: action.payload.finish
 });
 
-const setExit = () => ({
-  ...initialState
-});
+const setExit = (): Socket => initialState;
 
-const setResult = (state, action) => ({
+const setResult = (state: Socket, action: any): Socket => ({
   ...state,
   resultNumber: action.payload
 });
 
-const setStart = (state, action) => ({
+const setStart = (state: Socket, action: any): Socket => ({
   ...state,
   start: action.payload
 });
 
-const setTurn = (state, action) => ({
+const setTurn = (state: Socket, action: any): Socket => ({
   ...state,
   turn: action.payload
 });
