@@ -78,7 +78,7 @@ const client = {
     })
   ],
   resolve: {
-    extensions: ['.js', '.jsx', '.scss', 'tsx']
+    extensions: ['.js', '.jsx', '.scss', '.tsx']
   }
 };
 
