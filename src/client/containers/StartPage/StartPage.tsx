@@ -124,10 +124,11 @@ const StartPage = withRouter(
 );
 
 // istanbul ignore if
-// if (__TEST__) {
-//   StartPage._test = {
-//     UnconnectedStartPage
-//   };
-// }
+if (__TEST__) {
+  //@ts-ignore
+  StartPage._test = {
+    UnconnectedStartPage
+  };
+}
 
 export default StartPage;

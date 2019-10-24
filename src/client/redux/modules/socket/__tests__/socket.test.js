@@ -1,14 +1,15 @@
 import { reducer, actions } from '..';
 
 const initalState = {
-  entries: [],
   clientErrorMessage: '',
   connected: false,
+  entries: [],
+  finish: false,
   result: false,
   start: false,
   turn: false,
-  finish: false,
-  socketId: null
+  socketId: undefined,
+  resultNumber: undefined
 };
 
 describe('socket reducer', () => {

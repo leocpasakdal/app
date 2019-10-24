@@ -94,6 +94,7 @@
     "style-loader": "^0.23.0",
     "stylelint": "^9.10.1",
     "stylelint-order": "^2.0.0",
+    "ts-jest": "^24.1.0",
     "typescript": "^3.4.5",
     "url-loader": "^1.0.1",
     "webpack": "^4.41.2",
@@ -124,7 +125,15 @@
     ]
   },
   "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest",
+      "^.+\\.js$": "babel-jest"
+    },
     "setupTestFrameworkScriptFile": "<rootDir>/helpers/setupTests.js",
+    "moduleFileExtensions": [
+      "tsx",
+      "js"
+    ],
     "moduleNameMapper": {
       "^.+\\.(css|scss)$": "<rootDir>/helpers/styleMock.js",
       "^.+\\.(png|jpg|gif|svg)$": "<rootDir>/helpers/imageMock.js",
