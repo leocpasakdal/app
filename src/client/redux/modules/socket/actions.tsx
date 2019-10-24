@@ -44,7 +44,17 @@ export const setConnection = emitActions(RESPONSE_CONNECTION);
 export const setEntries = emitActions(RESPONSE_ENTRIES);
 export const setError = emitActions(RESPONSE_ERROR);
 export const setExit = emitActions(RESPONSE_EXIT);
-export const setFinish = emitActions(RESPONSE_FINISH);
+
+interface SetFinishPayload {
+  result: boolean;
+  finish: boolean;
+}
+
+export const setFinish = emitActions<typeof RESPONSE_FINISH, SetFinishPayload>(
+  RESPONSE_FINISH
+);
+
+export type SetFinish = ReturnType<typeof setFinish>;
 export const setResult = emitActions(RESPONSE_RESULT);
 export const setStart = emitActions(RESPONSE_START);
 export const setTurn = emitActions(RESPONSE_TURN);
