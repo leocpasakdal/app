@@ -35,7 +35,7 @@ module.exports = {
     'import/parser': 'babel-eslint',
     'import/resolver': {
       node: {
-        extensions: ['.js', '.jsx', 'tsx']
+        extensions: ['.js', '.ts', '.jsx', 'tsx']
       }
     }
   },
@@ -59,6 +59,9 @@ module.exports = {
     'prefer-destructuring': ['error'],
     'prefer-promise-reject-errors': 0,
     'require-await': 'error',
+    '@typescript-eslint/no-explicit-any': 0,
+    '@typescript-eslint/explicit-function-return-type': 0,
+
     'padding-line-between-statements': [
       'error',
       { blankLine: 'always', prev: '*', next: ['const', 'let'] },

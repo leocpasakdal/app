@@ -1,4 +1,3 @@
-// import { createAction } from 'redux-actions';
 import { REQUEST, RESPONSE } from '../../../../common/socketActions';
 import { emitActions } from '../../utils';
 

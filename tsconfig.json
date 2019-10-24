@@ -2,16 +2,18 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "jsx": "react", // support jsx in tsx file
-    "moduleResolution": "node", // Determine how modules get resolved
-    "experimentalDecorators": true, // Enables experimental support for ES decorators.
+    "jsx": "react",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
     "sourceMap": true,
-    "allowJs": true, // Allow JavaScript files to be compiled.
-    "strict": true, // enable all strict type checking options enables noImplicitAny, noImplicitThis, alwaysStrict, strictBindCallApply, strictNullChecks, strictFunctionTypes and strictPropertyInitialization.
-    "skipLibCheck": true, // Skip type checking of all declaration files
+    "allowJs": true,
+    "noEmit": true,
+    "strict": true,
+    "skipLibCheck": true,
     "esModuleInterop": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "noImplicitAny": true,
     "baseUrl": "src/client"
   },
   "include": ["src/client"],
