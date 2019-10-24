@@ -35,7 +35,7 @@ module.exports = {
     'import/parser': 'babel-eslint',
     'import/resolver': {
       node: {
-        extensions: ['.js', '.ts', '.jsx', 'tsx']
+        extensions: ['.js', '.ts', '.jsx', '.tsx']
       }
     }
   },
