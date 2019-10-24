@@ -1,5 +1,5 @@
+// import { createAction } from 'redux-actions';
 import { REQUEST, RESPONSE } from '../../../../common/socketActions';
-import { createAction } from 'redux-actions';
 import { emitActions } from '../../utils';
 
 export const REQUEST_EXIT = REQUEST.EXIT;
@@ -17,11 +17,25 @@ export const RESPONSE_START = RESPONSE.START;
 export const RESPONSE_TURN = RESPONSE.TURN;
 
 export const RESET_CLIENT_ERROR_MESSAGE = 'socket/RESET_CLIENT_ERROR_MESSAGE';
-export const clearError = createAction(RESET_CLIENT_ERROR_MESSAGE);
+// export const clearError = createAction(RESET_CLIENT_ERROR_MESSAGE);
+export const clearError = () => ({
+  type: RESET_CLIENT_ERROR_MESSAGE
+});
+export type ClearError = ReturnType<typeof clearError>;
 
 //request
 
-export const requestConnection = emitActions(REQUEST_CONNECTION);
+interface Payload {
+  avatarId: string;
+  teamName: string;
+}
+
+export const requestConnection = emitActions<
+  typeof REQUEST_CONNECTION,
+  Payload
+>(REQUEST_CONNECTION);
+export type RequestConnection = ReturnType<typeof requestConnection>;
+
 export const requestExit = emitActions(REQUEST_EXIT);
 export const requestInput = emitActions(REQUEST_INPUT);
 export const requestStart = emitActions(REQUEST_START);
