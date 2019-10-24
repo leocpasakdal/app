@@ -19,7 +19,8 @@
     "lint:css": "stylelint \"./src/**/*.scss\" \"./src/**/*.css\" --syntax scss",
     "test": "node ./node_modules/jest/bin/jest.js * --watch",
     "test:once": "node ./node_modules/jest/bin/jest.js",
-    "test:once:coverage": "node ./node_modules/jest/bin/jest.js -i --coverage"
+    "test:once:coverage": "node ./node_modules/jest/bin/jest.js -i --coverage",
+    "check-types": "tsc"
   },
   "author": "leo pasakdal",
   "license": "",
