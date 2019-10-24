@@ -23,7 +23,7 @@ const client = {
   modules: {
     rules: [
       {
-        test: /\.(t|j)sx?$/,
+        test: /\.js?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader'
