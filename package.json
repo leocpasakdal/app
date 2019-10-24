@@ -119,6 +119,11 @@
     ]
   },
   "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest",
+      "^.+\\.js$": "babel-jest"
+    },
+    
     "setupTestFrameworkScriptFile": "<rootDir>/helpers/setupTests.js",
     "moduleFileExtensions": [
       "tsx",
