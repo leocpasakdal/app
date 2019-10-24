@@ -1,9 +1,9 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import Avatar from '#/components/Image/Avatar';
-import MoveEntry from '#/components/Entry/MoveEntry';
-import ResultEntry from '#/components/Entry/ResultEntry';
+import Avatar from '../../Image/Avatar';
+import MoveEntry from '../../Entry/MoveEntry';
+import ResultEntry from '../../Entry/ResultEntry';
 
 import PlayerEntry from '../PlayerEntry';
 import styles from '../playerEntry.scss';

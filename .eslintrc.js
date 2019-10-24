@@ -132,7 +132,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: '**/src/**',
+      files: '**/src/client/**',
       rules: {
         'no-console': ['error', { allow: ['info', 'debug', 'error', 'warn'] }]
       }

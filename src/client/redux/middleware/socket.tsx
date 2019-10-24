@@ -23,6 +23,7 @@ const requestConnection = (store: Store, action: RequestConnection) => {
     })
   );
 };
+
 const socket = (store: Store) => (next: Dispatch) => (action: AnyAction) => {
   const {
     REQUEST_CONNECTION,
